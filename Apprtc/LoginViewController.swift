@@ -82,8 +82,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.view.addSubview(AUSwitch)
         
         
-        self.passwordTextField?.delegate = self;
-        self.accountTextField?.delegate = self;
+        self.passwordTextField?.delegate = self
+        self.accountTextField?.delegate = self
         
     }
     func login(){
