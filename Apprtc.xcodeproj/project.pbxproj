@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		975A57EB1BCFCAC1008F6AB9 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */; };
+		9D0A2B4E1D9BAC7600903277 /* UserRecognViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */; };
+		9D0A2B501D9BAE5B00903277 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */; };
+		9D0BD26E1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BD26D1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift */; };
+		9D4239171D9D25D200566B19 /* AgentRTCRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */; };
+		9D4239191DA0E6E300566B19 /* CustomTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4239181DA0E6E300566B19 /* CustomTabController.swift */; };
+		9D431CE51D99A33B002B8365 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CE41D99A33B002B8365 /* LoginViewController.swift */; };
+		9D431CEB1D9A42C3002B8365 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CEA1D9A42C3002B8365 /* PickerViewController.swift */; };
+		9D431CED1D9A91B3002B8365 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CEC1D9A91B3002B8365 /* ProfileViewController.swift */; };
+		9D431CEF1D9AF546002B8365 /* AgentRecognViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */; };
+		9D431CF11D9B9820002B8365 /* AgenProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CF01D9B9820002B8365 /* AgenProfileViewController.swift */; };
 		D863B1131C932B0000DE1C4C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D863B1121C932B0000DE1C4C /* VideoToolbox.framework */; };
 		D875EE851B9C03AE008B1DF3 /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D875EE551B9C03AE008B1DF3 /* ARDAppClient.m */; };
 		D875EE861B9C03AE008B1DF3 /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D875EE571B9C03AE008B1DF3 /* ARDMessageResponse.m */; };
@@ -53,6 +63,16 @@
 /* Begin PBXFileReference section */
 		975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = ../SRWebSocket.m; sourceTree = "<group>"; };
 		976E3D501BCE64DF002486D5 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecognViewController.swift; sourceTree = "<group>"; };
+		9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		9D0BD26D1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRTCRoomTextInputViewCell.swift; sourceTree = "<group>"; };
+		9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRTCRoomViewController.swift; sourceTree = "<group>"; };
+		9D4239181DA0E6E300566B19 /* CustomTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabController.swift; sourceTree = "<group>"; };
+		9D431CE41D99A33B002B8365 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9D431CEA1D9A42C3002B8365 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		9D431CEC1D9A91B3002B8365 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRecognViewController.swift; sourceTree = "<group>"; };
+		9D431CF01D9B9820002B8365 /* AgenProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgenProfileViewController.swift; sourceTree = "<group>"; };
 		D863B1121C932B0000DE1C4C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		D875EE541B9C03AE008B1DF3 /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
 		D875EE551B9C03AE008B1DF3 /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
@@ -121,7 +141,7 @@
 		D878BE5C1B9B6110001AE9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D878BE621B9B6110001AE9CD /* ApprtcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApprtcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D878BE671B9B6110001AE9CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D878BE681B9B6110001AE9CD /* ApprtcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprtcTests.swift; sourceTree = "<group>"; };
+		D878BE681B9B6110001AE9CD /* ApprtcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApprtcTests.swift; path = ApprtcTests/ApprtcTests.swift; sourceTree = SOURCE_ROOT; };
 		D878BEB11B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RTCRoomTextInputViewCell.swift; path = Apprtc/Views/RTCRoomTextInputViewCell.swift; sourceTree = "<group>"; };
 		D878BEB31B9B754D001AE9CD /* RTCVideoChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTCVideoChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,10 +275,20 @@
 		D878BE4F1B9B6110001AE9CD /* Apprtc */ = {
 			isa = PBXGroup;
 			children = (
+				9D4239181DA0E6E300566B19 /* CustomTabController.swift */,
+				D878BE511B9B6110001AE9CD /* Info.plist */,
+				9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */,
+				9D431CF01D9B9820002B8365 /* AgenProfileViewController.swift */,
+				9D431CEC1D9A91B3002B8365 /* ProfileViewController.swift */,
+				9D431CEA1D9A42C3002B8365 /* PickerViewController.swift */,
+				9D431CE41D99A33B002B8365 /* LoginViewController.swift */,
 				D878BE521B9B6110001AE9CD /* AppDelegate.swift */,
 				D878BE541B9B6110001AE9CD /* RTCRoomViewController.swift */,
 				D878BEB31B9B754D001AE9CD /* RTCVideoChatViewController.swift */,
 				D878BE561B9B6110001AE9CD /* Main.storyboard */,
+				9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */,
+				9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */,
+				9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */,
 				D878BE591B9B6110001AE9CD /* Images.xcassets */,
 				D878BE5B1B9B6110001AE9CD /* LaunchScreen.xib */,
 				D878BE501B9B6110001AE9CD /* Supporting Files */,
@@ -269,7 +299,6 @@
 		D878BE501B9B6110001AE9CD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D878BE511B9B6110001AE9CD /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -295,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				D878BEB11B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift */,
+				9D0BD26D1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -345,14 +375,17 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Dhilip;
 				TargetAttributes = {
 					D878BE4C1B9B6110001AE9CD = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = L46VAUBR64;
+						LastSwiftMigration = 0800;
 					};
 					D878BE611B9B6110001AE9CD = {
 						CreatedOnToolsVersion = 6.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = D878BE4C1B9B6110001AE9CD;
 					};
 				};
@@ -401,21 +434,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D0BD26E1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift in Sources */,
 				D875EE881B9C03AE008B1DF3 /* ARDSignalingMessage.m in Sources */,
+				9D431CEF1D9AF546002B8365 /* AgentRecognViewController.swift in Sources */,
+				9D4239191DA0E6E300566B19 /* CustomTabController.swift in Sources */,
 				D875EE851B9C03AE008B1DF3 /* ARDAppClient.m in Sources */,
+				9D0A2B501D9BAE5B00903277 /* UserProfileViewController.swift in Sources */,
 				D878BE551B9B6110001AE9CD /* RTCRoomViewController.swift in Sources */,
+				9D4239171D9D25D200566B19 /* AgentRTCRoomViewController.swift in Sources */,
 				975A57EB1BCFCAC1008F6AB9 /* SRWebSocket.m in Sources */,
+				9D431CEB1D9A42C3002B8365 /* PickerViewController.swift in Sources */,
 				D875EE8C1B9C03AE008B1DF3 /* RTCICECandidate+JSON.m in Sources */,
 				D875EE8D1B9C03AE008B1DF3 /* RTCICEServer+JSON.m in Sources */,
 				D875EE8A1B9C03AE008B1DF3 /* ARDWebSocketChannel.m in Sources */,
+				9D431CED1D9A91B3002B8365 /* ProfileViewController.swift in Sources */,
 				D878BEB41B9B754D001AE9CD /* RTCVideoChatViewController.swift in Sources */,
 				D875EE891B9C03AE008B1DF3 /* ARDUtilities.m in Sources */,
+				9D431CF11D9B9820002B8365 /* AgenProfileViewController.swift in Sources */,
 				D878BE531B9B6110001AE9CD /* AppDelegate.swift in Sources */,
 				D875EE8F1B9C03AE008B1DF3 /* RTCSessionDescription+JSON.m in Sources */,
 				D875EE871B9C03AE008B1DF3 /* ARDRegisterResponse.m in Sources */,
+				9D431CE51D99A33B002B8365 /* LoginViewController.swift in Sources */,
 				D875EE861B9C03AE008B1DF3 /* ARDMessageResponse.m in Sources */,
 				D875EE8E1B9C03AE008B1DF3 /* RTCMediaConstraints+JSON.m in Sources */,
 				D878BEB21B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift in Sources */,
+				9D0A2B4E1D9BAC7600903277 /* UserRecognViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,8 +513,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -494,7 +539,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -516,8 +561,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -533,9 +580,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -547,6 +595,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = L46VAUBR64;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Apprtc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -555,10 +604,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahabali.apprtc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -568,6 +618,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = L46VAUBR64;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Apprtc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -576,10 +627,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahabali.apprtc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -599,6 +651,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mahabali.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Apprtc.app/Apprtc";
 			};
 			name = Debug;
@@ -615,6 +668,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mahabali.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Apprtc.app/Apprtc";
 			};
 			name = Release;

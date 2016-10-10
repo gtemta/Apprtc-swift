@@ -540,7 +540,7 @@ static NSInteger kARDAppClientErrorInvalidRoom = -7;
     NSString *cameraID = nil;
     for (AVCaptureDevice *captureDevice in
          [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
-        if (captureDevice.position == AVCaptureDevicePositionFront) {
+        if (captureDevice.position == AVCaptureDevicePositionBack) {
             cameraID = [captureDevice localizedName];
             break;
         }

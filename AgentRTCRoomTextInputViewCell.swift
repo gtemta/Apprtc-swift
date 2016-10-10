@@ -1,28 +1,29 @@
 //
-//  UITableViewCell.swift
+//  AgentRTCRoomTextInputViewCell.swift
 //  Apprtc
 //
-//  Created by Mahabali on 9/5/15.
-//  Copyright (c) 2015 Mahabali. All rights reserved.
+//  Created by IMF on 2016/10/5.
+//  Copyright © 2016年 Dhilip. All rights reserved.
 //
+
 
 import UIKit
 
 
 
-protocol RTCRoomTextInputViewCellDelegate{
-    func shouldJoinRoom (room:NSString,textInputCell:RTCRoomTextInputViewCell)
+protocol AgentRTCRoomTextInputViewCellDelegate{
+    func shouldJoinRoom (room:NSString,textInputCell:AgentRTCRoomTextInputViewCell)
 }
 
 
-class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
+class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     
     @IBOutlet weak var textField:UITextField?
     @IBOutlet weak var textFieldBorderView:UIView?
     @IBOutlet weak var joinButton:UIButton?
     @IBOutlet weak var errorLabel:UILabel?
     @IBOutlet weak var errorLabelHeightConstraint:NSLayoutConstraint?
-    var delegate:RTCRoomTextInputViewCellDelegate?
+    var delegate:AgentRTCRoomTextInputViewCellDelegate?
     var id = ""
     var targetroom = ""
     
@@ -36,15 +37,15 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         // get account from loginview
         if let tbc = CustomTabController.sharedInstance.myID{
             id =  tbc
-            print ("===========RTC login id =======")
+            print ("======agent==RTC login id =======")
             print(id)
             print ("================================")
         }
         //===========Change account into id
         
         //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
-        request.HTTPMethod = "GET"
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?agent_id=" + self.id + "&format=json")!)
+        request.HTTPMethod = "POST"
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
@@ -62,7 +63,7 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     }
     
     
-    ///************change this place to target room********
+    
     @IBAction func touchButtonPressed (sender:UIButton){
         if self.delegate?.shouldJoinRoom(targetroom, textInputCell: self) != nil{
             NSLog("Delegate was implemented");

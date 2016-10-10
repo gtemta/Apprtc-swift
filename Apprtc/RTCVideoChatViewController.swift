@@ -45,15 +45,15 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     self.audioButton?.layer.cornerRadius=20.0
     self.videoButton?.layer.cornerRadius=20.0
     self.hangupButton?.layer.cornerRadius=20.0
-    let tapGestureRecognizer:UITapGestureRecognizer=UITapGestureRecognizer(target: self, action:"toggleButtonContainer" )
+    let tapGestureRecognizer:UITapGestureRecognizer=UITapGestureRecognizer(target: self, action:#selector(RTCVideoChatViewController.toggleButtonContainer) )
     tapGestureRecognizer.numberOfTapsRequired=1
     self.view.addGestureRecognizer(tapGestureRecognizer)
-    let zoomGestureRecognizer:UITapGestureRecognizer=UITapGestureRecognizer(target: self, action:"zoomRemote" )
+    let zoomGestureRecognizer:UITapGestureRecognizer=UITapGestureRecognizer(target: self, action:#selector(RTCVideoChatViewController.zoomRemote) )
     zoomGestureRecognizer.numberOfTapsRequired=2
     self.view.addGestureRecognizer(zoomGestureRecognizer)
     self.remoteView?.delegate=self
     self.localView?.delegate=self
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: "UIDeviceOrientationDidChangeNotification", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RTCVideoChatViewController.orientationChanged(_:)), name: "UIDeviceOrientationDidChangeNotification", object: nil)
     // Do any additional setup after loading the view.
   }
   
@@ -210,9 +210,9 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   }
   
   func appclient(client: ARDAppClient!, didRotateWithLocal localVideoTrack: RTCVideoTrack!, remoteVideoTrack: RTCVideoTrack!) {
-    NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: "updateUIForRotation", object: nil)
+    NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: #selector(RTCVideoChatViewController.updateUIForRotation), object: nil)
     // Hack for rotation to get the right video size
-    self.performSelector("updateUIForRotation", withObject: nil, afterDelay: 0.2)
+    self.performSelector(#selector(RTCVideoChatViewController.updateUIForRotation), withObject: nil, afterDelay: 0.2)
   }
   
   func updateUIForRotation(){
@@ -242,7 +242,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
         let aspectRatio: CGSize = CGSizeEqualToSize(size, CGSizeZero) ? defaultAspectRatio : size
         var videoRect: CGRect = self.view.bounds
         if (self.remoteVideoTrack != nil) {
-          videoRect = CGRectMake(0.0, 0.0, self.view.frame.size.width / 4.0, self.view.frame.size.height / 4.0)
+            videoRect = CGRectMake(0.0, 0.0, self.view.frame.size.width / 4.0, self.view.frame.size.height / 4.0)
           if orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight {
             videoRect = CGRectMake(0.0, 0.0, self.view.frame.size.height / 4.0, self.view.frame.size.width / 4.0)
           }
