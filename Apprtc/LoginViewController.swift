@@ -36,6 +36,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         accountTextField.borderStyle = .RoundedRect
         accountTextField.clearButtonMode = .WhileEditing
         accountTextField.keyboardType = .Default
+        accountTextField.autocapitalizationType = .None
+        accountTextField.autocorrectionType = .No
         accountTextField.textColor = UIColor.blackColor()
         accountTextField.backgroundColor = UIColor.lightGrayColor()
         accountTextField.center = CGPoint(x: fullScreenSize.width * 0.5 ,y : fullScreenSize.height * 0.45)
@@ -81,6 +83,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         
         self.passwordTextField?.delegate = self;
+        self.accountTextField?.delegate = self;
         
     }
     func login(){
@@ -166,7 +169,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     }
     
     func userloginpressed(){
-        
         let account = accountTextField.text!
         let password = passwordTextField.text!
         print("這是帳號: \(account)")
@@ -189,57 +191,57 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                         self.checker = false
                     }
                 }
-        }catch{
-            print("Couldn't Serialize")
-        }
-    }.resume()
-    print("return value checker")
-    print(self.checker)
-}
-func agentloginpress(){
-    let account = accountTextField.text!
-    let password = passwordTextField.text!
-    
-    print("這是帳號: \(account)")
-    print("And my password: \(password)")
-    
-    //開始執行web request
-    
-    let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/?name="+account+"&pw="+password+"&format=json")!)
-    request.HTTPMethod = "GET"
-    NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-        do{
-            let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-            if let section = json as? NSArray{
-                print("section.count: \(section.count)")
-                if section.count != 0
-                {
-                    self.checker = true
-                }
-                else
-                {
-                    self.checker = false
-                }
+            }catch{
+                print("Couldn't Serialize")
             }
-        }catch{
-            print("Couldn't Serialize")
-        }
         }.resume()
-    print("return value")
-    print(self.checker)
-}
+        print("return value checker")
+        print(self.checker)
+    }
+    func agentloginpress(){
+        let account = accountTextField.text!
+        let password = passwordTextField.text!
+        
+        print("這是帳號: \(account)")
+        print("And my password: \(password)")
+        
+        //開始執行web request
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/?name="+account+"&pw="+password+"&format=json")!)
+        request.HTTPMethod = "GET"
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                if let section = json as? NSArray{
+                    print("section.count: \(section.count)")
+                    if section.count != 0
+                    {
+                        self.checker = true
+                    }
+                    else
+                    {
+                        self.checker = false
+                    }
+                }
+            }catch{
+                print("Couldn't Serialize")
+            }
+            }.resume()
+        print("return value")
+        print(self.checker)
+    }
 
-func textFieldShouldReturn(textField: UITextField) -> Bool {
-    self.view.endEditing(true)
-    if userlogin{
-        userloginpressed()
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        if userlogin{
+            userloginpressed()
+        }
+        else{
+            agentloginpress()
+        }
+        
+        return false
     }
-    else{
-        agentloginpress()
-    }
-    
-    return false
-}
 
 
 
