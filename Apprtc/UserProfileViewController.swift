@@ -116,10 +116,12 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         let language = profile_data["language"]! as! Int
                         let gender = profile_data["gender"]! as! Int
                         let id = profile_data["id"]! as! Int
+                        let level = profile_data["level"]! as! Int
                         self.profile.append("用戶名稱: \(realname)")
                         self.profile.append("用戶性別: \(self.gender_decode(gender))")
                         self.profile.append("使用語言: \(self.language_decode(language))")
                         self.profile.append("教育程度: \(self.education_decode(education))")
+                        self.profile.append("視障等級: \(self.level_decode(level))")
                         self.myTableView.reloadData()
                         print(id)
                         CustomTabController.sharedInstance.myID = String(id)

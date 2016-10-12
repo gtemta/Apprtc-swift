@@ -393,35 +393,6 @@
             </objects>
             <point key="canvasLocation" x="-1975" y="677"/>
         </scene>
-        <!--User Recogn View Controller-->
-        <scene sceneID="QMH-9E-9vV">
-            <objects>
-                <viewController id="uAK-ks-ZiF" customClass="UserRecognViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="W5u-0C-hTa"/>
-                        <viewControllerLayoutGuide type="bottom" id="QVQ-iY-N4x"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="unq-6F-YRu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKR-K8-6UL">
-                                <frame key="frameInset" minX="42" minY="321" width="290" height="175"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Camera"/>
-                                <connections>
-                                    <action selector="openCamera:" destination="uAK-ks-ZiF" eventType="touchUpInside" id="IwP-Fj-04c"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="HE9-1s-aOK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W95-Jz-PWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1674.4000000000001" y="-2827.736131934033"/>
-        </scene>
         <!--UserTabBar-->
         <scene sceneID="sMV-Qp-4gz">
             <objects>
@@ -729,12 +700,31 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="uAK-ks-ZiF" kind="relationship" relationship="rootViewController" id="VC7-ah-2xM"/>
+                        <segue destination="PXX-Ic-1Kx" kind="relationship" relationship="rootViewController" id="0Uy-lQ-5fi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRW-uN-6ZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2612" y="-2827"/>
+        </scene>
+        <!--User Recogn View Controller-->
+        <scene sceneID="5sH-op-WYf">
+            <objects>
+                <viewController id="PXX-Ic-1Kx" customClass="UserRecognViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fFr-Nt-C3Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="m9s-90-Xys"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LIm-Fe-ipH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KS3-ep-scg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bYQ-Cv-x82" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1940" y="-2828"/>
         </scene>
         <!--個人資料-->
         <scene sceneID="Lj3-vm-93t">

@@ -49,6 +49,10 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Reply,target: self,action: #selector(UserProfileViewController.logout))
+        self.navigationItem.rightBarButtonItem = logout_Button
+        
+        
         let fullScreenSize = UIScreen.mainScreen().bounds.size
         self.view.backgroundColor = UIColor.whiteColor()
         let myprofileimg = UIImageView(
@@ -69,7 +73,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         }
         
         // 建立 UITableView 並設置原點及尺寸
-        let myTableView = UITableView(frame: CGRect(
+        myTableView = UITableView(frame: CGRect(
             x: 0, y: 200,
             width: fullScreenSize.width,
             height: fullScreenSize.height - 20),
@@ -114,7 +118,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
                         self.profile.append("使用語言: \(self.language_decode(language))")
                         self.profile.append("教育程度: \(self.education_decode(education))")
                         print("this is my STR \(self.profile)")
-                        //self.myTableView.reloadData()
+                        self.myTableView.reloadData()
                         CustomTabController.sharedInstance.myID = String(id)
                         
                     }

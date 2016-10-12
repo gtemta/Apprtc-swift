@@ -11,9 +11,10 @@ import UIKit
 
 class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
-    var userlogin = true
     //the value from LoginView
-    var account = String()
+    var ID = String()
+    var picture = UIImageView()
+    @IBOutlet var cameraButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,43 +22,46 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         let fullScreenSize = UIScreen.mainScreen().bounds.size
         self.view.backgroundColor = UIColor.blackColor()
         
+        //imageView.image = UIImage(named: "pikachu.png")
+        
         
         // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myInformation{
-            account =  tbc
-            print ("===========login  account=======")
-            print(account)
+        if let tbc = CustomTabController.sharedInstance.myID{
+            ID =  tbc
+            print ("========account ID=======")
+            print(ID)
             print ("================================")
         }
+        //
+        //        //text
+        //        switchTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
+        //        switchTextLabel.text = ""
+        //        switchTextLabel.textColor = UIColor.purpleColor()
+        //        switchTextLabel.textAlignment = .Center
+        //
+        //        switchTextLabel.center = CGPoint(x: fullScreenSize.width * 0.4  , y: fullScreenSize.height *  0.7)
+        //        self.view.addSubview(switchTextLabel)
         
+        picture = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        picture.image = UIImage(named: "pikachu.png")
+        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.4)
+        self.view.addSubview(picture)
         
-        
-        //camera按鍵
-        let loginButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200 ,height: 40))
-        loginButton.setTitle("camera", forState:  UIControlState())
-        loginButton.setTitleColor(UIColor.greenColor(), forState:  UIControlState())
-        loginButton.enabled = true
-        loginButton.backgroundColor = UIColor.darkGrayColor()
-        //loginButton.addTarget(self, action: #selector(UserRecognViewController.opencamera), forControlEvents: .TouchUpInside)
-        loginButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.85 )
-        self.view.addSubview(loginButton)
-        
-        //text
-        let switchTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
-        switchTextLabel.text = ""
-        switchTextLabel.textColor = UIColor.purpleColor()
-        switchTextLabel.textAlignment = .Center
-        
-        switchTextLabel.center = CGPoint(x: fullScreenSize.width * 0.4  , y: fullScreenSize.height *  0.7)
-        self.view.addSubview(switchTextLabel)
-        
-        
+        uploadRequest()
+//        //送出結果按鍵
+//        let sendButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200 ,height: 40))
+//        sendButton.setTitle("送出結果", forState: UIControlState())
+//        sendButton.setTitleColor(UIColor.greenColor(), forState:  UIControlState())
+//        sendButton.enabled = true
+//        sendButton.backgroundColor = UIColor.darkGrayColor()
+//        sendButton.addTarget(self, action: #selector(uploadRequest()), forControlEvents: .TouchUpInside)
+//        sendButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.9 )
+//        self.view.addSubview(sendButton)
+//        
         
     }
-    
-    
-    
-    @IBAction func openCamera(sender: UIButton) {
+        
+    @IBAction func openCamera(sender: AnyObject) {
         print("進入相機頁面")
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
             let imagePicker = UIImagePickerController()
@@ -69,26 +73,47 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             //no camera
             noCamera()
         }
+        
+    }
     
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        // The info dictionary contains multiple representations of the image, and this uses the original.
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        // Set photoImageView to display the selected image.
+        picture.image = selectedImage
+        //Dismiss  the picker
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        //Dismiss  the picker if the user canceled
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    
-    func onChange(sender: AnyObject){
-        //get UISwitch Object
-        let tempswitch = sender as! UISwitch
-        if tempswitch.on{
-            userlogin = true
-            self.view.backgroundColor = UIColor.whiteColor()
-        }
-        else{
-            userlogin = false
-            self.view.backgroundColor = UIColor.blackColor()
-        }
-        
-        
-        
+    func uploadRequest(){
+        //get image Data from ImageView
+        let imageData:NSData = UIImagePNGRepresentation(picture.image!)!
+        //let strBase64 = String(imageData.base64EncodedDataWithOptions(.Encoding64CharacterLineLength))
+        let strBase64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/")!)
+        let session = NSURLSession.sharedSession()
+        request.HTTPMethod = "POST"
+        let key = "http://140.113.72.29:8100/api/account/" + self.ID + "/"
+        let params = NSMutableDictionary()
+        params.setValue(key, forKey: "account")
+        params.setValue(1, forKey: "state")
+        //params.setValue(strBase64, forKey: "image")
+        print("json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
+            print("Response: \(response)")})
+        task.resume()
     }
+    
     
     func noCamera(){
         let alertVC = UIAlertController(
