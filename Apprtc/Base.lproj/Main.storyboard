@@ -718,13 +718,27 @@
                     <view key="view" contentMode="scaleToFill" id="LIm-Fe-ipH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dc3-nh-zIQ">
+                                <frame key="frameInset" minX="83" minY="444" width="208" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="openCamera:" destination="PXX-Ic-1Kx" eventType="touchUpInside" id="Crj-Ri-2v4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="KS3-ep-scg"/>
+                    <connections>
+                        <outlet property="cameraButton" destination="LIm-Fe-ipH" id="zv1-nz-FUr"/>
+                        <outlet property="openCamera" destination="dc3-nh-zIQ" id="QlB-8I-CMD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYQ-Cv-x82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1940" y="-2828"/>
+            <point key="canvasLocation" x="-1940" y="-2828.6356821589206"/>
         </scene>
         <!--個人資料-->
         <scene sceneID="Lj3-vm-93t">

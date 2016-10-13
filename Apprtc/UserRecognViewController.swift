@@ -14,7 +14,9 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     //the value from LoginView
     var ID = String()
     var picture = UIImageView()
-    @IBOutlet var cameraButton: UIButton!
+    var  contentTextLabel = UILabel()
+    @IBOutlet var cameraButton: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,35 +34,36 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             print(ID)
             print ("================================")
         }
-        //
-        //        //text
-        //        switchTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
-        //        switchTextLabel.text = ""
-        //        switchTextLabel.textColor = UIColor.purpleColor()
-        //        switchTextLabel.textAlignment = .Center
-        //
-        //        switchTextLabel.center = CGPoint(x: fullScreenSize.width * 0.4  , y: fullScreenSize.height *  0.7)
-        //        self.view.addSubview(switchTextLabel)
         
-        picture = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        //text
+        contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
+        contentTextLabel.text = "請拍下欲辨識的物體"
+        contentTextLabel.textColor = UIColor.purpleColor()
+        contentTextLabel.textAlignment = .Center
+        
+        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.4  , y: fullScreenSize.height *  0.7)
+        self.view.addSubview(contentTextLabel)
+        
+        
+        //imageview
+        picture = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
         picture.image = UIImage(named: "pikachu.png")
-        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.4)
+        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.2)
         self.view.addSubview(picture)
         
-        uploadRequest()
-//        //送出結果按鍵
-//        let sendButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200 ,height: 40))
-//        sendButton.setTitle("送出結果", forState: UIControlState())
-//        sendButton.setTitleColor(UIColor.greenColor(), forState:  UIControlState())
-//        sendButton.enabled = true
-//        sendButton.backgroundColor = UIColor.darkGrayColor()
-//        sendButton.addTarget(self, action: #selector(uploadRequest()), forControlEvents: .TouchUpInside)
-//        sendButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.9 )
-//        self.view.addSubview(sendButton)
-//        
+        //送出結果按鍵
+        //        let sendButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200 ,height: 40))
+        //        sendButton.setTitle("送出結果", forState: UIControlState())
+        //        sendButton.setTitleColor(UIColor.greenColor(), forState:  UIControlState())
+        //        sendButton.enabled = true
+        //        sendButton.backgroundColor = UIColor.darkGrayColor()
+        //        sendButton.addTarget(self, action: #selector(uploadRequest()), forControlEvents: .TouchUpInside)
+        //        sendButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.9 )
+        //        self.view.addSubview(sendButton)
+        ////
         
     }
-        
+    
     @IBAction func openCamera(sender: AnyObject) {
         print("進入相機頁面")
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
@@ -75,8 +78,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         }
         
     }
-    
-    
+    //set imageview to camera's content
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -84,6 +86,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         picture.image = selectedImage
         //Dismiss  the picker
         dismissViewControllerAnimated(true, completion: nil)
+        uploadRequest()
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         //Dismiss  the picker if the user canceled
@@ -133,14 +136,14 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         
         request.HTTPMethod = "POST"
         
-//        let params = NSMutableDictionary()
-//        params.setValue(key, forKey: "account")
-//        params.setValue(1, forKey: "state")
-//        print("json content")
-//        print(params)
-//        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        //        let params = NSMutableDictionary()
+        //        params.setValue(key, forKey: "account")
+        //        params.setValue(1, forKey: "state")
+        //        print("json content")
+        //        print(params)
+        //        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+        //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
             print("Response: \(response)")})
         task.resume()
