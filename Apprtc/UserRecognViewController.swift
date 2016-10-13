@@ -92,22 +92,54 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     
     
     func uploadRequest(){
+        
         //get image Data from ImageView
         let imageData:NSData = UIImagePNGRepresentation(picture.image!)!
-        //let strBase64 = String(imageData.base64EncodedDataWithOptions(.Encoding64CharacterLineLength))
-        let strBase64 = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+        let boundary = generateBoundaryString()
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/")!)
+        //define multipart request type
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         let session = NSURLSession.sharedSession()
+        let body = NSMutableData()
+        let accountname = "http://140.113.72.29:8100/api/account/" + self.ID + "/"
+        let fname = "upload.png"
+        let mimetype = "image/png"
+        
+        //define the data post parameter
+        //multi part header
+        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("Content-Disposition:form-data; name=\"test\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("hi\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        //account field
+        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("Content-Disposition:form-data; name=\"account\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("\(accountname)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        //state field
+        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("Content-Disposition:form-data; name=\"state\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("\(1)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        //image field
+        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("Content-Disposition:form-data; name=\"image\"; filename=\"\(fname)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("Content-Type: \(mimetype)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(imageData)
+        body.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        //multi part end
+        body.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        request.HTTPBody = body
+        print("body")
+        print (body)
+        
         request.HTTPMethod = "POST"
-        let key = "http://140.113.72.29:8100/api/account/" + self.ID + "/"
-        let params = NSMutableDictionary()
-        params.setValue(key, forKey: "account")
-        params.setValue(1, forKey: "state")
-        //params.setValue(strBase64, forKey: "image")
-        print("json content")
-        print(params)
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+//        let params = NSMutableDictionary()
+//        params.setValue(key, forKey: "account")
+//        params.setValue(1, forKey: "state")
+//        print("json content")
+//        print(params)
+//        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
             print("Response: \(response)")})
@@ -126,6 +158,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     }
     
     
+    func generateBoundaryString() -> String
+    {
+        return "Boundary-\(NSUUID().UUIDString)"
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
