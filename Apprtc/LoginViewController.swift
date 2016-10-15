@@ -170,6 +170,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     func userloginpressed(){
         let account = accountTextField.text!
         let password = passwordTextField.text!
+        
+        guard account != "" && password != "" else {print("Haven't Finish edit."); return}
         print("這是帳號: \(account)")
         print("And my password: \(password)")
         //開始執行web request
@@ -181,26 +183,24 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
                 if let section = json as? NSArray{
                     print("section.count: \(section.count)")
-                    if section.count != 0
-                    {
-                        self.checker = true
-                    }
-                    else
-                    {
+                    guard section.count == 1 else{
                         self.checker = false
+                        print("return value checker")
+                        print(self.checker)
+                        return
                     }
+                    self.checker = true
                 }
-            }catch{
-                print("Couldn't Serialize")
-            }
+            }catch{print("Couldn't Serialize")}
+            print("return value checker")
+            print(self.checker)
         }.resume()
-        print("return value checker")
-        print(self.checker)
     }
     func agentloginpress(){
         let account = accountTextField.text!
         let password = passwordTextField.text!
         
+        guard account != "" && password != "" else {print("Haven't Finish edit."); return}
         print("這是帳號: \(account)")
         print("And my password: \(password)")
         
@@ -213,21 +213,18 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
                 if let section = json as? NSArray{
                     print("section.count: \(section.count)")
-                    if section.count != 0
-                    {
-                        self.checker = true
-                    }
-                    else
-                    {
+                    guard section.count == 1 else{
                         self.checker = false
+                        print("return value checker")
+                        print(self.checker)
+                        return
                     }
+                    self.checker = true
                 }
-            }catch{
-                print("Couldn't Serialize")
-            }
-            }.resume()
-        print("return value")
-        print(self.checker)
+            }catch{print("Couldn't Serialize")}
+            print("return value checker")
+            print(self.checker)
+        }.resume()
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

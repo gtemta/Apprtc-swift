@@ -178,6 +178,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
             }.resume()
     }
     
+    
     func logout(){
         //back to LoginViewController
         let signInView = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
