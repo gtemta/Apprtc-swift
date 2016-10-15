@@ -15,7 +15,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     var ID = String()
     var picture = UIImageView()
     var  contentTextLabel = UILabel()
-    @IBOutlet var cameraButton: UIView!
     
     
     override func viewDidLoad() {
@@ -64,7 +63,8 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         
     }
     
-    @IBAction func openCamera(sender: AnyObject) {
+    
+    @IBAction func cameraAction(sender: AnyObject) {
         print("進入相機頁面")
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
             let imagePicker = UIImagePickerController()
@@ -76,8 +76,9 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             //no camera
             noCamera()
         }
-        
+
     }
+    
     //set imageview to camera's content
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.

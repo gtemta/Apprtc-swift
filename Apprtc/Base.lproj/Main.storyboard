@@ -700,7 +700,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="PXX-Ic-1Kx" kind="relationship" relationship="rootViewController" id="0Uy-lQ-5fi"/>
+                        <segue destination="sqp-j8-zCk" kind="relationship" relationship="rootViewController" id="LTX-rq-Us9"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRW-uN-6ZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -708,37 +708,34 @@
             <point key="canvasLocation" x="-2612" y="-2827"/>
         </scene>
         <!--User Recogn View Controller-->
-        <scene sceneID="5sH-op-WYf">
+        <scene sceneID="nPP-As-ZGn">
             <objects>
-                <viewController id="PXX-Ic-1Kx" customClass="UserRecognViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sqp-j8-zCk" customClass="UserRecognViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fFr-Nt-C3Q"/>
-                        <viewControllerLayoutGuide type="bottom" id="m9s-90-Xys"/>
+                        <viewControllerLayoutGuide type="top" id="2Fj-6M-GuW"/>
+                        <viewControllerLayoutGuide type="bottom" id="PMM-YR-vFV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LIm-Fe-ipH">
+                    <view key="view" contentMode="scaleToFill" id="u4f-ot-zx1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dc3-nh-zIQ">
-                                <frame key="frameInset" minX="83" minY="444" width="208" height="83"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dc3-nh-zIQ" colorLabel="IBBuiltInLabel-Green">
+                                <frame key="frameInset" minX="83" minY="527" width="208" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Camera"/>
                                 <connections>
-                                    <action selector="openCamera:" destination="PXX-Ic-1Kx" eventType="touchUpInside" id="Crj-Ri-2v4"/>
+                                    <action selector="cameraAction:" destination="sqp-j8-zCk" eventType="touchUpInside" id="oKf-if-7W2"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="KS3-ep-scg"/>
-                    <connections>
-                        <outlet property="cameraButton" destination="LIm-Fe-ipH" id="zv1-nz-FUr"/>
-                        <outlet property="openCamera" destination="dc3-nh-zIQ" id="QlB-8I-CMD"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="J9R-M6-8T8"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bYQ-Cv-x82" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P85-IX-43Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1940" y="-2828.6356821589206"/>
+            <point key="canvasLocation" x="-975" y="-3073"/>
         </scene>
         <!--個人資料-->
         <scene sceneID="Lj3-vm-93t">
