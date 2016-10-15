@@ -184,8 +184,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         changeState(0, userid: userid)
         leaveRating()
-        appDelegate.window?.rootViewController = signInView
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     // 必須實作的方法：每一組有幾個 cell
     func tableView(_tableView: UITableView,

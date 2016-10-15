@@ -46,7 +46,6 @@
 		D878BE551B9B6110001AE9CD /* RTCRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878BE541B9B6110001AE9CD /* RTCRoomViewController.swift */; };
 		D878BE581B9B6110001AE9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D878BE561B9B6110001AE9CD /* Main.storyboard */; };
 		D878BE5A1B9B6110001AE9CD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D878BE591B9B6110001AE9CD /* Images.xcassets */; };
-		D878BE5D1B9B6110001AE9CD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D878BE5B1B9B6110001AE9CD /* LaunchScreen.xib */; };
 		D878BE691B9B6110001AE9CD /* ApprtcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878BE681B9B6110001AE9CD /* ApprtcTests.swift */; };
 		D878BEB21B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878BEB11B9B637F001AE9CD /* RTCRoomTextInputViewCell.swift */; };
 		D878BEB41B9B754D001AE9CD /* RTCVideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878BEB31B9B754D001AE9CD /* RTCVideoChatViewController.swift */; };
@@ -142,7 +141,6 @@
 		D878BE541B9B6110001AE9CD /* RTCRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTCRoomViewController.swift; sourceTree = "<group>"; };
 		D878BE571B9B6110001AE9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D878BE591B9B6110001AE9CD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D878BE5C1B9B6110001AE9CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D878BE621B9B6110001AE9CD /* ApprtcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApprtcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D878BE671B9B6110001AE9CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D878BE681B9B6110001AE9CD /* ApprtcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApprtcTests.swift; path = ApprtcTests/ApprtcTests.swift; sourceTree = SOURCE_ROOT; };
@@ -296,7 +294,6 @@
 				9D10FAC91DAFDF5B006F27A4 /* AgentRTCVideoChatViewController.swift */,
 				D878BE591B9B6110001AE9CD /* Images.xcassets */,
 				9D275D2A1DAD3DFA00C38B08 /* pikachu.png */,
-				D878BE5B1B9B6110001AE9CD /* LaunchScreen.xib */,
 				D878BE501B9B6110001AE9CD /* Supporting Files */,
 			);
 			path = Apprtc;
@@ -421,7 +418,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D878BE581B9B6110001AE9CD /* Main.storyboard in Resources */,
-				D878BE5D1B9B6110001AE9CD /* LaunchScreen.xib in Resources */,
 				D878BE5A1B9B6110001AE9CD /* Images.xcassets in Resources */,
 				9D275D2B1DAD3DFA00C38B08 /* pikachu.png in Resources */,
 			);
@@ -495,14 +491,6 @@
 				D878BE571B9B6110001AE9CD /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D878BE5B1B9B6110001AE9CD /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D878BE5C1B9B6110001AE9CD /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
