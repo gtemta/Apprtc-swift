@@ -38,7 +38,9 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   var   localVideoSize:CGSize?;
   var   remoteVideoSize:CGSize?;
   var   isZoom:Bool = false; //used for double tap remote view
-  
+  var   pickerView = UIPickerView()
+  var   serviceid = ""
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     self.isZoom = false;
@@ -131,7 +133,34 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
       self.client?.disconnect()
     }
   }
-  
+    //==================================================
+    func leaveRating(){
+        let alertView = UIAlertController(title: "給予評分", message: "\n\n\n\n\n\n",preferredStyle: .Alert)
+        alertView.modalInPopover = true
+        alertView.view.addSubview(pickerView)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+        presentViewController(alertView, animated: true, completion: nil)
+        
+    }
+    
+    func putRating(content: String){
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceid + "/")! as NSURL)
+        request.HTTPMethod = "PUT"
+        let params = NSMutableDictionary()
+        params.setValue(content, forKey: "feedback")
+        print(" state json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+            print("response:\(response)")
+            }.resume()
+    }
+    
+    
+    //==================================================
   func remoteDisconnected(){
     self.remoteVideoTrack?.removeRenderer(self.remoteView)
     self.remoteView?.renderFrame(nil)

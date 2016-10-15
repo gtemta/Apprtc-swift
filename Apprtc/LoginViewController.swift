@@ -17,7 +17,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     var checker: Bool = false
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -217,17 +217,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="AppRTC" id="uAt-Tj-Vbr"/>
                     <connections>
-                        <segue destination="iFm-Yh-cyi" kind="show" identifier="RTCVideoChatViewController" id="Apq-VH-1Ps"/>
+                        <segue destination="iFm-Yh-cyi" kind="show" identifier="AgentRTCVideoChatViewController" id="Apq-VH-1Ps"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nOW-Ur-ryn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-447" y="-8"/>
         </scene>
-        <!--Video Chat View Controller-->
+        <!--AgentRTC Video Chat View Controller-->
         <scene sceneID="jgH-vu-nW5">
             <objects>
-                <viewController id="iFm-Yh-cyi" customClass="RTCVideoChatViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iFm-Yh-cyi" customClass="AgentRTCVideoChatViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0cH-CD-mhT"/>
                         <viewControllerLayoutGuide type="bottom" id="bwG-RG-LnS"/>

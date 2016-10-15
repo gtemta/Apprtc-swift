@@ -16,9 +16,14 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     var profile : [String] = []
     var myTableView: UITableView!
     
+    var pickerView = UIPickerView()
+
+    let items = [1,2,3,4,5]
+    
     
     //the value from LoginView
     var account:String = ""
+    var userid:String = ""
     
     // 必須實作的方法：每個 cell 要顯示的內容
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -124,8 +129,9 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         self.profile.append("視障等級: \(self.level_decode(level))")
                         self.myTableView.reloadData()
                         print(id)
-                        CustomTabController.sharedInstance.myID = String(id)
+                        self.userid = String(id)
                         print("this is my STR \(self.profile)")
+                        self.changeState(1, userid: String(id))
                     }
                 }
             }catch{
@@ -134,18 +140,50 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
             }.resume()
         
         
-        
         // 加入到畫面中
         self.view.addSubview(myTableView)
         // Do any additional setup after loading the view, typically from a nib.
+     //888888888888888888888888888888888888888888888
+    }
+    func leaveRating(){
+        let alertView = UIAlertController(title: "給予評分", message: "\n\n\n\n\n\n",preferredStyle: .Alert)
+        alertView.modalInPopover = true
+        //Create a frame (placeholder/wrapper) for the picker and then create the picker
+ 
+        //set the pickers datasource and delegate
+//        picker.delegate = self;
+//        picker.dataSource = self;
+//        //Add the picker to the alert controller
+        alertView.view.addSubview(pickerView)
         
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+        presentViewController(alertView, animated: true, completion: nil)
+    
     }
     
+    //change user state
+    func changeState(userstate:Int ,userid: String){
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/account/" + userid + "/")! as NSURL)
+        request.HTTPMethod = "PUT"
+        let params = NSMutableDictionary()
+        params.setValue(userstate, forKey: "state")
+        print(" state json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+            print("response:\(response)")
+            }.resume()
+    }
     
     func logout(){
         //back to LoginViewController
         let signInView = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        changeState(0, userid: userid)
+        leaveRating()
         appDelegate.window?.rootViewController = signInView
         self.dismissViewControllerAnimated(true, completion: nil)
     }

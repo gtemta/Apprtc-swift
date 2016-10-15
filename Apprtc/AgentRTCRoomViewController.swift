@@ -49,12 +49,12 @@ class AgentRTCRoomViewController: UITableViewController,RTCRoomTextInputViewCell
     }
     
     func shouldJoinRoom(room: NSString, textInputCell: RTCRoomTextInputViewCell) {
-        self.performSegueWithIdentifier("RTCVideoChatViewController", sender: room)
+        self.performSegueWithIdentifier("AgentRTCVideoChatViewController", sender: room)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(" to string \(segue.destinationViewController.dynamicType)")
-        let viewController:RTCVideoChatViewController=segue.destinationViewController as! RTCVideoChatViewController
+        let viewController:AgentRTCVideoChatViewController=segue.destinationViewController as! AgentRTCVideoChatViewController
         //pass the roomname
         viewController.roomName=sender as! String
     }

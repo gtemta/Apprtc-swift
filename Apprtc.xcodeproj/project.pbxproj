@@ -11,6 +11,7 @@
 		9D0A2B4E1D9BAC7600903277 /* UserRecognViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */; };
 		9D0A2B501D9BAE5B00903277 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */; };
 		9D0BD26E1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BD26D1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift */; };
+		9D10FACA1DAFDF5B006F27A4 /* AgentRTCVideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D10FAC91DAFDF5B006F27A4 /* AgentRTCVideoChatViewController.swift */; };
 		9D275D2B1DAD3DFA00C38B08 /* pikachu.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D275D2A1DAD3DFA00C38B08 /* pikachu.png */; };
 		9D4239171D9D25D200566B19 /* AgentRTCRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */; };
 		9D4239191DA0E6E300566B19 /* CustomTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4239181DA0E6E300566B19 /* CustomTabController.swift */; };
@@ -67,6 +68,7 @@
 		9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecognViewController.swift; sourceTree = "<group>"; };
 		9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		9D0BD26D1DA4FA0500AFF89E /* AgentRTCRoomTextInputViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRTCRoomTextInputViewCell.swift; sourceTree = "<group>"; };
+		9D10FAC91DAFDF5B006F27A4 /* AgentRTCVideoChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRTCVideoChatViewController.swift; sourceTree = "<group>"; };
 		9D275D2A1DAD3DFA00C38B08 /* pikachu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pikachu.png; path = Images.xcassets/pikachu.png; sourceTree = "<group>"; };
 		9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRTCRoomViewController.swift; sourceTree = "<group>"; };
 		9D4239181DA0E6E300566B19 /* CustomTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabController.swift; sourceTree = "<group>"; };
@@ -286,11 +288,12 @@
 				9D431CE41D99A33B002B8365 /* LoginViewController.swift */,
 				D878BE521B9B6110001AE9CD /* AppDelegate.swift */,
 				D878BE541B9B6110001AE9CD /* RTCRoomViewController.swift */,
-				D878BEB31B9B754D001AE9CD /* RTCVideoChatViewController.swift */,
 				D878BE561B9B6110001AE9CD /* Main.storyboard */,
 				9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */,
 				9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */,
 				9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */,
+				D878BEB31B9B754D001AE9CD /* RTCVideoChatViewController.swift */,
+				9D10FAC91DAFDF5B006F27A4 /* AgentRTCVideoChatViewController.swift */,
 				D878BE591B9B6110001AE9CD /* Images.xcassets */,
 				9D275D2A1DAD3DFA00C38B08 /* pikachu.png */,
 				D878BE5B1B9B6110001AE9CD /* LaunchScreen.xib */,
@@ -458,6 +461,7 @@
 				D878BE531B9B6110001AE9CD /* AppDelegate.swift in Sources */,
 				D875EE8F1B9C03AE008B1DF3 /* RTCSessionDescription+JSON.m in Sources */,
 				D875EE871B9C03AE008B1DF3 /* ARDRegisterResponse.m in Sources */,
+				9D10FACA1DAFDF5B006F27A4 /* AgentRTCVideoChatViewController.swift in Sources */,
 				9D431CE51D99A33B002B8365 /* LoginViewController.swift in Sources */,
 				D875EE861B9C03AE008B1DF3 /* ARDMessageResponse.m in Sources */,
 				D875EE8E1B9C03AE008B1DF3 /* RTCMediaConstraints+JSON.m in Sources */,

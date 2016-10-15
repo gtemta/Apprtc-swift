@@ -18,6 +18,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     
     //the value from LoginView
     var account = String()
+    var agentid = String()
     
     
     // 必須實作的方法：每個 cell 要顯示的內容
@@ -120,7 +121,8 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
                         print("this is my STR \(self.profile)")
                         self.myTableView.reloadData()
                         CustomTabController.sharedInstance.myID = String(id)
-                        
+                        self.agentid = String(id)
+                        self.changeState(1, userid: String(id) )
                     }
                 }
             }catch{
@@ -135,6 +137,24 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         self.view.addSubview(myTableView)
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    
+    //change user state
+    func changeState(userstate:Int ,userid: String){
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/agent/" + userid + "/")! as NSURL)
+        request.HTTPMethod = "PUT"
+        let params = NSMutableDictionary()
+        params.setValue(userstate, forKey: "state")
+        print(" state json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+            print("response:\(response)")
+            }.resume()
+    }
+    
     
     // 必須實作的方法：每一組有幾個 cell
     func tableView(_tableView: UITableView,
@@ -192,6 +212,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = signInView
         self.dismissViewControllerAnimated(true, completion: nil)
+        changeState(0, userid: agentid)
     }
     
     func education_decode(e: Int) -> String{
