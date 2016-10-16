@@ -92,8 +92,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         if userlogin{
             print("userlogin")
             print(userlogin)
-            
-            
             if checker
             {
                 let userTabBar = self.storyboard?.instantiateViewControllerWithIdentifier("UserTabBar") as! UITabBarController

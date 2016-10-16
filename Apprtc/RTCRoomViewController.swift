@@ -20,34 +20,6 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myID{
-            id =  tbc
-            print ("===========RTC login id =======")
-            print(id)
-            print ("================================")
-        }
-        
-        //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
-        request.HTTPMethod = "GET"
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSDictionary{
-                    let roomname = section["msg"]! as! String
-                    self.targetroom = roomname
-                    print ("target Room : ")
-                    print(self.targetroom)
-            
-                }
-            }catch{
-                print("Couldn't Serialize")
-            }
-            }.resume()
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -97,7 +69,7 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
         viewController.roomName = targetroom
         print("Segue use roomname")
         print(viewController.roomName)
-        viewController.roomName=sender as! String
+        viewController.roomName!=sender as! String
     }
     
     override func  shouldAutorotate() -> Bool {
