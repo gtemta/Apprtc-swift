@@ -201,28 +201,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         guard account != "" && password != "" else {print("Haven't Finish edit."); return}
         print("這是帳號: \(account)")
         print("And my password: \(password)")
-        
-        //開始執行web request
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/?name="+account+"&pw="+password+"&format=json")!)
-        request.HTTPMethod = "GET"
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSArray{
-                    print("section.count: \(section.count)")
-                    guard section.count == 1 else{
-                        self.checker = false
-                        print("return value checker")
-                        print(self.checker)
-                        return
-                    }
-                    self.checker = true
-                }
-            }catch{print("Couldn't Serialize")}
-            print("return value checker")
-            print(self.checker)
-        }.resume()
+        trylogin(account, password)
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -236,6 +215,31 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         return false
     }
+    
+    func trylogin(agentid:String ,_ agentpw: String){
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/agent/login/")! as NSURL)
+        request.HTTPMethod = "POST"
+        let body = "username=\(agentid)&password=\(agentpw)&type=api"
+        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
+        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+            print("response:\(response)")
+            
+            do {
+                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:String]
+                if result!["state"] == "ok"{
+                    self.checker = true
+                }
+                else{
+                    self.checker = false
+                }
+                
+            } catch {print("Error -> \(error)")}
+            print("return value checker")
+            print(self.checker)
+
+            }.resume()
+    }
+
 
 
 
