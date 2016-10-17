@@ -25,9 +25,6 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     var targetphotoview = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        //log out button
-        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: Selector(searchObject()))
-        self.navigationItem.rightBarButtonItem = logout_Button
         
         
         // get account from loginview
@@ -39,11 +36,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         }
         searchObject()
         
-//        
-//        //log out button
-//        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(AgentRecognViewController.load_image(_:)))
-//        self.navigationItem.rightBarButtonItem = logout_Button
-//        
+   
         self.view.backgroundColor = UIColor.whiteColor()
         
         //相片說明文字
@@ -108,7 +101,10 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         
         self.colorTextField.delegate = self
         self.nameTextField.delegate = self
-        
+        //*****
+        //Refresh button
+        let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(searchObject))
+        self.navigationItem.rightBarButtonItem = refresh_Button
         
         // Do any additional setup after loading the view.
     }

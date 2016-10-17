@@ -37,7 +37,7 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         if let tbc = CustomTabController.sharedInstance.myID{
             id =  tbc
             print ("===========RTC login id =======")
-            print(id)
+            print (id)
             print ("================================")
         }
         //===========Change account into id

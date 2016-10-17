@@ -130,6 +130,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         self.myTableView.reloadData()
                         print(id)
                         self.userid = String(id)
+                        CustomTabController.sharedInstance.myID = String(id)
                         print("this is my STR \(self.profile)")
                         self.changeState(1, userid: String(id))
                     }
