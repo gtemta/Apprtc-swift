@@ -172,7 +172,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         print(params)
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Accept", forHTTPHeaderField: "Vary")
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()

@@ -17,6 +17,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     let titletext = UILabel()
     var photoid = ""
     var photourl = ""
+    var photouser = ""
     
     let fullScreenSize = UIScreen.mainScreen().bounds.size
     let colorTextField = UITextField()
@@ -24,37 +25,20 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     var targetphotoview = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //log out button
+        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: Selector(searchObject()))
+        self.navigationItem.rightBarButtonItem = logout_Button
         
         
         // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myInformation{
+        if let tbc = CustomTabController.sharedInstance.myID{
             account =  tbc
             print ("===========login  account=======")
             print(account)
             print ("================================")
         }
-        //get recogn photo
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?state=1&format=json")!)
-        request.HTTPMethod = "GET"
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSArray{
-                    if let photo_data = section[0] as? NSDictionary{
-                        print(photo_data)
-                        let id = photo_data["id"]! as! Int
-                        let url = photo_data["image"]! as! String
-                        self.photoid = String(id)
-                        self.photourl = url
-                        print(self.photoid)
-                        print(self.photourl)
-                        self.load_image(url)
-                    }
-                }
-            }catch{
-                print("Couldn't Serialize")
-            }
-            }.resume()
+        searchObject()
+        
 //        
 //        //log out button
 //        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(AgentRecognViewController.load_image(_:)))
@@ -128,6 +112,32 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         
         // Do any additional setup after loading the view.
     }
+    func searchObject(){
+        //get recogn photo
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?state=1&format=json")!)
+        request.HTTPMethod = "GET"
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                if let section = json as? NSArray{
+                    if let photo_data = section[0] as? NSDictionary{
+                        print(photo_data)
+                        let id = photo_data["id"]! as! Int
+                        let useraccount = photo_data["account"] as! String
+                        let url = photo_data["image"]! as! String
+                        self.photoid = String(id)
+                        self.photourl = url
+                        self.photouser = useraccount
+                        print(self.photoid)
+                        print(self.photourl)
+                        self.load_image(url)
+                    }
+                }
+            }catch{
+                print("Couldn't Serialize")
+            }
+            }.resume()
+    }
 
     
     func load_image(urlString:String)
@@ -161,11 +171,12 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         let params = NSMutableDictionary()
         params.setValue(comment, forKey: "comment")
         params.setValue(3, forKey: "state")
+        params.setValue(photouser, forKey: "account")
         print(" Result json content")
         print(params)
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("\()", forHTTPHeaderField: "Content-Length")
+        request.addValue("Accept", forHTTPHeaderField: "Vary")
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()
