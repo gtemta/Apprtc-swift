@@ -173,6 +173,9 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Accept", forHTTPHeaderField: "Vary")
+        //=====================
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        //^^^^^^^^^^^^^^^^^^^^^
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()
