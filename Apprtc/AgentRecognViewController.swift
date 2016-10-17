@@ -17,7 +17,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     let titletext = UILabel()
     var photoid = ""
     var photourl = ""
-    var photouser = ""
+    var photouser:[String] = []
     
     let fullScreenSize = UIScreen.mainScreen().bounds.size
     let colorTextField = UITextField()
@@ -119,11 +119,11 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
                     if let photo_data = section[0] as? NSDictionary{
                         print(photo_data)
                         let id = photo_data["id"]! as! Int
-                        let useraccount = photo_data["account"] as! String
+                        let useraccount = photo_data["account"] as! NSString
                         let url = photo_data["image"]! as! String
                         self.photoid = String(id)
                         self.photourl = url
-                        self.photouser = useraccount
+                        self.photouser = useraccount.componentsSeparatedByString("?format=json")
                         print(self.photoid)
                         print(self.photourl)
                         self.load_image(url)
@@ -167,7 +167,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         let params = NSMutableDictionary()
         params.setValue(comment, forKey: "comment")
         params.setValue(3, forKey: "state")
-        params.setValue(photouser, forKey: "account")
+        params.setValue(photouser[0], forKey: "account")
         print(" Result json content")
         print(params)
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
