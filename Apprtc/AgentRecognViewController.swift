@@ -109,13 +109,23 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         // Do any additional setup after loading the view.
     }
     func searchObject(){
+        let filter  = NSArray()
         //get recogn photo
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?state=1&format=json")!)
         request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
                 if let section = json as? NSArray{
+                    if (section.isEqualToArray(filter as [AnyObject])){
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.alertnull()
+                        })
+                    }
+                    else{
+                        
                     if let photo_data = section[0] as? NSDictionary{
                         print(photo_data)
                         let id = photo_data["id"]! as! Int
@@ -126,8 +136,12 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
                         self.photouser = useraccount.componentsSeparatedByString("?format=json")
                         print(self.photoid)
                         print(self.photourl)
-                        self.load_image(url)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.load_image(self.photourl)
+                        })
+                        
                     }
+            }
                 }
             }catch{
                 print("Couldn't Serialize")
@@ -135,6 +149,12 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
             }.resume()
     }
 
+    func alertnull(){
+        let alertView = UIAlertController(title: "系統訊息", message: "佇列中沒有待辨識相片",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+       }
+    
     
     func load_image(urlString:String)
     {

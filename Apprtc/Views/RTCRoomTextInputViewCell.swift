@@ -45,20 +45,35 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         //get the fit roomname
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
         request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
                 if let section = json as? NSDictionary{
+                    if (section.count==0){
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.alertnull()
+                        })
+                    }
+                    else{
+                        
                     let roomname = section["msg"]! as! String
                     self.targetroom = roomname
                     print ("target Room : ")
                     print(self.targetroom)
                     
                 }
+                }
             }catch{
                 print("Couldn't Serialize")
             }
             }.resume()
+    }
+    func alertnull(){
+        let alertView = UIAlertController(title: "系統訊息", message: "系統中無專員可提供服務，請稍後再試",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
     }
     
     

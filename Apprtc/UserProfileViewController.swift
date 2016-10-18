@@ -110,6 +110,8 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/account/?name=" + account + "&?format=json")!)
         request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
@@ -174,6 +176,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Accept", forHTTPHeaderField: "Vary")
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()

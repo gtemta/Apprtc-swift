@@ -16,21 +16,19 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     var picture = UIImageView()
     var contentTextLabel = UILabel()
     var CameraButton = UIButton()
-    var statecode = 0
+    
     var photourl = ""
     var photocomment = ""
-    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+//        let fullScreenSize = UIScreen.mainScreen().bounds.size
         self.view.backgroundColor = UIColor.blackColor()
-        
+        let fullScreenSize = UIScreen.mainScreen().applicationFrame.size
         //imageView.image = UIImage(named: "pikachu.png")
-        
         
         
         // get account from loginview
@@ -41,35 +39,67 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             print ("=========================")
         }
         
-        //set center position
-        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.4  , y: fullScreenSize.height *  0.6)
-        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.2)
-        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.8)
         
         //Refresh button
         let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(checkstatus))
         self.navigationItem.rightBarButtonItem = refresh_Button
         
+        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5, y:fullScreenSize.height * 0.9)
+        contentTextLabel.frame = CGRect(x:0,y:0,width: 250,height: 50)
+        contentTextLabel.textColor = UIColor.greenColor()
+        contentTextLabel.textAlignment = .Center
+        self.view.addSubview(contentTextLabel)
+        
+        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.3)
+        picture.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
+        self.view.addSubview(picture)
+        
+        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.8)
+        CameraButton.frame = CGRect(x: 0, y: 0, width: 200, height: 80)
+        CameraButton.setTitle("Camera", forState: .Normal)
+        CameraButton.setTitleColor(UIColor.blueColor(),forState: .Normal)
+        CameraButton.backgroundColor = UIColor.darkGrayColor()
+        CameraButton.addTarget(self,action: #selector(CameraAction),forControlEvents: .TouchUpInside)
+        self.view.addSubview(CameraButton)
+        
+        checkstatus()
+        
     }
+    
     func checkstatus(){
         print("in checkstatus")
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?account="+ID+"/")!)
+        
+        let filter = NSArray()
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?account="+ID)!)
         request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        //jump out
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
+                //null check
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
                 if let section = json as? NSArray{
-                    if let photo_data = section[0] as? NSDictionary{
-                        print(photo_data)
-                        let state = photo_data["state"]! as! Int
-                        let url = photo_data["image"]! as! String
-                        let comment = photo_data["comment"]! as! String
-                        self.statecode = state
-                        self.photourl = url
-                        self.photocomment = comment
-                        print("statecode: \(self.statecode)")
+                    if (section.isEqualToArray(filter as [AnyObject])){
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.setview(0)
+                        })
+                    }
+                    else{
+                        if let photo_data = section.lastObject as? NSDictionary{
+                            print(photo_data)
+                            let state = photo_data["state"]! as! Int
+                            let url = photo_data["image"]! as! String
+                            let comment = photo_data["comment"]! as! String
+                            self.photourl = url
+                            self.photocomment = comment
+                            print("statecode: \(state)")
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.setview(state)
+                            })
+                        }
                     }
                 }
+                
             }catch{
                 print("Couldn't Serialize")
             }
@@ -77,73 +107,49 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         
         
         print("out status check")
-        self.setview(self.statecode)
-        
     }
-    // set the view base from different situation
+    
     func setview(situation :Int){
         
         print("in setview")
         print("sitution: \(situation)")
         if situation==0 {
             //text
-            contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
             contentTextLabel.text = "請拍下欲辨識的物體"
-            contentTextLabel.textColor = UIColor.purpleColor()
-            contentTextLabel.textAlignment = .Center
+            contentTextLabel.enabled = true
             self.view.addSubview(contentTextLabel)
             
             
             //imageview
-            picture = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
             picture.image = UIImage(named: "pikachu.png")
             self.view.addSubview(picture)
             
+            
             //Button
-            CameraButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 80))
-            // 按鈕文字
-            CameraButton.setTitle("Camera", forState: .Normal)
-            // 按鈕文字顏色
-            CameraButton.setTitleColor(UIColor.blueColor(),forState: .Normal)
-            // 按鈕是否可以使用
             CameraButton.enabled = true
-            // 按鈕背景顏色
-            CameraButton.backgroundColor = UIColor.darkGrayColor()
-            // 按鈕按下後的動作
-            CameraButton.addTarget(self,action: #selector(CameraAction),forControlEvents: .TouchUpInside)
+            self.view.addSubview(CameraButton)
             
         }
         // wait for agent recogn the photo
         if situation==1 {
-            contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 400,height: 100))
             contentTextLabel.text = "前次照片等待辨識中，請稍後再來查看"
-            contentTextLabel.textColor = UIColor.purpleColor()
-            contentTextLabel.textAlignment = .Center
             self.view.addSubview(contentTextLabel)
             
+            //imageview
+            picture = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+            load_image(photourl)
+            self.view.addSubview(picture)
+            CameraButton.enabled = false
         }
         //show the previous photo & the camera Button
         if situation==3 {
-            contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 400,height: 100))
             contentTextLabel.text = photocomment
-            contentTextLabel.textColor = UIColor.purpleColor()
-            contentTextLabel.textAlignment = .Center
             self.view.addSubview(contentTextLabel)
             load_image(photourl)
             
             //Button
-            CameraButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 80))
-            // 按鈕文字
-            CameraButton.setTitle("Camera", forState: .Normal)
-            // 按鈕文字顏色
-            CameraButton.setTitleColor(UIColor.blueColor(),forState: .Normal)
-            // 按鈕是否可以使用
             CameraButton.enabled = true
-            // 按鈕背景顏色
-            CameraButton.backgroundColor = UIColor.darkGrayColor()
-            // 按鈕按下後的動作
-            CameraButton.addTarget(self,action: #selector(CameraAction),forControlEvents: .TouchUpInside)
-            
+            self.view.addSubview(CameraButton)
         }
         print("out setview")
     }
@@ -180,13 +186,27 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     
     //set imageview to camera's content
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        // The info dictionary contains multiple representations of the image, and this uses the original.
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        // Set photoImageView to display the selected image.
-        picture.image = selectedImage
+        let serialQueue = dispatch_queue_create("org.iii.iaim.uploadphoto", DISPATCH_QUEUE_SERIAL)
+        
+        
+        dispatch_async(serialQueue) { () -> Void in
+            // The info dictionary contains multiple representations of the image, and this uses the original.
+            let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            dispatch_async(dispatch_get_main_queue(), {
+                // Set photoImageView to display the selected image.
+                self.picture.image = selectedImage
+                print("set photo from camera")
+            })
+        }
+        dispatch_async(serialQueue) { () -> Void in
+            self.uploadRequest()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.dismissViewControllerAnimated(true, completion: nil)
+                            })
+        }
+        
         //Dismiss  the picker
-        dismissViewControllerAnimated(true, completion: nil)
-        uploadRequest()
+        
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         //Dismiss  the picker if the user canceled
@@ -195,6 +215,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     
     
     func uploadRequest(){
+        print("upload start")
         //get image Data from ImageView
         let imageData:NSData = UIImagePNGRepresentation(picture.image!)!
         let boundary = generateBoundaryString()
@@ -240,6 +261,8 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         body.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         request.HTTPBody = body
         request.HTTPMethod = "POST"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        
         
         //        let params = NSMutableDictionary()
         //        params.setValue(key, forKey: "account")

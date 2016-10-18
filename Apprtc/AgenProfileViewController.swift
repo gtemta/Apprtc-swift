@@ -103,6 +103,8 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/?name=" + account + "&?format=json")!)
         request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
@@ -150,6 +152,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()

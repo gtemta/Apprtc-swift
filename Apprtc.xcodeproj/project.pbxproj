@@ -17,7 +17,6 @@
 		9D4239191DA0E6E300566B19 /* CustomTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4239181DA0E6E300566B19 /* CustomTabController.swift */; };
 		9D431CE51D99A33B002B8365 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CE41D99A33B002B8365 /* LoginViewController.swift */; };
 		9D431CEB1D9A42C3002B8365 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CEA1D9A42C3002B8365 /* PickerViewController.swift */; };
-		9D431CED1D9A91B3002B8365 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CEC1D9A91B3002B8365 /* ProfileViewController.swift */; };
 		9D431CEF1D9AF546002B8365 /* AgentRecognViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */; };
 		9D431CF11D9B9820002B8365 /* AgenProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D431CF01D9B9820002B8365 /* AgenProfileViewController.swift */; };
 		D863B1131C932B0000DE1C4C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D863B1121C932B0000DE1C4C /* VideoToolbox.framework */; };
@@ -73,7 +72,6 @@
 		9D4239181DA0E6E300566B19 /* CustomTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabController.swift; sourceTree = "<group>"; };
 		9D431CE41D99A33B002B8365 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9D431CEA1D9A42C3002B8365 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
-		9D431CEC1D9A91B3002B8365 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentRecognViewController.swift; sourceTree = "<group>"; };
 		9D431CF01D9B9820002B8365 /* AgenProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgenProfileViewController.swift; sourceTree = "<group>"; };
 		D863B1121C932B0000DE1C4C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -281,7 +279,6 @@
 				D878BE511B9B6110001AE9CD /* Info.plist */,
 				9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */,
 				9D431CF01D9B9820002B8365 /* AgenProfileViewController.swift */,
-				9D431CEC1D9A91B3002B8365 /* ProfileViewController.swift */,
 				9D431CEA1D9A42C3002B8365 /* PickerViewController.swift */,
 				9D431CE41D99A33B002B8365 /* LoginViewController.swift */,
 				D878BE521B9B6110001AE9CD /* AppDelegate.swift */,
@@ -450,7 +447,6 @@
 				D875EE8C1B9C03AE008B1DF3 /* RTCICECandidate+JSON.m in Sources */,
 				D875EE8D1B9C03AE008B1DF3 /* RTCICEServer+JSON.m in Sources */,
 				D875EE8A1B9C03AE008B1DF3 /* ARDWebSocketChannel.m in Sources */,
-				9D431CED1D9A91B3002B8365 /* ProfileViewController.swift in Sources */,
 				D878BEB41B9B754D001AE9CD /* RTCVideoChatViewController.swift in Sources */,
 				D875EE891B9C03AE008B1DF3 /* ARDUtilities.m in Sources */,
 				9D431CF11D9B9820002B8365 /* AgenProfileViewController.swift in Sources */,
