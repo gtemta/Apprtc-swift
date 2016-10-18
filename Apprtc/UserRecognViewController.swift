@@ -20,15 +20,12 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     var photourl = ""
     var photocomment = ""
     
+    let fullScreenSize = UIScreen.mainScreen().bounds.size
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let fullScreenSize = UIScreen.mainScreen().bounds.size
         self.view.backgroundColor = UIColor.blackColor()
-        let fullScreenSize = UIScreen.mainScreen().applicationFrame.size
-        //imageView.image = UIImage(named: "pikachu.png")
         
         
         // get account from loginview
@@ -39,29 +36,33 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             print ("=========================")
         }
         
+        contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height:60))
+        contentTextLabel.text = " user recogn "
+        contentTextLabel.font = contentTextLabel.font.fontWithSize(20)
+        contentTextLabel.textColor = UIColor.blueColor()
+        contentTextLabel.numberOfLines = 1
+        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.6)
+        self.view.addSubview(contentTextLabel)
+        
+        //picture
+        picture.frame = CGRect(x: 0, y: 0,width: 250,height: 250)
+        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.3)
+        picture.image = UIImage(named: "pikachu.png")
+        self.view.addSubview(picture)
+        //button
+        CameraButton.frame = CGRect(x: 0, y: 0, width: 200,height: 50)
+        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.7)
+        
+        CameraButton.setTitle("Camera", forState: .Normal)
+        CameraButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        CameraButton.backgroundColor = UIColor.darkGrayColor()
+        CameraButton.addTarget(self, action: #selector(CameraAction), forControlEvents: .TouchUpInside)
+        self.view.addSubview(CameraButton)
         
         //Refresh button
         let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(checkstatus))
         self.navigationItem.rightBarButtonItem = refresh_Button
-        
-        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5, y:fullScreenSize.height * 0.9)
-        contentTextLabel.frame = CGRect(x:0,y:0,width: 250,height: 50)
-        contentTextLabel.textColor = UIColor.greenColor()
-        contentTextLabel.textAlignment = .Center
-        self.view.addSubview(contentTextLabel)
-        
-        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.3)
-        picture.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
-        self.view.addSubview(picture)
-        
-        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.8)
-        CameraButton.frame = CGRect(x: 0, y: 0, width: 200, height: 80)
-        CameraButton.setTitle("Camera", forState: .Normal)
-        CameraButton.setTitleColor(UIColor.blueColor(),forState: .Normal)
-        CameraButton.backgroundColor = UIColor.darkGrayColor()
-        CameraButton.addTarget(self,action: #selector(CameraAction),forControlEvents: .TouchUpInside)
-        self.view.addSubview(CameraButton)
-        
+
         checkstatus()
         
     }
@@ -117,39 +118,32 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             //text
             contentTextLabel.text = "請拍下欲辨識的物體"
             contentTextLabel.enabled = true
-            self.view.addSubview(contentTextLabel)
-            
+           
             
             //imageview
             picture.image = UIImage(named: "pikachu.png")
-            self.view.addSubview(picture)
-            
+           
             
             //Button
             CameraButton.enabled = true
-            self.view.addSubview(CameraButton)
-            
+            CameraButton.hidden = false
         }
         // wait for agent recogn the photo
         if situation==1 {
             contentTextLabel.text = "前次照片等待辨識中，請稍後再來查看"
-            self.view.addSubview(contentTextLabel)
-            
             //imageview
-            picture = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
             load_image(photourl)
-            self.view.addSubview(picture)
             CameraButton.enabled = false
+            CameraButton.hidden = true
         }
         //show the previous photo & the camera Button
         if situation==3 {
             contentTextLabel.text = photocomment
-            self.view.addSubview(contentTextLabel)
             load_image(photourl)
             
             //Button
             CameraButton.enabled = true
-            self.view.addSubview(CameraButton)
+            CameraButton.hidden = false
         }
         print("out setview")
     }
