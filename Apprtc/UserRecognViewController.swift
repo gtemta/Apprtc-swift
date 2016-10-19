@@ -184,24 +184,14 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     
     //set imageview to camera's content
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let serialQueue = dispatch_queue_create("org.iii.iaim.uploadphoto", DISPATCH_QUEUE_SERIAL)
+        // The info dictionary contains multiple representations of the image, and this uses the original.
         
-        
-        dispatch_async(serialQueue) { () -> Void in
-            // The info dictionary contains multiple representations of the image, and this uses the original.
-            let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            dispatch_async(dispatch_get_main_queue(), {
-                // Set photoImageView to display the selected image.
-                self.picture.image = selectedImage
-                print("set photo from camera")
-            })
-        }
-        dispatch_async(serialQueue) { () -> Void in
-            self.uploadRequest()
-            dispatch_async(dispatch_get_main_queue(), {
-                self.dismissViewControllerAnimated(true, completion: nil)
-                            })
-        }
+        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        // Set photoImageView to display the selected image.
+        self.picture.image = selectedImage
+        print("set photo from camera")
+        self.uploadRequest(selectedImage)
+        self.dismissViewControllerAnimated(true, completion: nil)
         
         //Dismiss  the picker
         
@@ -212,10 +202,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     }
     
     
-    func uploadRequest(){
+    func uploadRequest(image: UIImage ){
         print("upload start")
         //get image Data from ImageView
-        let imageData:NSData = UIImagePNGRepresentation(picture.image!)!
+        let imageData:NSData = UIImagePNGRepresentation(image)!
         let boundary = generateBoundaryString()
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/")!)
         //define multipart request type

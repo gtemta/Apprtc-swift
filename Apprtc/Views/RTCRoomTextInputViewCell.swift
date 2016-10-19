@@ -46,7 +46,6 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
                 let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
