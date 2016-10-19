@@ -36,9 +36,9 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         // get account from loginview
         if let tbc = CustomTabController.sharedInstance.myID{
             id =  tbc
-            print ("===========RTC login id =======")
+            print ("========RTC login id =======")
             print (id)
-            print ("================================")
+            print ("============================")
         }
         //===========Change account into id
         
@@ -58,18 +58,19 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
                     }
                     else{
                         
-                    let roomname = section["msg"]! as! String
-                    self.targetroom = roomname
-                    print ("target Room : ")
-                    print(self.targetroom)
-                    
-                }
+                        let roomname = section["msg"]! as! String
+                        self.targetroom = roomname
+                        print ("target Room : ")
+                        print(self.targetroom)
+                        }
                 }
             }catch{
                 print("Couldn't Serialize")
             }
             }.resume()
     }
+    
+    
     func alertnull(){
         let alertView = UIAlertController(title: "系統訊息", message: "系統中無專員可提供服務，請稍後再試",preferredStyle: .Alert)
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)

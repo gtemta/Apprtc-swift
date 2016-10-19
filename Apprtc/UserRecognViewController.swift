@@ -86,13 +86,17 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                         })
                     }
                     else{
+                        
                         if let photo_data = section.lastObject as? NSDictionary{
                             print(photo_data)
                             let state = photo_data["state"]! as! Int
                             let url = photo_data["image"]! as! String
-                            let comment = photo_data["comment"]! as! String
+                            var comment = photo_data["comment"] as? String
                             self.photourl = url
-                            self.photocomment = comment
+                            if comment == nil{
+                                comment = ""
+                            }
+                            self.photocomment = comment!
                             print("statecode: \(state)")
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.setview(state)
@@ -269,6 +273,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
             print("Response: \(response)")})
         task.resume()
+        checkstatus()
     }
     
     
