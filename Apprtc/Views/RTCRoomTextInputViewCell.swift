@@ -57,11 +57,16 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
                     }
                     else{
                         
-                        let roomname = section["msg"]! as! String
-                        self.targetroom = roomname
-                        print ("target Room : ")
-                        print(self.targetroom)
+                        let roomname = section["msg"] as? String
+                        if roomname == nil {
+                            self.alertnull()
                         }
+                        else {
+                            self.targetroom = roomname!}
+                            print ("target Room : ")
+                            print(self.targetroom)
+                        
+                    }
                 }
             }catch{
                 print("Couldn't Serialize")
@@ -74,6 +79,7 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         let alertView = UIAlertController(title: "系統訊息", message: "系統中無專員可提供服務，請稍後再試",preferredStyle: .Alert)
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
+        alertView.actions
     }
     
     

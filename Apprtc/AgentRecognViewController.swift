@@ -86,12 +86,12 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         sendButton.enabled = true
         sendButton.backgroundColor = UIColor.darkGrayColor()
         sendButton.addTarget(self, action: #selector(AgentRecognViewController.sendResult), forControlEvents: .TouchUpInside)
-        sendButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.9 )
+        sendButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.85 )
         self.view.addSubview(sendButton)
         
         
         //辨識圖片設定
-        targetphotoview = UIImageView( frame: CGRect(x: 0 , y:0 ,width: fullScreenSize.width*0.9,height: fullScreenSize.width*0.9))
+        targetphotoview = UIImageView( frame: CGRect(x: 0 , y:0 ,width: fullScreenSize.width*0.6,height: fullScreenSize.width*0.6))
         targetphotoview.image = UIImage(named: "icons/glass")
         targetphotoview.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(targetphotoview)
@@ -153,6 +153,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         let alertView = UIAlertController(title: "系統訊息", message: "佇列中沒有待辨識相片",preferredStyle: .Alert)
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
+        self.presentViewController(alertView, animated: true, completion: nil)
        }
     
     
