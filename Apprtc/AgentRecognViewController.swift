@@ -81,7 +81,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         
         //辨識圖片設定
         targetphotoview = UIImageView( frame: CGRect(x: 0 , y:0 ,width: fullScreenSize.width*0.6,height: fullScreenSize.width*0.6))
-        targetphotoview.image = UIImage(named: "icons/glass")
+        targetphotoview.image = UIImage(named: "pikachu.png")
         targetphotoview.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(targetphotoview)
         targetphotoview.reloadInputViews()

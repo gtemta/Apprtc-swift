@@ -61,9 +61,9 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
             frame: CGRect(
                 x:0, y:0, width: 200, height: 180))
         
-        myprofileimg.image = UIImage(named: "icons/profile.png")
+        myprofileimg.image = UIImage(named: "user.png")
         
-        myprofileimg.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.15)
+        myprofileimg.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(myprofileimg)
         
         // 建立 UITableView 並設置原點及尺寸
@@ -93,11 +93,11 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
         
-        self.profile.append("用戶名稱: \("user")")
-        self.profile.append("用戶性別: \("male")")
-        self.profile.append("使用語言: \("Chinese English")")
-        self.profile.append("教育程度: \("undergraduated")")
-        self.profile.append("視障等級: \("slight")")
+        self.profile.append("用戶名稱: \(" 用戶 Ｂ")")
+        self.profile.append("用戶性別: \("男性")")
+        self.profile.append("使用語言: \("中文 英文")")
+        self.profile.append("教育程度: \("大學")")
+        self.profile.append("視障等級: \("輕微視障")")
         self.myTableView.reloadData()
         
         // 加入到畫面中

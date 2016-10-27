@@ -54,9 +54,9 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
             frame: CGRect(
                 x:0, y:0, width: 200, height: 180))
         
-        myprofileimg.image = UIImage(named: "icons/profile.png")
+        myprofileimg.image = UIImage(named: "agent.png")
         
-        myprofileimg.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.15)
+        myprofileimg.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(myprofileimg)
         
         // 建立 UITableView 並設置原點及尺寸
@@ -87,10 +87,10 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         myTableView.allowsMultipleSelection = false
         
         
-        self.profile.append("用戶名稱: \("Agent")")
-        self.profile.append("用戶性別: \("female")")
-        self.profile.append("使用語言: \("chinese English")")
-        self.profile.append("教育程度: \("senior high")")
+        self.profile.append("用戶名稱: \("專員 Ａ")")
+        self.profile.append("用戶性別: \("女性")")
+        self.profile.append("使用語言: \("中文 英文")")
+        self.profile.append("教育程度: \("碩士班")")
         self.myTableView.reloadData()
         
         // 加入到畫面中
