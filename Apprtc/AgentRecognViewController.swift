@@ -204,6 +204,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         
         self.dismissViewControllerAnimated(true, completion: nil)
         print("送出結果")
+        searchObject()
     }
     
     @IBAction func logout(_sender: AnyObject) {

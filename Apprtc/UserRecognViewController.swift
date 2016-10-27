@@ -36,9 +36,11 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             print ("=========================")
         }
         
-        contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height:60))
+        contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height:200))
         contentTextLabel.text = " user recogn "
-        contentTextLabel.font = contentTextLabel.font.fontWithSize(20)
+        contentTextLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        contentTextLabel.numberOfLines = 0
+        contentTextLabel.font = contentTextLabel.font.fontWithSize(11)
         contentTextLabel.textColor = UIColor.blueColor()
         contentTextLabel.numberOfLines = 1
         contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.6)
@@ -51,7 +53,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         self.view.addSubview(picture)
         //button
         CameraButton.frame = CGRect(x: 0, y: 0, width: 200,height: 50)
-        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.7)
+        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.83)
         
         CameraButton.setTitle("Camera", forState: .Normal)
         CameraButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
@@ -64,6 +66,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         self.navigationItem.rightBarButtonItem = refresh_Button
 
         checkstatus()
+        
+    }
+    
+    func refresh(){
         
     }
     
@@ -188,9 +194,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         // Set photoImageView to display the selected image.
+        let myOrientation = selectedImage.imageOrientation
         self.picture.image = selectedImage
         print("set photo from camera")
-        self.uploadRequest(selectedImage)
+        self.uploadRequest(selectedImage, Orientation: myOrientation)
         self.dismissViewControllerAnimated(true, completion: nil)
         
         //Dismiss  the picker
@@ -202,68 +209,74 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     }
     
     
-    func uploadRequest(image: UIImage ){
-        print("upload start")
-        //get image Data from ImageView
-        let imageData:NSData = UIImagePNGRepresentation(image)!
-        let boundary = generateBoundaryString()
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/")!)
-        //define multipart request type
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        let session = NSURLSession.sharedSession()
-        let body = NSMutableData()
-        let accountname = "http://140.113.72.29:8100/api/account/" + self.ID + "/"
-        
-        //date
-        let date = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmmss"
-        let date2 = formatter.stringFromDate(date) as String
-        print(date2)
-        //
-        let fname = date2 + ".png"
-        let mimetype = "image/png"
-        
-        //define the data post parameter
-        //multi part header
-        
-        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("Content-Disposition:form-data; name=\"test\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("hi\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        //account field
-        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("Content-Disposition:form-data; name=\"account\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("\(accountname)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        //state field
-        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("Content-Disposition:form-data; name=\"state\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("\(1)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        //image field
-        body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("Content-Disposition:form-data; name=\"image\"; filename=\"\(fname)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData("Content-Type: \(mimetype)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData(imageData)
-        body.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        //multi part end
-        body.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-        request.HTTPBody = body
-        request.HTTPMethod = "POST"
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        
-        
-        //        let params = NSMutableDictionary()
-        //        params.setValue(key, forKey: "account")
-        //        params.setValue(1, forKey: "state")
-        //        print("json content")
-        //        print(params)
-        //        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
-        //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
-            print("Response: \(response)")})
-        task.resume()
-        checkstatus()
+    func uploadRequest(image: UIImage, Orientation: UIImageOrientation ){
+        self.setview(1)
+        self.picture.image = image
+        func mynewUpLoad(image: UIImage, Orientation: UIImageOrientation ){
+            print("upload start")
+            //get image Data from ImageView
+            let imageData:NSData = UIImageJPEGRepresentation(image, 0)!
+            let boundary = generateBoundaryString()
+            let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/")!)
+            //define multipart request type
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            let session = NSURLSession.sharedSession()
+            let body = NSMutableData()
+            let accountname = "http://140.113.72.29:8100/api/account/" + self.ID + "/"
+            
+            //date
+            let date = NSDate()
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyyMMddHHmmss"
+            let date2 = formatter.stringFromDate(date) as String
+            print(date2)
+            //
+            let fname = date2 + ".png"
+            let mimetype = "image/png"
+            
+            //define the data post parameter
+            //multi part header
+            
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"test\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("hi\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //account field
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"account\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(accountname)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //state field
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"state\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(1)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //image field
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"image\"; filename=\"\(fname)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Type: \(mimetype)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(imageData)
+            body.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            //multi part end
+            body.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            request.HTTPBody = body
+            request.HTTPMethod = "POST"
+            request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+            
+            
+            //        let params = NSMutableDictionary()
+            //        params.setValue(key, forKey: "account")
+            //        params.setValue(1, forKey: "state")
+            //        print("json content")
+            //        print(params)
+            //        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+            //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
+                print("Response: \(response)")})
+            task.resume()
+
+        }
+        mynewUpLoad(image, Orientation: Orientation)
+        //        checkstatus()
     }
     
     

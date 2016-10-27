@@ -262,13 +262,35 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     func language_decode(l: Int) -> String{
         switch l {
         case 1:
-            return "客家話"
-        case 2:
-            return "閩南語"
-        case 3:
             return "中文"
-        case 4:
+        case 2:
             return "英文"
+        case 3:
+            return "中文、英文"
+        case 4:
+            return "客家語"
+        case 5:
+            return "中文、客家語"
+        case 6:
+            return "英文、客家語"
+        case 7:
+            return "中文、英文、客家語"
+        case 8:
+            return "閩南語"
+        case 9:
+            return "中文、閩南語"
+        case 10:
+            return "英文、閩南語"
+        case 11:
+            return "中文、英文、閩南語"
+        case 12:
+            return "客家語、閩南語"
+        case 13:
+            return "中文、客家語、閩南語"
+        case 14:
+            return "英文、客家語、閩南語"
+        case 15:
+            return "中文、英文、客家語、閩南語"
         default:
             return "SOME THING WENT WRONG"
         }
