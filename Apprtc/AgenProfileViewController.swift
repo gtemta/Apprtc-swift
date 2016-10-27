@@ -15,12 +15,6 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     ]
     var profile : [String] = []
     var myTableView: UITableView!
-    
-    //the value from LoginView
-    var account = String()
-    var agentid = String()
-    
-    
     // 必須實作的方法：每個 cell 要顯示的內容
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // 取得 tableView 目前使用的 cell
@@ -65,14 +59,6 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         myprofileimg.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.15)
         self.view.addSubview(myprofileimg)
         
-        // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myInformation{
-            account =  tbc
-            print ("===========login  account=======")
-            print(account)
-            print ("================================")
-        }
-        
         // 建立 UITableView 並設置原點及尺寸
         myTableView = UITableView(frame: CGRect(
             x: 0, y: 200,
@@ -101,109 +87,25 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         myTableView.allowsMultipleSelection = false
         
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/?name=" + account + "&?format=json")!)
-        request.HTTPMethod = "GET"
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSArray{
-                    if let profile_data = section[0] as? NSDictionary{
-                        print(profile_data)
-                        let realname = profile_data["realname"]! as! String
-                        let education = profile_data["education"]! as! Int
-                        let language = profile_data["language"]! as! Int
-                        let gender = profile_data["gender"]! as! Int
-                        let id = profile_data["id"]! as! Int
-                        self.profile.append("用戶名稱: \(realname)")
-                        self.profile.append("用戶性別: \(self.gender_decode(gender))")
-                        self.profile.append("使用語言: \(self.language_decode(language))")
-                        self.profile.append("教育程度: \(self.education_decode(education))")
-                        print("this is my STR \(self.profile)")
-                        self.myTableView.reloadData()
-                        CustomTabController.sharedInstance.myID = String(id)
-                        self.agentid = String(id)
-                        self.changeState(1, userid: String(id) )
-                    }
-                }
-            }catch{
-                print("Couldn't Serialize")
-            }
-            }.resume()
-        
-        
-        
+        self.profile.append("用戶名稱: \("Agent")")
+        self.profile.append("用戶性別: \("female")")
+        self.profile.append("使用語言: \("chinese English")")
+        self.profile.append("教育程度: \("senior high")")
+        self.myTableView.reloadData()
         
         // 加入到畫面中
         self.view.addSubview(myTableView)
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    
-    //change user state
-    func changeState(userstate:Int ,userid: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/agent/" + userid + "/")! as NSURL)
-        request.HTTPMethod = "PUT"
-        let params = NSMutableDictionary()
-        params.setValue(userstate, forKey: "state")
-        print(" state json content")
-        print(params)
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
-            print("response:\(response)")
-            }.resume()
-    }
-    
-    
     // 必須實作的方法：每一組有幾個 cell
     func tableView(_tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return profile.count
     }
-    
-    
-    //
-    //    // 點選 cell 後執行的動作
-    //    func tableView(_tableView: UITableView,
-    //                   didSelectRowAt indexPath: NSIndexPath) {
-    //        // 取消 cell 的選取狀態
-    //
-    //        //tableView.deselectRow(at: indexPath, animated: true)
-    //
-    //
-    //
-    //        let name = info[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
-    //        print("選擇的是 \(name)")
-    //    }
-    //
-    //
-    //    // 點選 Accessory 按鈕後執行的動作
-    //    // 必須設置 cell 的 accessoryType
-    //    // 設置為 .DisclosureIndicator (向右箭頭)之外都會觸發
-    //    func tableView(_tableView: UITableView,
-    //                   accessoryButtonTappedForRowWith
-    //        indexPath: NSIndexPath) {
-    //        let name = info[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
-    //        print("按下的是 \(name) 的 detail")
-    //    }
-    //
-    // 有幾組 section
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
         
     }
-    
-    //    // 每個 section 的標題
-    //    func tableView(_tableView: UITableView,
-    //                   titleForHeaderInSection section: Int) -> String? {
-    //        let title = section == 0 ? "My Profile" : "wrong"
-    //        return title
-    //    }
-    //
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -215,79 +117,6 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = signInView
         self.dismissViewControllerAnimated(true, completion: nil)
-        changeState(0, userid: agentid)
     }
-    
-    func education_decode(e: Int) -> String{
-        switch e {
-        case 0:
-            return "學前教育"
-        case 1:
-            return "學前教育"
-        case 2:
-            return "國民中學"
-        case 3:
-            return "高級中學"
-        case 4:
-            return "專科（副學士）"
-        case 5:
-            return "大學（學士）"
-        case 6:
-            return "碩士"
-        case 7:
-            return "博士"
-        default:
-            return "SOME THING WENT WRONG"
-        }
-    }
-    
-    func language_decode(l: Int) -> String{
-        switch l {
-        case 1:
-            return "客家話"
-        case 2:
-            return "閩南語"
-        case 3:
-            return "中文"
-        case 4:
-            return "英文"
-        default:
-            return "SOME THING WENT WRONG"
-        }
-    }
-    
-    func gender_decode(g: Int) -> String{
-        if g==0{
-            return "男"
-        }
-        else{
-            return "女"
-        }
-    }
-    
-    func level_decode(l: Int) -> String{
-        switch l {
-        case 1:
-            return "輕度視障"
-        case 2:
-            return "中度視障"
-        case 3:
-            return "高度視障"
-        default:
-            return "SOME THING WENT WRONG"
-        }
-    }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 

@@ -68,6 +68,8 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     self.footerViewBottomConstraint?.constant=0.0
     self.disconnect()
     self.client=ARDAppClient(delegate: self)
+    
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     self.client?.serverHostUrl="https://apprtc.appspot.com"
     self.client!.connectToRoomWithId(self.roomName! as String, options: nil)
     self.urlLabel?.text=self.roomName! as String
@@ -133,37 +135,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
       self.client?.disconnect()
     }
   }
-    //==================================================
-    func leaveRating(){
-        let alertView = UIAlertController(title: "給予評分", message: "\n\n\n\n\n\n",preferredStyle: .Alert)
-        alertView.modalInPopover = true
-        alertView.view.addSubview(pickerView)
-        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
-        alertView.addAction(action)
-        presentViewController(alertView, animated: true, completion: nil)
-        
-    }
-    
-    func putRating(content: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceid + "/")! as NSURL)
-        request.HTTPMethod = "PUT"
-        let params = NSMutableDictionary()
-        params.setValue(content, forKey: "feedback")
-        print(" state json content")
-        print(params)
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        
-        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
-            print("response:\(response)")
-            }.resume()
-    }
-    
-    
-    //==================================================
-  func remoteDisconnected(){
+    func remoteDisconnected(){
     self.remoteVideoTrack?.removeRenderer(self.remoteView)
     self.remoteView?.renderFrame(nil)
     if self.localVideoSize != nil {

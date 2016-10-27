@@ -25,18 +25,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     var targetphotoview = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myID{
-            account =  tbc
-            print ("===========login  account=======")
-            print(account)
-            print ("================================")
-        }
-        searchObject()
-        
-   
+
         self.view.backgroundColor = UIColor.whiteColor()
         
         //相片說明文字
@@ -96,79 +85,19 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         targetphotoview.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(targetphotoview)
         targetphotoview.reloadInputViews()
-        load_image(photourl)
         print("****" + (photourl))
         
         self.colorTextField.delegate = self
         self.nameTextField.delegate = self
         //*****
         //Refresh button
-        let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(searchObject))
+        let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(cleanview))
         self.navigationItem.rightBarButtonItem = refresh_Button
         
         // Do any additional setup after loading the view.
     }
-    func searchObject(){
-        let filter  = NSArray()
-        //get recogn photo
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?state=1&format=json")!)
-        request.HTTPMethod = "GET"
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+    func cleanview(){
         
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSArray{
-                    if (section.isEqualToArray(filter as [AnyObject])){
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.alertnull()
-                        })
-                    }
-                    else{
-                        
-                    if let photo_data = section[0] as? NSDictionary{
-                        print(photo_data)
-                        let id = photo_data["id"]! as! Int
-                        let useraccount = photo_data["account"] as! NSString
-                        let url = photo_data["image"]! as! String
-                        self.photoid = String(id)
-                        self.photourl = url
-                        self.photouser = useraccount.componentsSeparatedByString("?format=json")
-                        print(self.photoid)
-                        print(self.photourl)
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.load_image(self.photourl)
-                        })
-                        
-                    }
-            }
-                }
-            }catch{
-                print("Couldn't Serialize")
-            }
-            }.resume()
-    }
-
-    func alertnull(){
-        let alertView = UIAlertController(title: "系統訊息", message: "佇列中沒有待辨識相片",preferredStyle: .Alert)
-        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
-        alertView.addAction(action)
-        self.presentViewController(alertView, animated: true, completion: nil)
-       }
-    
-    
-    func load_image(urlString:String)
-    {
-        
-        let imgURL: NSURL = NSURL(string: urlString)!
-        let request: NSURLRequest = NSURLRequest(URL: imgURL)
-        NSURLConnection.sendAsynchronousRequest(
-            request, queue: NSOperationQueue.mainQueue(),
-            completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
-                if error == nil {
-                    self.targetphotoview.image = UIImage(data: data!)
-                }
-        })
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -181,38 +110,10 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     func  sendResult() {
         //現階段為返回前頁 待修改
         comment = String(colorTextField.text!) + "  " + String(nameTextField.text!)
-        
-        //put result to photo
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/photo/" + photoid + "/")! as NSURL)
-        request.HTTPMethod = "PUT"
-        let params = NSMutableDictionary()
-        params.setValue(comment, forKey: "comment")
-        params.setValue(3, forKey: "state")
-        params.setValue(photouser[0], forKey: "account")
-        print(" Result json content")
-        print(params)
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Accept", forHTTPHeaderField: "Vary")
-        //=====================
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        //^^^^^^^^^^^^^^^^^^^^^
-        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
-            print("response:\(response)")
-            }.resume()
-        
-        
         self.dismissViewControllerAnimated(true, completion: nil)
         print("送出結果")
     }
     
-    @IBAction func logout(_sender: AnyObject) {
-        //LoginViewController
-        //let signInView = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //appDelegate.window?.rootViewController = signInView
-        
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

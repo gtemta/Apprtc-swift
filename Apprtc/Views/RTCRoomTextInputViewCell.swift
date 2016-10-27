@@ -23,8 +23,6 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     @IBOutlet weak var errorLabel:UILabel?
     @IBOutlet weak var errorLabelHeightConstraint:NSLayoutConstraint?
     var delegate:RTCRoomTextInputViewCellDelegate?
-    var id = ""
-    var targetroom = ""
     
     override func awakeFromNib() {
         self.errorLabelHeightConstraint?.constant=0.0
@@ -32,60 +30,13 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         self.joinButton?.backgroundColor=UIColor(white: 100/255, alpha: 1.0)
         self.joinButton?.enabled=true
         self.joinButton?.layer.cornerRadius=3.0
-        
-        // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myID{
-            id =  tbc
-            print ("========RTC login id =======")
-            print (id)
-            print ("============================")
         }
-        //===========Change account into id
-        
-        //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
-        request.HTTPMethod = "GET"
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSDictionary{
-                    if (section.count==0){
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.alertnull()
-                        })
-                    }
-                    else{
-                        
-                        let roomname = section["msg"] as? String
-                        if roomname == nil {
-                            self.alertnull()
-                        }
-                        else {
-                            self.targetroom = roomname!}
-                            print ("target Room : ")
-                            print(self.targetroom)
-                        
-                    }
-                }
-            }catch{
-                print("Couldn't Serialize")
-            }
-            }.resume()
-    }
     
-    
-    func alertnull(){
-        let alertView = UIAlertController(title: "系統訊息", message: "系統中無專員可提供服務，請稍後再試",preferredStyle: .Alert)
-        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
-        alertView.addAction(action)
-        alertView.actions
-    }
-    
+
     
     ///************change this place to target room********
     @IBAction func touchButtonPressed (sender:UIButton){
-        if self.delegate?.shouldJoinRoom(targetroom, textInputCell: self) != nil{
+        if self.delegate?.shouldJoinRoom("agent5withuser21105", textInputCell: self) != nil{
             NSLog("Delegate was implemented");
         }
     }

@@ -92,39 +92,23 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         if userlogin{
             print("userlogin")
             print(userlogin)
-            if checker
-            {
                 let userTabBar = self.storyboard?.instantiateViewControllerWithIdentifier("UserTabBar") as! UITabBarController
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 CustomTabController.sharedInstance.myInformation = accountTextField.text
                 appDelegate.window?.rootViewController = userTabBar
                 self.dismissViewControllerAnimated(true, completion: nil)
                 print("登入系統")
-                
-            }
-            else{
-                Failsignin()
-            }
-            //jumop to agent side app
         }
             
         else {
             print("userlogin")
             print(userlogin)
-            
-            if checker{
                 let agentTabBar = self.storyboard?.instantiateViewControllerWithIdentifier("AgentTabBar") as! UITabBarController
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 CustomTabController.sharedInstance.myInformation = accountTextField.text
                 appDelegate.window?.rootViewController = agentTabBar
                 self.dismissViewControllerAnimated(true, completion: nil)
                 print("登入系統")
-                
-                // jump to user side app
-            }
-            else{
-                Failsignin()
-            }
         }
         
         
@@ -148,17 +132,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    func Failsignin(){
-        print("login fail")
-        let alertVC = UIAlertController(
-            title: "Sign in Failed",
-            message: "Sorry, Please Try again",
-            preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "OK",style: .Default,handler: nil)
-        alertVC.addAction(okAction)
-        self.presentViewController(alertVC, animated: true, completion: nil)
-        
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -172,29 +145,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         guard account != "" && password != "" else {print("Haven't Finish edit."); return}
         print("這是帳號: \(account)")
         print("And my password: \(password)")
-        //開始執行web request
-        //
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/account/?name="+account+"&pw="+password+"&format=json")!)
-        request.HTTPMethod = "GET"
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSArray{
-                    print("section.count: \(section.count)")
-                    guard section.count == 1 else{
-                        self.checker = false
-                        print("return value checker")
-                        print(self.checker)
-                        return
-                    }
-                    self.checker = true
-                }
-            }catch{print("Couldn't Serialize")}
-            print("return value checker")
-            print(self.checker)
-        }.resume()
-    }
+        }
     func agentloginpress(){
         let account = accountTextField.text!
         let password = passwordTextField.text!
@@ -202,8 +153,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         guard account != "" && password != "" else {print("Haven't Finish edit."); return}
         print("這是帳號: \(account)")
         print("And my password: \(password)")
-        trylogin(account, password)
-    }
+     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -216,33 +166,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         return false
     }
-    
-    func trylogin(agentid:String ,_ agentpw: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/agent/login/")! as NSURL)
-        request.HTTPMethod = "POST"
-        let body = "username=\(agentid)&password=\(agentpw)&type=api"
-        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
-            print("response:\(response)")
-            
-            do {
-                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:String]
-                if result!["state"] == "ok"{
-                    self.checker = true
-                }
-                else{
-                    self.checker = false
-                }
-                
-            } catch {print("Error -> \(error)")}
-            print("return value checker")
-            print(self.checker)
-
-            }.resume()
-    }
-
-
 
 
 }
