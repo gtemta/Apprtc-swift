@@ -38,7 +38,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         //picture
         picture.frame = CGRect(x: 0, y: 0,width: 250,height: 250)
         picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.3)
-        picture.image = UIImage(named: "pikachu.png")
+        picture.image = UIImage(named: ".png")
         self.view.addSubview(picture)
         //button
         CameraButton.frame = CGRect(x: 0, y: 0, width: 200,height: 50)
@@ -94,6 +94,9 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         self.picture.image = selectedImage
         print("set photo from camera")
         self.dismissViewControllerAnimated(true, completion: nil)
+        CameraButton.enabled = false
+        CameraButton.hidden = true
+        contentTextLabel.text = "原 子 筆"
         
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
