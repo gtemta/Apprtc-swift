@@ -386,7 +386,7 @@
 				TargetAttributes = {
 					D878BE4C1B9B6110001AE9CD = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 5T6BPJGSC7;
+						DevelopmentTeam = 97P6384A4C;
 						LastSwiftMigration = 0800;
 					};
 					D878BE611B9B6110001AE9CD = {
@@ -595,7 +595,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5T6BPJGSC7;
+				DEVELOPMENT_TEAM = 97P6384A4C;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Apprtc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -604,7 +604,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.InstaEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
@@ -618,7 +618,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5T6BPJGSC7;
+				DEVELOPMENT_TEAM = 97P6384A4C;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Apprtc/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -627,7 +627,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.InstaEye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
