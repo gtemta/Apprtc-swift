@@ -16,7 +16,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     var picture = UIImageView()
     var contentTextLabel = UILabel()
     var CameraButton = UIButton()
-    
+    let ipadress = "http://192.168.1.87:8100/api"
     var photourl = ""
     var photocomment = ""
     
@@ -27,22 +27,23 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.blackColor()
         
-        contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height:60))
-        contentTextLabel.text = " user recogn "
-        contentTextLabel.font = contentTextLabel.font.fontWithSize(20)
-        contentTextLabel.textColor = UIColor.blueColor()
-        contentTextLabel.numberOfLines = 1
+        contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height:200))
+        contentTextLabel.text = "歡迎使用照片辨識"
+        contentTextLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        contentTextLabel.numberOfLines = 0
+        contentTextLabel.font = contentTextLabel.font.fontWithSize(25)
+        contentTextLabel.textColor = UIColor.whiteColor()
         contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.6)
         self.view.addSubview(contentTextLabel)
         
         //picture
         picture.frame = CGRect(x: 0, y: 0,width: 250,height: 250)
         picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.3)
-        picture.image = UIImage(named: "pikachu.png")
+        picture.image = UIImage(named: "icon3x.png")
         self.view.addSubview(picture)
         //button
         CameraButton.frame = CGRect(x: 0, y: 0, width: 200,height: 50)
-        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.7)
+        CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.83)
         
         CameraButton.setTitle("Camera", forState: .Normal)
         CameraButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
@@ -53,22 +54,139 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         //Refresh button
         let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(checkstatus))
         self.navigationItem.rightBarButtonItem = refresh_Button
-
+        
+        checkstatus()
+        
         
     }
     
-    func checkstatus(){
-        setview()
+    func sendPOST(){
+        let post_address = ipadress + "/end/?format=json"
+        let request = NSMutableURLRequest(URL: NSURL(string: post_address)!)
+        request.HTTPMethod = "POST"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                if let section = json as? NSDictionary{
+                    if (section.count==0){}
+                    else{
+                        
+                        let message = section["msg"] as? String
+                        if message == nil {}
+                        else {
+                            self.photocomment = message!}
+                        print ("target Photo : ")
+                        print(self.photocomment)
+                        
+                    }
+                }
+            }catch{
+                print("Couldn't Serialize")
+            }
+            }.resume()
     }
     
-    func setview(){
-            contentTextLabel.text = photocomment
+    func checkstatus(){
+        print("in checkstatus")
+        sendPOST()
+        let filter = NSArray()
+        let acc_address =  ipadress + "/photo/?account=7"
+        let request = NSMutableURLRequest(URL: NSURL(string: acc_address)!)
+        request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        //jump out
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            do{
+                //null check
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                if let section = json as? NSArray{
+                    if (section.isEqualToArray(filter as [AnyObject])){
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.setview(0)
+                        })
+                    }
+                    else{
+                        
+                        if let photo_data = section.lastObject as? NSDictionary{
+                            print(photo_data)
+                            let state = photo_data["state"]! as! Int
+                            let url = photo_data["image"]! as! String
+                            var comment = photo_data["comment"] as? String
+                            self.photourl = url
+                            if comment == nil{
+                                comment = ""
+                            }
+                            self.photocomment = comment!
+                            print("statecode: \(state)")
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.setview(state)
+                            })
+                        }
+                    }
+                }
+                
+            }catch{
+                print("Couldn't Serialize")
+            }
+            }.resume()
+        
+        
+        print("out status check")
+    }
+    
+    func setview(situation :Int){
+        
+        print("in setview")
+        print("sitution: \(situation)")
+        if situation==0 {
+            //text
+            contentTextLabel.text = "請拍下欲辨識的物體"
+            contentTextLabel.enabled = true
+            
+            
+            //imageview
+            picture.image = UIImage(named: "icon3x.png")
+            
+            
             //Button
             CameraButton.enabled = true
             CameraButton.hidden = false
-         }
+        }
+        // wait for agent recogn the photo
+        if situation==1 {
+            contentTextLabel.text = "前次照片等待辨識中，請稍後再來查看"
+            //imageview
+            load_image(photourl)
+            CameraButton.enabled = false
+            CameraButton.hidden = true
+        }
+        //show the previous photo & the camera Button
+        if situation==3 {
+            contentTextLabel.text = photocomment
+            load_image(photourl)
+            
+            //Button
+            CameraButton.enabled = true
+            CameraButton.hidden = false
+        }
+        print("out setview")
+    }
     
     
+    //load image from url
+    func load_image(urlString:String)
+    {
+        let imgURL: NSURL = NSURL(string: urlString)!
+        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        NSURLConnection.sendAsynchronousRequest(
+            request, queue: NSOperationQueue.mainQueue(),
+            completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+                if error == nil {
+                    self.picture.image = UIImage(data: data!)
+                }
+        })
+    }
     
     func CameraAction(){
         print("進入相機頁面")
@@ -91,15 +209,94 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         // Set photoImageView to display the selected image.
+        let myOrientation = selectedImage.imageOrientation
         self.picture.image = selectedImage
         print("set photo from camera")
+        self.uploadRequest(selectedImage, Orientation: myOrientation)
         self.dismissViewControllerAnimated(true, completion: nil)
+        
+        //Dismiss  the picker
         
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         //Dismiss  the picker if the user canceled
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    func uploadRequest(image: UIImage, Orientation: UIImageOrientation ){
+        self.setview(1)
+        self.picture.image = image
+        func mynewUpLoad(image: UIImage, Orientation: UIImageOrientation ){
+            print("upload start")
+            //get image Data from ImageView
+            let imageData:NSData = UIImageJPEGRepresentation(image, 0)!
+            let boundary = generateBoundaryString()
+            let req_address = ipadress + "/photo/"
+            let request = NSMutableURLRequest(URL: NSURL(string: req_address)!)
+            //define multipart request type
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            let session = NSURLSession.sharedSession()
+            let body = NSMutableData()
+            //set account to 7
+            let accountname = ipadress + "/account/7/"
+            
+            //date
+            let date = NSDate()
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyyMMddHHmmss"
+            let date2 = formatter.stringFromDate(date) as String
+            print(date2)
+            //
+            let fname = date2 + ".png"
+            let mimetype = "image/png"
+            
+            //define the data post parameter
+            //multi part header
+            
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"test\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("hi\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //account field
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"account\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(accountname)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //state field
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"state\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("\(1)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //image field
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Disposition:form-data; name=\"image\"; filename=\"\(fname)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData("Content-Type: \(mimetype)\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            body.appendData(imageData)
+            body.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+            //multi part end
+            body.appendData("--\(boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            request.HTTPBody = body
+            request.HTTPMethod = "POST"
+            request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+            
+            
+            //        let params = NSMutableDictionary()
+            //        params.setValue(key, forKey: "account")
+            //        params.setValue(1, forKey: "state")
+            //        print("json content")
+            //        print(params)
+            //        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+            //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
+                print("Response: \(response)")})
+            task.resume()
+            
+        }
+        mynewUpLoad(image, Orientation: Orientation)
+        //        checkstatus()
+        sendPOST()
+    }
+    
     
     func noCamera(){
         let alertVC = UIAlertController(

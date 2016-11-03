@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C3908E31DCB400700CF2958 /* icon3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C3908E21DCB400700CF2958 /* icon3x.png */; };
 		1CD2599E1DC23EED00B742D9 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD2599D1DC23EED00B742D9 /* user.png */; };
 		1CD259A01DC23FE900B742D9 /* agent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD2599F1DC23FE900B742D9 /* agent.png */; };
 		975A57EB1BCFCAC1008F6AB9 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C3908E21DCB400700CF2958 /* icon3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3x.png; sourceTree = "<group>"; };
 		1CD2599D1DC23EED00B742D9 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		1CD2599F1DC23FE900B742D9 /* agent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agent.png; sourceTree = "<group>"; };
 		975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = ../SRWebSocket.m; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		D878BE4F1B9B6110001AE9CD /* Apprtc */ = {
 			isa = PBXGroup;
 			children = (
+				1C3908E21DCB400700CF2958 /* icon3x.png */,
 				9D4239181DA0E6E300566B19 /* CustomTabController.swift */,
 				D878BE511B9B6110001AE9CD /* Info.plist */,
 				9D431CEE1D9AF546002B8365 /* AgentRecognViewController.swift */,
@@ -423,6 +426,7 @@
 				1CD259A01DC23FE900B742D9 /* agent.png in Resources */,
 				D878BE581B9B6110001AE9CD /* Main.storyboard in Resources */,
 				1CD2599E1DC23EED00B742D9 /* user.png in Resources */,
+				1C3908E31DCB400700CF2958 /* icon3x.png in Resources */,
 				D878BE5A1B9B6110001AE9CD /* Images.xcassets in Resources */,
 				9D275D2B1DAD3DFA00C38B08 /* pikachu.png in Resources */,
 			);
