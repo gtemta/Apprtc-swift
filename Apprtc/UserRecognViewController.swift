@@ -40,15 +40,14 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         contentTextLabel.text = " user recogn "
         contentTextLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         contentTextLabel.numberOfLines = 0
-        contentTextLabel.font = contentTextLabel.font.fontWithSize(11)
+        contentTextLabel.font = contentTextLabel.font.fontWithSize(25)
         contentTextLabel.textColor = UIColor.blueColor()
-        contentTextLabel.numberOfLines = 1
-        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.6)
+        contentTextLabel.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.5)
         self.view.addSubview(contentTextLabel)
         
         //picture
-        picture.frame = CGRect(x: 0, y: 0,width: 250,height: 250)
-        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.3)
+        picture.frame = CGRect(x: 0, y: 0,width: 150,height: 150)
+        picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.20)
         picture.image = UIImage(named: "pikachu.png")
         self.view.addSubview(picture)
         //button

@@ -16,8 +16,6 @@ class PickerViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     
     //UIpickerDataSource必須實作的方法
     //UIpicker各列有多少行資料
-
-    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }

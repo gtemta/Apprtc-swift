@@ -8,9 +8,38 @@
 
 import UIKit
 
-class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
+class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource{
+    //--- picker
+    let response = ["辨識完成且成功","相片過於模糊，無法辨識","環境光線不足，無法辨識","照片中無明確物體可供辨識","物體資訊不足無法辨識"]
+    var whatResponse = "環境光線不足，無法辨識"
+    
+    //UIpickerDataSource必須實作的方法
+    //UIpicker各列有多少行資料
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    //UIpickerDataSource必須實作的方法
+    //UIPickerView各列有多少行資料
+    func pickerView(_pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        //設置第一列
+        //返回陣列response的成員數量
+        return response.count
+    }
     
     
+    //每個選項選擇使用的資料
+    func pickerView(_pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return response[row]
+    }
+    
+    
+    //改變後選擇執行的動作
+    func pickerView(_pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        whatResponse = response[row]
+        print("選擇的是 \(whatResponse) ")
+        myRow = row
+    }
+    //---
     //the value from LoginView
     var account = String()
     var comment = ""
@@ -18,6 +47,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     var photoid = ""
     var photourl = ""
     var photouser:[String] = []
+    var myRow: Int = 0
     
     let fullScreenSize = UIScreen.mainScreen().bounds.size
     let colorTextField = UITextField()
@@ -56,7 +86,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         colorTextField.keyboardType = .Default
         colorTextField.textColor = UIColor.cyanColor()
         colorTextField.backgroundColor = UIColor.lightGrayColor()
-        colorTextField.center = CGPoint(x: fullScreenSize.width * 0.5 ,y : fullScreenSize.height * 0.5)
+        colorTextField.center = CGPoint(x: fullScreenSize.width * 0.5 ,y : fullScreenSize.height * 0.45)
         self.view.addSubview(colorTextField)
         //填入物體名稱
         nameTextField.frame = CGRect(x:0,y:0,width: fullScreenSize.width * 0.8,height: 50)
@@ -66,17 +96,14 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         nameTextField.keyboardType = .Default
         nameTextField.textColor = UIColor.greenColor()
         nameTextField.backgroundColor = UIColor.lightGrayColor()
-        nameTextField.center = CGPoint(x: fullScreenSize.width * 0.5 ,y : fullScreenSize.height * 0.6)
+        nameTextField.center = CGPoint(x: fullScreenSize.width * 0.5 ,y : fullScreenSize.height * 0.55)
         self.view.addSubview(nameTextField)
         //快速回覆表
         let fastPickerView = UIPickerView(frame: CGRect(x:0 ,y:fullScreenSize.height * 0.6, width: fullScreenSize.width, height: 150))
-        
+        fastPickerView.delegate = self
+        fastPickerView.dataSource = self
+
         //新增viewcontroller實作委任模式的方法
-        let fastPickerViewController = PickerViewController()
-        
-        self.addChildViewController(fastPickerViewController)
-        fastPickerView.delegate = fastPickerViewController
-        fastPickerView.dataSource = fastPickerViewController
         self.view.addSubview(fastPickerView)
         
         //送出結果按鍵
@@ -91,7 +118,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
         
         
         //辨識圖片設定
-        targetphotoview = UIImageView( frame: CGRect(x: 0 , y:0 ,width: fullScreenSize.width*0.6,height: fullScreenSize.width*0.6))
+        targetphotoview = UIImageView( frame: CGRect(x: 0 , y:0 ,width: fullScreenSize.width*0.6,height:fullScreenSize.width*0.6))
         targetphotoview.image = UIImage(named: "icons/glass")
         targetphotoview.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(targetphotoview)
@@ -180,7 +207,12 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate{
     
     func  sendResult() {
         //現階段為返回前頁 待修改
-        comment = String(colorTextField.text!) + "  " + String(nameTextField.text!)
+        if myRow==0{
+            comment = String(colorTextField.text!) + "  " + String(nameTextField.text!)
+        }
+        else{
+            comment = whatResponse
+        }
         
         //put result to photo
         let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/photo/" + photoid + "/")! as NSURL)
