@@ -26,14 +26,14 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>camera is used by WebRTC streaming for visuall diability</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>my micro</string>
 	<key>NSVideoSubscriberAccountUsageDescription</key>
 	<string>my vid</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
