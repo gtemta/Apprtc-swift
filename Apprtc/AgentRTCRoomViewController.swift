@@ -9,7 +9,7 @@
 
 import UIKit
 
-class AgentRTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDelegate {
+class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputViewCellDelegate {
     
     
     //the value from LoginView
@@ -37,8 +37,8 @@ class AgentRTCRoomViewController: UITableViewController,RTCRoomTextInputViewCell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell
         if (indexPath.row == 0){
-            var cell:RTCRoomTextInputViewCell
-            cell=tableView.dequeueReusableCellWithIdentifier("RoomInputCell", forIndexPath: indexPath) as! RTCRoomTextInputViewCell
+            var cell:AgentRTCRoomTextInputViewCell
+            cell=tableView.dequeueReusableCellWithIdentifier("RoomInputCell", forIndexPath: indexPath) as! AgentRTCRoomTextInputViewCell
             cell.delegate=self
             return cell
         }
@@ -48,7 +48,7 @@ class AgentRTCRoomViewController: UITableViewController,RTCRoomTextInputViewCell
         return cell
     }
     
-    func shouldJoinRoom(room: NSString, textInputCell: RTCRoomTextInputViewCell) {
+    func shouldJoinRoom(room: NSString, textInputCell: AgentRTCRoomTextInputViewCell) {
         self.performSegueWithIdentifier("AgentRTCVideoChatViewController", sender: room)
     }
     

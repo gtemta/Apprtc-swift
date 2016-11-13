@@ -41,11 +41,19 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
             print(id)
             print ("================================")
         }
-        //===========Change account into id
         
+
         //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?agent_id=" + self.id + "&format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/")!)
+        let params = NSMutableDictionary()
+        params.setValue(self.id, forKey: "agent_id")
+        print(" Result json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        
         request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
