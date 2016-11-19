@@ -377,7 +377,7 @@
 				TargetAttributes = {
 					D878BE4C1B9B6110001AE9CD = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = VQ4ZREDCK2;
+						DevelopmentTeam = L46VAUBR64;
 						LastSwiftMigration = 0800;
 					};
 					D878BE611B9B6110001AE9CD = {
@@ -583,7 +583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VQ4ZREDCK2;
+				DEVELOPMENT_TEAM = L46VAUBR64;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Apprtc/Info.plist;
@@ -593,7 +593,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hahahaha.iaimApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
@@ -608,7 +608,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VQ4ZREDCK2;
+				DEVELOPMENT_TEAM = L46VAUBR64;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Apprtc/Info.plist;
@@ -618,7 +618,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hahahaha.iaimApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;

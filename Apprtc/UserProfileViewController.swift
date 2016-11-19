@@ -150,16 +150,16 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     func leaveRating(){
         let alertView = UIAlertController(title: "給予評分", message: "\n\n\n\n\n\n",preferredStyle: .Alert)
-        alertView.modalInPopover = true
+//        alertView.modalInPopover = true
         //Create a frame (placeholder/wrapper) for the picker and then create the picker
  
         //set the pickers datasource and delegate
 //        picker.delegate = self;
 //        picker.dataSource = self;
 //        //Add the picker to the alert controller
-        alertView.view.addSubview(pickerView)
+//        alertView.view.addSubview(pickerView)
         
-        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
         alertView.addAction(action)
         presentViewController(alertView, animated: true, completion: nil)
     
@@ -184,11 +184,21 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     
     
     func logout(){
+//        //back to LoginViewController
+//        let signInView = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        changeState(0, userid: userid)
+        leaveRating()
+//        appDelegate.window?.rootViewController = signInView
+//        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func realLogout(){
         //back to LoginViewController
         let signInView = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         changeState(0, userid: userid)
-        leaveRating()
+
         appDelegate.window?.rootViewController = signInView
         self.dismissViewControllerAnimated(true, completion: nil)
     }

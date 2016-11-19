@@ -38,7 +38,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
         var cell:UITableViewCell
         if (indexPath.row == 0){
             var cell:AgentRTCRoomTextInputViewCell
-            cell=tableView.dequeueReusableCellWithIdentifier("RoomInputCell", forIndexPath: indexPath) as! AgentRTCRoomTextInputViewCell
+            cell=(tableView.dequeueReusableCellWithIdentifier("RoomInputCell", forIndexPath: indexPath) as! AgentRTCRoomTextInputViewCell)
             cell.delegate=self
             return cell
         }
