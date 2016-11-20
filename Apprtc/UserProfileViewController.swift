@@ -149,7 +149,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
      //888888888888888888888888888888888888888888888
     }
     func leaveRating(){
-        let alertView = UIAlertController(title: "給予評分", message: "\n\n\n\n\n\n",preferredStyle: .Alert)
+        let alertView = UIAlertController(title: "請給予評分", message: "這次的服務品質您給幾分?",preferredStyle: .Alert)
 //        alertView.modalInPopover = true
         //Create a frame (placeholder/wrapper) for the picker and then create the picker
  
@@ -159,8 +159,18 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
 //        //Add the picker to the alert controller
 //        alertView.view.addSubview(pickerView)
         
-        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
-        alertView.addAction(action)
+        let star1 = UIAlertAction(title: "★☆☆☆☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        let star2 = UIAlertAction(title: "★★☆☆☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        let star3 = UIAlertAction(title: "★★★☆☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        let star4 = UIAlertAction(title: "★★★★☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        let notNow = UIAlertAction(title: "Not Now",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        alertView.addAction(star5)
+        alertView.addAction(star4)
+        alertView.addAction(star3)
+        alertView.addAction(star2)
+        alertView.addAction(star1)
+        alertView.addAction(notNow)
         presentViewController(alertView, animated: true, completion: nil)
     
     }

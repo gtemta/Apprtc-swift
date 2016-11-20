@@ -230,6 +230,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:String]
                 if result!["state"] == "ok"{
                     self.checker = true
+                    print("this is my result \(result!)")
                 }
                 else{
                     self.checker = false
