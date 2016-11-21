@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Tca-jx-gTX">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Tca-jx-gTX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -179,7 +179,7 @@
         <!--AppRTC-->
         <scene sceneID="eDq-uC-1fY">
             <objects>
-                <tableViewController id="Gy1-Ex-pi8" customClass="AgentRTCRoomViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Gy1-Ex-pi8" customClass="RTCRoomViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="DJY-vq-O5R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -305,10 +305,10 @@
             </objects>
             <point key="canvasLocation" x="-1903.2" y="-2146.776611694153"/>
         </scene>
-        <!--AgentRTC Video Chat View Controller-->
+        <!--Video Chat View Controller-->
         <scene sceneID="4Yg-Ma-448">
             <objects>
-                <viewController id="xdS-jh-JJq" customClass="AgentRTCVideoChatViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xdS-jh-JJq" customClass="RTCVideoChatViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rru-lE-vez"/>
                         <viewControllerLayoutGuide type="bottom" id="d2V-3e-TNO"/>
@@ -641,10 +641,10 @@
             </objects>
             <point key="canvasLocation" x="-492" y="-8"/>
         </scene>
-        <!--Video Chat View Controller-->
+        <!--AgentRTC Video Chat View Controller-->
         <scene sceneID="KBT-c6-Gi8">
             <objects>
-                <viewController id="hQd-si-2r0" customClass="RTCVideoChatViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hQd-si-2r0" customClass="AgentRTCVideoChatViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8fe-mF-3Pz"/>
                         <viewControllerLayoutGuide type="bottom" id="ZoA-4l-0Bg"/>

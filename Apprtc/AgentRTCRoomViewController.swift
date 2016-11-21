@@ -14,6 +14,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     
     //the value from LoginView
     var account = String()
+    var targetroom = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +56,15 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(" to string \(segue.destinationViewController.dynamicType)")
         let viewController:AgentRTCVideoChatViewController=segue.destinationViewController as! AgentRTCVideoChatViewController
-        //pass the roomname
-        viewController.roomName=sender as! String
+            //pass the roomname
+        if targetroom == ""{alertnull()}else{
+            viewController.roomName = targetroom
+            print("Segue use roomname")
+            print(viewController.roomName)
+            viewController.roomName!=sender as! String
+        }
+        
+        
     }
     
     override func  shouldAutorotate() -> Bool {
@@ -65,6 +73,14 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
+    }
+    
+    func alertnull(){
+        let alertView = UIAlertController(title: "系統訊息", message: "目前無用戶需要服務，請稍後再試",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+        presentViewController(alertView, animated: true, completion: nil)
+        
     }
 }
 

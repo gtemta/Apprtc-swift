@@ -68,12 +68,13 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
 
                     let roomname = section["msg"] as? String
                         if roomname == nil{
-                            self.alertnull()
+                            print("room is nil")
                         }
                         else{
-                            self.targetroom = roomname!}
-                            print ("target Room : ")
-                            print(self.targetroom)
+                            self.targetroom = roomname!
+                        }
+                        print ("target Room : ")
+                        print(self.targetroom)
                         
                     }
                 }

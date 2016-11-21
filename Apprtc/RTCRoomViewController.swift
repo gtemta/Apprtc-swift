@@ -65,11 +65,13 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(" to string \(segue.destinationViewController.dynamicType)")
         let viewController:RTCVideoChatViewController=segue.destinationViewController as! RTCVideoChatViewController
-        //pass the roomname
-        viewController.roomName = targetroom
-        print("Segue use roomname")
-        print(viewController.roomName)
-        viewController.roomName!=sender as! String
+            //pass the roomname
+        if targetroom == ""{alertnull()}else{
+            viewController.roomName = targetroom
+            print("Segue use roomname")
+            print(viewController.roomName)
+            viewController.roomName!=sender as! String
+        }
     }
     
     override func  shouldAutorotate() -> Bool {
@@ -79,5 +81,14 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
+    
+    func alertnull(){
+        let alertView = UIAlertController(title: "系統訊息", message: "系統中無專員可提供服務，請稍後再試",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+        presentViewController(alertView, animated: true, completion: nil)
+
+    }
+
 }
 

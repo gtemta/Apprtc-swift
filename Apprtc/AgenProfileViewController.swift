@@ -106,7 +106,6 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            print("my response is \(response)")
             do{
                 let profileData = try  NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
                 print("my data is \(profileData!)")
