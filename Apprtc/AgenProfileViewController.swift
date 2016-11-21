@@ -66,10 +66,10 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         self.view.addSubview(myprofileimg)
         
         // get account from loginview
-        if let tbc = CustomTabController.sharedInstance.myInformation{
-            account =  tbc
+        if let tbc = CustomTabController.sharedInstance.myID{
+            agentid =  tbc
             print ("===========login  account=======")
-            print(account)
+            print(agentid)
             print ("================================")
         }
         
@@ -101,32 +101,27 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         myTableView.allowsMultipleSelection = false
         
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/?name=" + account + "&?format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/" + agentid + "/?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            print("my response is \(response)")
             do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                if let section = json as? NSArray{
-                    if let profile_data = section[0] as? NSDictionary{
-                        print(profile_data)
-                        let realname = profile_data["realname"]! as! String
-                        let education = profile_data["education"]! as! Int
-                        let language = profile_data["language"]! as! Int
-                        let gender = profile_data["gender"]! as! Int
-                        let id = profile_data["id"]! as! Int
-                        self.profile.append("用戶名稱: \(realname)")
-                        self.profile.append("用戶性別: \(self.gender_decode(gender))")
-                        self.profile.append("使用語言: \(self.language_decode(language))")
-                        self.profile.append("教育程度: \(self.education_decode(education))")
-                        print("this is my STR \(self.profile)")
-                        self.myTableView.reloadData()
-                        CustomTabController.sharedInstance.myID = String(id)
-                        self.agentid = String(id)
-                        self.changeState(1, userid: String(id) )
-                    }
-                }
+                let profileData = try  NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
+                print("my data is \(profileData!)")
+                let realname = profileData!["realname"]! as! String
+                let education = profileData!["education"]! as! Int
+                let language = profileData!["language"]! as! Int
+                let gender = profileData!["gender"]! as! Int
+                let id = profileData!["id"]! as! Int
+                self.profile.append("用戶名稱: \(realname)")
+                self.profile.append("用戶性別: \(self.gender_decode(gender))")
+                self.profile.append("使用語言: \(self.language_decode(language))")
+                self.profile.append("教育程度: \(self.education_decode(education))")
+                print("this is my STR \(self.profile)")
+                self.myTableView.reloadData()
+                self.changeState(1, userid: String(id) )
             }catch{
                 print("Couldn't Serialize")
             }

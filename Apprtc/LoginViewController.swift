@@ -227,10 +227,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             print("response:\(response)")
             
             do {
-                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:String]
-                if result!["state"] == "ok"{
+                let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
+                print("my result is\(result)")
+                if result!["state"] as! String == "ok"{
                     self.checker = true
-                    print("this is my result \(result!)")
+                    let ID = result!["agent"] as! Int
+                    let infoID = String(ID)
+                    CustomTabController.sharedInstance.myID = infoID
                 }
                 else{
                     self.checker = false

@@ -159,20 +159,46 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
 //        //Add the picker to the alert controller
 //        alertView.view.addSubview(pickerView)
         
-        let star1 = UIAlertAction(title: "★☆☆☆☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
-        let star2 = UIAlertAction(title: "★★☆☆☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
-        let star3 = UIAlertAction(title: "★★★☆☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
-        let star4 = UIAlertAction(title: "★★★★☆",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
-        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
-        let notNow = UIAlertAction(title: "Not Now",style: UIAlertActionStyle.Default, handler: {action in self.realLogout()})
+        let star1 = UIAlertAction(title: "★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(1)})
+        let star2 = UIAlertAction(title: "★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(2)})
+        let star3 = UIAlertAction(title: "★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(3)})
+        let star4 = UIAlertAction(title: "★★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(4)})
+        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(5)})
         alertView.addAction(star5)
         alertView.addAction(star4)
         alertView.addAction(star3)
         alertView.addAction(star2)
         alertView.addAction(star1)
-        alertView.addAction(notNow)
         presentViewController(alertView, animated: true, completion: nil)
     
+    }
+    
+    func  sendRating(_rate: Int) {
+        //現階段為返回前頁 待修改
+//        let theRate = _rate;
+//        //put result to photo
+//        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/photo/" + photoid + "/")! as NSURL)
+//        request.HTTPMethod = "PUT"
+//        let params = NSMutableDictionary()
+//        params.setValue(comment, forKey: "comment")
+//        params.setValue(3, forKey: "state")
+//        params.setValue(photouser[0], forKey: "account")
+//        print(" Result json content")
+//        print(params)
+//        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("Accept", forHTTPHeaderField: "Vary")
+//        //=====================
+//        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+//        //^^^^^^^^^^^^^^^^^^^^^
+//        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+//            print("response:\(response)")
+//            }.resume()
+//        
+//        
+//        self.dismissViewControllerAnimated(true, completion: nil)
+//        print("送出結果")
+//        searchObject()
     }
     
     //change user state
