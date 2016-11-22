@@ -246,7 +246,4 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }.resume()
     }
 
-
-
-
 }

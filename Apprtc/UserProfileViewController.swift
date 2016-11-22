@@ -24,6 +24,9 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     //the value from LoginView
     var account:String = ""
     var userid:String = ""
+    var userAcctURL:String = ""
+    var agentAcctURL:String = ""
+    var serviceID:String = ""
     
     // 必須實作的方法：每個 cell 要顯示的內容
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -80,7 +83,6 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         }
         
         
-        
         // 建立 UITableView 並設置原點及尺寸
         myTableView = UITableView(frame: CGRect(
             x: 0, y: 200,
@@ -135,6 +137,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         CustomTabController.sharedInstance.myID = String(id)
                         print("this is my STR \(self.profile)")
                         self.changeState(1, userid: String(id))
+                        self.getMyService(String(id))
                     }
                 }
             }catch{
@@ -159,11 +162,11 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
 //        //Add the picker to the alert controller
 //        alertView.view.addSubview(pickerView)
         
-        let star1 = UIAlertAction(title: "★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(1)})
-        let star2 = UIAlertAction(title: "★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(2)})
-        let star3 = UIAlertAction(title: "★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(3)})
-        let star4 = UIAlertAction(title: "★★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(4)})
-        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.realLogout();self.sendRating(5)})
+        let star1 = UIAlertAction(title: "★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(1);self.realLogout()})
+        let star2 = UIAlertAction(title: "★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(2);self.realLogout()})
+        let star3 = UIAlertAction(title: "★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(3);self.realLogout()})
+        let star4 = UIAlertAction(title: "★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(4);self.realLogout()})
+        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(5);self.realLogout()})
         alertView.addAction(star5)
         alertView.addAction(star4)
         alertView.addAction(star3)
@@ -173,36 +176,65 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     
     }
     
-    func  sendRating(_rate: Int) {
-        //現階段為返回前頁 待修改
-//        let theRate = _rate;
-//        //put result to photo
-//        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/photo/" + photoid + "/")! as NSURL)
-//        request.HTTPMethod = "PUT"
-//        let params = NSMutableDictionary()
-//        params.setValue(comment, forKey: "comment")
-//        params.setValue(3, forKey: "state")
-//        params.setValue(photouser[0], forKey: "account")
-//        print(" Result json content")
-//        print(params)
-//        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("Accept", forHTTPHeaderField: "Vary")
-//        //=====================
-//        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-//        //^^^^^^^^^^^^^^^^^^^^^
-//        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
-//            print("response:\(response)")
-//            }.resume()
-//        
-//        
-//        self.dismissViewControllerAnimated(true, completion: nil)
-//        print("送出結果")
-//        searchObject()
+    func  sendRating(_rate:Int) {
+        //將rating值傳回資料庫
+        let theRate = _rate
+        let acctURL = userAcctURL
+        let agentURL = agentAcctURL
+        
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceID + "/")! as NSURL)
+        request.HTTPMethod = "PUT"
+        let params = NSMutableDictionary()
+        params.setValue(acctURL, forKey: "account")
+        params.setValue(agentURL, forKey: "agent")
+        params.setValue(theRate, forKey: "rating")
+        print(" Result json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Accept", forHTTPHeaderField: "Vary")
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+            print("response:\(response)")
+            }.resume()
+        
+        print("送出結果")
+    }
+    
+    func getMyService(_theID:String){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/service/?account=" + _theID + "&format=json")!)
+        request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            print("response: \(response)")
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!,  options: []) as? NSArray
+                if json?.count<1 {
+                    print("Havn't have any service")
+                }
+                else{
+                    let minus = "?format=json"
+                    let lastService = json![(json!.count)-1] as! NSDictionary
+                    let url1 = lastService["account"]!
+                    let url2 = lastService["agent"]!
+                    let id = lastService["id"]!
+                    let surl1 = String(url1)
+                    let ssurl1 = surl1.componentsSeparatedByString(minus)
+                    let surl2 = String(url2)
+                    let ssurl2 = surl2.componentsSeparatedByString(minus)
+                    let sid = String(id)
+                    self.userAcctURL = ssurl1[0]
+                    self.agentAcctURL = ssurl2[0]
+                    self.serviceID = sid
+                }
+            }catch{print(err)}
+            }.resume()
+
     }
     
     //change user state
     func changeState(userstate:Int ,userid: String){
+        
         let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/account/" + userid + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
