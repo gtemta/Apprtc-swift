@@ -72,6 +72,7 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
                         }
                         else{
                             self.targetroom = roomname!
+                            CustomTabController.sharedInstance.targetRoom = self.targetroom
                         }
                         print ("target Room : ")
                         print(self.targetroom)

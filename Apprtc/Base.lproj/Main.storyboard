@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Tca-jx-gTX">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Tca-jx-gTX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -90,7 +90,7 @@
             <objects>
                 <navigationController id="Z5R-7M-zly" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="視訊" image="microphone" id="8Qv-g6-rgY"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GHC-dR-WMb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GHC-dR-WMb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -108,7 +108,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jBz-vo-kzB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="辨識" image="photo-camera" id="DmN-X8-eyG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HnI-oc-AdB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HnI-oc-AdB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -127,7 +127,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IDn-eQ-3O3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="個人資料" image="cogwheel" id="DVe-SC-P0n"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G49-NZ-0xn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G49-NZ-0xn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -164,7 +164,7 @@
             <objects>
                 <navigationController id="33z-W4-GnS" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="視訊" image="microphone" id="7lb-lW-RQE"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qDz-Yf-5Tj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qDz-Yf-5Tj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -442,7 +442,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WhO-9c-taT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="辨識" image="photo-camera" id="6jT-aF-PLO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="30Y-uO-EIU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="30Y-uO-EIU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -480,7 +480,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fKn-HG-uwt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="個人資料" image="cogwheel" id="frr-8u-ixa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xlL-Tz-1WA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xlL-Tz-1WA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -632,7 +632,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="AppRTC" id="70U-VG-OYE"/>
                     <connections>
-                        <segue destination="hQd-si-2r0" kind="show" identifier="RTCVideoChatViewController" id="2Rx-9B-ABN">
+                        <segue destination="hQd-si-2r0" kind="show" identifier="AgentRTCVideoChatViewController" id="2Rx-9B-ABN">
                             <nil key="action"/>
                         </segue>
                     </connections>
@@ -770,7 +770,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBD-eI-Ct2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127" y="-8"/>
+            <point key="canvasLocation" x="273" y="-9"/>
         </scene>
     </scenes>
     <resources>

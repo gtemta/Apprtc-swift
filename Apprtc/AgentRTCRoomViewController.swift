@@ -14,7 +14,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     
     //the value from LoginView
     var account = String()
-    var targetroom = ""
+    var targetroom = CustomTabController.sharedInstance.targetRoom!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,12 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
         print(" to string \(segue.destinationViewController.dynamicType)")
         let viewController:AgentRTCVideoChatViewController=segue.destinationViewController as! AgentRTCVideoChatViewController
             //pass the roomname
-        if targetroom == ""{alertnull()}else{
+        self.targetroom = CustomTabController.sharedInstance.targetRoom!
+        print("THIS ROOM NAME :")
+        print(targetroom)
+        if targetroom == ""{alertnull()}
+        else{
+            print("GO ROOOOOOOOOM")
             viewController.roomName = targetroom
             print("Segue use roomname")
             print(viewController.roomName)
