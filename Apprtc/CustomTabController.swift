@@ -14,5 +14,5 @@ public class CustomTabController{
     
     var myInformation:String?
     var myID:String?
-    
+    var targetRoom:String? = ""
 }

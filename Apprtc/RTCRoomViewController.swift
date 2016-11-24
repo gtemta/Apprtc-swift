@@ -16,7 +16,6 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     
     
     var targetroom = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,6 +65,7 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
         print(" to string \(segue.destinationViewController.dynamicType)")
         let viewController:RTCVideoChatViewController=segue.destinationViewController as! RTCVideoChatViewController
             //pass the roomname
+        targetroom = CustomTabController.sharedInstance.targetRoom!
         if targetroom == ""{alertnull()}else{
             viewController.roomName = targetroom
             print("Segue use roomname")

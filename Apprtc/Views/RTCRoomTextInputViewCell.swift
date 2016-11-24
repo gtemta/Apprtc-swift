@@ -52,7 +52,6 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
                 if let section = json as? NSDictionary{
                     if (section.count==0){
                         dispatch_async(dispatch_get_main_queue(), {
-                            self.alertnull()
                         })
                     }
                     else{
@@ -63,10 +62,10 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
                         }
                         else {
                             self.targetroom = roomname!
+                            CustomTabController.sharedInstance.targetRoom = self.targetroom
                         }
                         print ("target Room : ")
                         print(self.targetroom)
-                        self.alertnull()
                         
                     }
                 }
@@ -86,6 +85,9 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     
     ///************change this place to target room********
     @IBAction func touchButtonPressed (sender:UIButton){
+        if targetroom == "" {
+            alertnull()
+        }
         if self.delegate?.shouldJoinRoom(targetroom, textInputCell: self) != nil{
             NSLog("Delegate was implemented");
         }
