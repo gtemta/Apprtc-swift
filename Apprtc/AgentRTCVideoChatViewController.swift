@@ -145,6 +145,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     
     @IBAction func hangupButtonPressed(sender:UIButton){
         leavecomment()
+        self.changeState(4, userid: agentid)
     }
     
     //=============================
@@ -220,6 +221,22 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
             }catch{print(err)}
             }.resume()
         
+    }
+    //change user state
+    func changeState(userstate:Int ,userid: String){
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/agent/" + userid + "/")! as NSURL)
+        request.HTTPMethod = "PUT"
+        let params = NSMutableDictionary()
+        params.setValue(userstate, forKey: "state")
+        print(" state json content")
+        print(params)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
+            print("response:\(response)")
+            }.resume()
     }
     //=====================
     func disconnect(){
