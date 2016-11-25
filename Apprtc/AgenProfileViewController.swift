@@ -50,7 +50,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Reply,target: self,action: #selector(UserProfileViewController.logout))
+        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Reply,target: self,action: #selector(AgentProfileViewController.logout))
         self.navigationItem.rightBarButtonItem = logout_Button
         
         

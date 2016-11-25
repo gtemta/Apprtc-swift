@@ -38,11 +38,29 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   var   localVideoSize:CGSize?;
   var   remoteVideoSize:CGSize?;
   var   isZoom:Bool = false; //used for double tap remote view
-  var   pickerView = UIPickerView()
-  var   serviceid = ""
+  
+    
+    //=======
+    var userid:String = ""
+    var userAcctURL:String = ""
+    var agentAcctURL:String = ""
+    var serviceID:String = ""
+    //====
+    
+    
     
   override func viewDidLoad() {
     super.viewDidLoad()
+    // get ID from custom
+    if let tbc = CustomTabController.sharedInstance.myID
+    {
+        userid = tbc
+        print ("===========login  account=======")
+        print(userid)
+        print ("================================")
+    }
+    getMyService(userid)
+    //====
     self.isZoom = false;
     self.audioButton?.layer.cornerRadius=20.0
     self.videoButton?.layer.cornerRadius=20.0
@@ -116,12 +134,15 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     sender.selected = !sender.selected
     self.client?.toggleVideoMute()
   }
-  
+  //=============
   @IBAction func hangupButtonPressed(sender:UIButton){
-    self.disconnect()
-    self.navigationController?.popToRootViewControllerAnimated(true)
+    leaveRating()
   }
-  
+    //=============
+    func leaveRoom(){
+        self.disconnect()
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
   func disconnect(){
     if let _ = self.client{
       self.localVideoTrack?.removeRenderer(self.localView)
@@ -135,30 +156,75 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   }
     //==================================================
     func leaveRating(){
-        let alertView = UIAlertController(title: "給予評分", message: "\n\n\n\n\n\n",preferredStyle: .Alert)
-        alertView.modalInPopover = true
-        alertView.view.addSubview(pickerView)
-        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
-        alertView.addAction(action)
+        let alertView = UIAlertController(title: "請給予評分", message: "這次的服務品質您給幾分?",preferredStyle: .Alert)
+        let star1 = UIAlertAction(title: "★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(1);self.leaveRoom()})
+        let star2 = UIAlertAction(title: "★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(2);self.leaveRoom()})
+        let star3 = UIAlertAction(title: "★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(3);self.leaveRoom()})
+        let star4 = UIAlertAction(title: "★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(4);self.leaveRoom()})
+        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(5);self.leaveRoom()})
+        alertView.addAction(star5)
+        alertView.addAction(star4)
+        alertView.addAction(star3)
+        alertView.addAction(star2)
+        alertView.addAction(star1)
         presentViewController(alertView, animated: true, completion: nil)
         
     }
     
-    func putRating(content: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceid + "/")! as NSURL)
+    func  sendRating(_rate:Int) {
+        //將rating值傳回資料庫
+        let theRate = _rate
+        let acctURL = userAcctURL
+        let agentURL = agentAcctURL
+        
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceID + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
-        params.setValue(content, forKey: "feedback")
-        print(" state json content")
+        params.setValue(acctURL, forKey: "account")
+        params.setValue(agentURL, forKey: "agent")
+        params.setValue(theRate, forKey: "rating")
+        print(" Result json content")
         print(params)
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Accept", forHTTPHeaderField: "Vary")
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()
+        
+        print("送出結果")
+    }
+    
+    func getMyService(_theID:String){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/service/?account=" + _theID + "&format=json")!)
+        request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            print("response: \(response)")
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!,  options: []) as? NSArray
+                if json?.count<1 {
+                    print("Havn't have any service")
+                }
+                else{
+                    let minus = "?format=json"
+                    let lastService = json![(json!.count)-1] as! NSDictionary
+                    let url1 = lastService["account"]!
+                    let url2 = lastService["agent"]!
+                    let id = lastService["id"]!
+                    let surl1 = String(url1)
+                    let ssurl1 = surl1.componentsSeparatedByString(minus)
+                    let surl2 = String(url2)
+                    let ssurl2 = surl2.componentsSeparatedByString(minus)
+                    let sid = String(id)
+                    self.userAcctURL = ssurl1[0]
+                    self.agentAcctURL = ssurl2[0]
+                    self.serviceID = sid
+                }
+            }catch{print(err)}
+            }.resume()
+        
     }
     
     

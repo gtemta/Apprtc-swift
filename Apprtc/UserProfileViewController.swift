@@ -58,7 +58,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         //log out button
-        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Reply,target: self,action: #selector(UserProfileViewController.logout))
+        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Reply,target: self,action: #selector(UserProfileViewController.realLogout))
         self.navigationItem.rightBarButtonItem = logout_Button
         
         let fullScreenSize = UIScreen.mainScreen().bounds.size
@@ -137,7 +137,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         CustomTabController.sharedInstance.myID = String(id)
                         print("this is my STR \(self.profile)")
                         self.changeState(1, userid: String(id))
-                        self.getMyService(String(id))
+                        //self.getMyService(String(id))
                     }
                 }
             }catch{
@@ -149,87 +149,6 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         // 加入到畫面中
         self.view.addSubview(myTableView)
         // Do any additional setup after loading the view, typically from a nib.
-     //888888888888888888888888888888888888888888888
-    }
-    func leaveRating(){
-        let alertView = UIAlertController(title: "請給予評分", message: "這次的服務品質您給幾分?",preferredStyle: .Alert)
-//        alertView.modalInPopover = true
-        //Create a frame (placeholder/wrapper) for the picker and then create the picker
- 
-        //set the pickers datasource and delegate
-//        picker.delegate = self;
-//        picker.dataSource = self;
-//        //Add the picker to the alert controller
-//        alertView.view.addSubview(pickerView)
-        
-        let star1 = UIAlertAction(title: "★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(1);self.realLogout()})
-        let star2 = UIAlertAction(title: "★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(2);self.realLogout()})
-        let star3 = UIAlertAction(title: "★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(3);self.realLogout()})
-        let star4 = UIAlertAction(title: "★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(4);self.realLogout()})
-        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(5);self.realLogout()})
-        alertView.addAction(star5)
-        alertView.addAction(star4)
-        alertView.addAction(star3)
-        alertView.addAction(star2)
-        alertView.addAction(star1)
-        presentViewController(alertView, animated: true, completion: nil)
-    
-    }
-    
-    func  sendRating(_rate:Int) {
-        //將rating值傳回資料庫
-        let theRate = _rate
-        let acctURL = userAcctURL
-        let agentURL = agentAcctURL
-        
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceID + "/")! as NSURL)
-        request.HTTPMethod = "PUT"
-        let params = NSMutableDictionary()
-        params.setValue(acctURL, forKey: "account")
-        params.setValue(agentURL, forKey: "agent")
-        params.setValue(theRate, forKey: "rating")
-        print(" Result json content")
-        print(params)
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Accept", forHTTPHeaderField: "Vary")
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
-            print("response:\(response)")
-            }.resume()
-        
-        print("送出結果")
-    }
-    
-    func getMyService(_theID:String){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/service/?account=" + _theID + "&format=json")!)
-        request.HTTPMethod = "GET"
-        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
-            print("response: \(response)")
-            do{
-                let json = try  NSJSONSerialization.JSONObjectWithData(data!,  options: []) as? NSArray
-                if json?.count<1 {
-                    print("Havn't have any service")
-                }
-                else{
-                    let minus = "?format=json"
-                    let lastService = json![(json!.count)-1] as! NSDictionary
-                    let url1 = lastService["account"]!
-                    let url2 = lastService["agent"]!
-                    let id = lastService["id"]!
-                    let surl1 = String(url1)
-                    let ssurl1 = surl1.componentsSeparatedByString(minus)
-                    let surl2 = String(url2)
-                    let ssurl2 = surl2.componentsSeparatedByString(minus)
-                    let sid = String(id)
-                    self.userAcctURL = ssurl1[0]
-                    self.agentAcctURL = ssurl2[0]
-                    self.serviceID = sid
-                }
-            }catch{print(err)}
-            }.resume()
-
     }
     
     //change user state
@@ -249,18 +168,6 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
             print("response:\(response)")
             }.resume()
     }
-    
-    
-    func logout(){
-//        //back to LoginViewController
-//        let signInView = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        changeState(0, userid: userid)
-        leaveRating()
-//        appDelegate.window?.rootViewController = signInView
-//        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     func realLogout(){
         //back to LoginViewController
         let signInView = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController

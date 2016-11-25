@@ -46,7 +46,14 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     var   localVideoSize:CGSize?;
     var   remoteVideoSize:CGSize?;
     var   isZoom:Bool = false; //used for double tap remote view
-    var   serviceid = String()
+    
+    //=======
+    var agentid:String = ""
+    var userAcctURL:String = ""
+    var agentAcctURL:String = ""
+    var serviceID:String = ""
+    //====
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +61,18 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         self.audioButton?.layer.cornerRadius=20.0
         self.videoButton?.layer.cornerRadius=20.0
         self.hangupButton?.layer.cornerRadius=20.0
+        //========
+        // get ID from custom
+        if let tbc = CustomTabController.sharedInstance.myID
+        {
+            agentid = tbc
+            print ("===========login  agent=======")
+            print(agentid)
+            print ("================================")
+        }
+        getMyService(agentid)
+        
+        //========
         let tapGestureRecognizer:UITapGestureRecognizer=UITapGestureRecognizer(target: self, action:#selector(AgentRTCVideoChatViewController.toggleButtonContainer) )
         tapGestureRecognizer.numberOfTapsRequired=1
         self.view.addGestureRecognizer(tapGestureRecognizer)
@@ -125,8 +144,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     }
     
     @IBAction func hangupButtonPressed(sender:UIButton){
-        self.disconnect()
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        leavecomment()
     }
     
     //=============================
@@ -139,27 +157,69 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
             (ACTION: UIAlertAction!) -> Void in
             let message = (alertController.textFields?.first)! as UITextField
             comment = message.text!
+            self.sendFeedback(comment)
+            self.disconnect()
+            self.navigationController?.popToRootViewControllerAnimated(true)
         }
         alertController.addAction(confirmAction)
         //display the hint
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func putComment(content: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceid + "/")! as NSURL)
+    func  sendFeedback(feedback:String) {
+        //將rating值傳回資料庫
+        let theFeedback = feedback
+        let acctURL = userAcctURL
+        let agentURL = agentAcctURL
+        
+        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceID + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
-        params.setValue(content, forKey: "feedback")
-        print(" state json content")
+        params.setValue(acctURL, forKey: "account")
+        params.setValue(agentURL, forKey: "agent")
+        params.setValue(theFeedback, forKey: "feedback")
+        print(" Result json content")
         print(params)
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: .PrettyPrinted)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Accept", forHTTPHeaderField: "Vary")
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
-        
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()
+        
+        print("送出結果")
+    }
+    
+    func getMyService(_theID:String){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/service/?agent=" + _theID + "&format=json")!)
+        request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            print("response: \(response)")
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!,  options: []) as? NSArray
+                if json?.count<1 {
+                    print("Havn't have any service")
+                }
+                else{
+                    let minus = "?format=json"
+                    let lastService = json![(json!.count)-1] as! NSDictionary
+                    let url1 = lastService["account"]!
+                    let url2 = lastService["agent"]!
+                    let id = lastService["id"]!
+                    let surl1 = String(url1)
+                    let ssurl1 = surl1.componentsSeparatedByString(minus)
+                    let surl2 = String(url2)
+                    let ssurl2 = surl2.componentsSeparatedByString(minus)
+                    let sid = String(id)
+                    self.userAcctURL = ssurl1[0]
+                    self.agentAcctURL = ssurl2[0]
+                    self.serviceID = sid
+                }
+            }catch{print(err)}
+            }.resume()
+        
     }
     //=====================
     func disconnect(){
