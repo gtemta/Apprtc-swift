@@ -18,6 +18,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     
     override func viewDidLoad() {
+        CustomTabController.sharedInstance.myInformation=""
+        CustomTabController.sharedInstance.myID=""
+        CustomTabController.sharedInstance.targetRoom=""
+        
         super.viewDidLoad()
         
         let fullScreenSize = UIScreen.mainScreen().bounds.size
