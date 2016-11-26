@@ -94,7 +94,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         self.footerViewBottomConstraint?.constant=0.0
         self.disconnect()
         self.client=ARDAppClient(delegate: self)
-        self.client?.serverHostUrl="https://apprtc.appspot.com"
+        self.client?.serverHostUrl="https://appr.tc/"
         self.client!.connectToRoomWithId(self.roomName! as String, options: nil)
         self.urlLabel?.text=self.roomName! as String
     }
