@@ -66,7 +66,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         if let tbc = CustomTabController.sharedInstance.myID
         {
             agentid = tbc
-            print ("===========login  agent=======")
+            print ("======= RTC  login  agent=======")
             print(agentid)
             print ("================================")
         }

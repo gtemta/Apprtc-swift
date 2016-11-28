@@ -18,6 +18,17 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     var targetroom = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        // get account from loginview
+        if let tbc = CustomTabController.sharedInstance.myID{
+            id =  tbc
+            print ("========RTC login id =======")
+            print (id)
+            print ("============================")
+        }
+        //Refresh button
+        let refresh_Button = UIBarButtonItem(title:"重新要求服務",style: .Plain ,target: self,action: #selector(refreshAlert))
+        self.navigationItem.rightBarButtonItem = refresh_Button
+
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -49,6 +60,50 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
         return cell
     }
     
+    //
+    func refreshAlert(){
+        let alertView = UIAlertController(title: "系統訊息", message: "確定真的要重新要求分配專員服務？若是請按下確認",preferredStyle: .Alert)
+        let confirmAction = UIAlertAction(title: "確認", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) in self.regetroommname()})
+        alertView.addAction(confirmAction)
+        let cancellAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(cancellAction)
+        presentViewController(alertView, animated: true, completion: nil)
+    }
+    // refresh the roomname
+    func regetroommname(){
+        //get the fit roomname
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
+        request.HTTPMethod = "GET"
+        request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
+            do{
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                if let section = json as? NSDictionary{
+                    if (section.count==0){
+                        dispatch_async(dispatch_get_main_queue(), {
+                        })
+                    }
+                    else{
+                        
+                        let roomname = section["msg"] as? String
+                        if roomname == nil {
+                            print("room is nil")
+                            CustomTabController.sharedInstance.targetRoom = ""
+                        }
+                        else {
+                            self.targetroom = roomname!
+                            CustomTabController.sharedInstance.targetRoom = self.targetroom
+                        }
+                        print ("::RE::target Room : ")
+                        print(self.targetroom)
+                    }
+                }
+            }catch{
+                print("Couldn't Serialize")
+            }
+            }.resume()
+        
+    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)

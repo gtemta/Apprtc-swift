@@ -55,7 +55,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     if let tbc = CustomTabController.sharedInstance.myID
     {
         userid = tbc
-        print ("===========login  account=======")
+        print ("=====RTC   login  account=======")
         print(userid)
         print ("================================")
     }

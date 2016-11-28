@@ -58,7 +58,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         //log out button
-        let logout_Button = UIBarButtonItem(barButtonSystemItem: .Reply,target: self,action: #selector(UserProfileViewController.realLogout))
+        let logout_Button = UIBarButtonItem(title:  "登出",style: .Plain ,target: self,action: #selector(UserProfileViewController.realLogout))
         self.navigationItem.rightBarButtonItem = logout_Button
         
         let fullScreenSize = UIScreen.mainScreen().bounds.size
