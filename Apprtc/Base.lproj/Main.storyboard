@@ -176,7 +176,7 @@
             </objects>
             <point key="canvasLocation" x="-2612" y="-2145"/>
         </scene>
-        <!--呼叫專員-->
+        <!--視訊功能-->
         <scene sceneID="eDq-uC-1fY">
             <objects>
                 <tableViewController id="Gy1-Ex-pi8" customClass="RTCRoomViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
@@ -192,25 +192,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請按下呼叫專員按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPq-Rn-8Ma">
-                                            <rect key="frame" x="18" y="18" width="153" height="20"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1z-DZ-68S">
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1z-DZ-68S">
                                             <rect key="frame" x="40" y="88" width="520" height="2"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQL-Rt-OdE">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQL-Rt-OdE">
                                             <rect key="frame" x="40" y="133" width="268" height="59"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="49g-f7-gq5"/>
-                                                <constraint firstAttribute="height" constant="40" id="RDe-5k-0TP"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                            <state key="normal" title="JOIN">
+                                            <state key="normal" title="呼叫專員">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="disabled">
@@ -226,15 +218,15 @@
                                                 <action selector="touchButtonPressed:" destination="DEP-aM-p38" eventType="touchUpInside" id="Y3M-Uh-byx"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="請按下呼叫專員按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPq-Rn-8Ma">
+                                            <rect key="frame" x="111" y="8" width="153" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="g1z-DZ-68S" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leading" constant="40" id="8Dk-ij-2QF"/>
-                                        <constraint firstAttribute="trailing" secondItem="g1z-DZ-68S" secondAttribute="trailing" constant="40" id="CUO-RH-R0J"/>
-                                        <constraint firstItem="FPq-Rn-8Ma" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leadingMargin" constant="10" id="GXn-84-3G7"/>
-                                        <constraint firstItem="lQL-Rt-OdE" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leading" constant="40" id="eWQ-4i-tpx"/>
-                                        <constraint firstItem="FPq-Rn-8Ma" firstAttribute="top" secondItem="n2a-hJ-wYO" secondAttribute="topMargin" constant="10" id="kUU-wU-xLu"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -257,7 +249,7 @@
                             <outlet property="delegate" destination="Gy1-Ex-pi8" id="r1b-By-36U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="呼叫專員" id="gci-VV-su8"/>
+                    <navigationItem key="navigationItem" title="視訊功能" id="gci-VV-su8"/>
                     <connections>
                         <segue destination="xdS-jh-JJq" kind="show" identifier="RTCVideoChatViewController" id="Phm-I1-reH">
                             <nil key="action"/>
