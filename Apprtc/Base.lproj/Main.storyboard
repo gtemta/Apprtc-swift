@@ -90,7 +90,7 @@
             <objects>
                 <navigationController id="Z5R-7M-zly" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="視訊" image="microphone" id="8Qv-g6-rgY"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GHC-dR-WMb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GHC-dR-WMb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -108,7 +108,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jBz-vo-kzB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="辨識" image="photo-camera" id="DmN-X8-eyG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HnI-oc-AdB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HnI-oc-AdB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -127,7 +127,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IDn-eQ-3O3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="個人資料" image="cogwheel" id="DVe-SC-P0n"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G49-NZ-0xn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G49-NZ-0xn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -164,7 +164,7 @@
             <objects>
                 <navigationController id="33z-W4-GnS" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="視訊" image="microphone" id="7lb-lW-RQE"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qDz-Yf-5Tj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qDz-Yf-5Tj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -176,7 +176,7 @@
             </objects>
             <point key="canvasLocation" x="-2612" y="-2145"/>
         </scene>
-        <!--AppRTC-->
+        <!--呼叫專員-->
         <scene sceneID="eDq-uC-1fY">
             <objects>
                 <tableViewController id="Gy1-Ex-pi8" customClass="RTCRoomViewController" customModule="Apprtc" customModuleProvider="target" sceneMemberID="viewController">
@@ -192,7 +192,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a room name." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPq-Rn-8Ma">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請按下呼叫專員按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPq-Rn-8Ma">
                                             <rect key="frame" x="18" y="18" width="227" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Hzv-zQ-Aoe"/>
@@ -202,33 +202,14 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIF-85-lZz">
-                                            <rect key="frame" x="40" y="48" width="520" height="40"/>
-                                            <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="Mij-5V-OLl"/>
-                                            </constraints>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="alert"/>
-                                        </textField>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1z-DZ-68S">
+                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1z-DZ-68S">
                                             <rect key="frame" x="40" y="88" width="520" height="2"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="Siy-XY-sYl"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Room name must be 5 or more characters and include only letters and numbers." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PO-aG-lVR">
-                                            <rect key="frame" x="40" y="93" width="520" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="QtN-3V-QLz"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                            <color key="textColor" red="0.93341982359999998" green="0.16678811609999999" blue="0.1634537429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQL-Rt-OdE">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQL-Rt-OdE">
                                             <rect key="frame" x="65" y="141" width="268" height="59"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -255,27 +236,16 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstItem="qIF-85-lZz" firstAttribute="top" secondItem="FPq-Rn-8Ma" secondAttribute="bottom" constant="9" id="1qf-FL-bCR"/>
-                                        <constraint firstItem="g1z-DZ-68S" firstAttribute="top" secondItem="qIF-85-lZz" secondAttribute="bottom" id="7lv-Dw-m0m"/>
                                         <constraint firstItem="g1z-DZ-68S" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leading" constant="40" id="8Dk-ij-2QF"/>
-                                        <constraint firstAttribute="trailing" secondItem="qIF-85-lZz" secondAttribute="trailing" constant="40" id="Aim-xa-qCI"/>
                                         <constraint firstAttribute="trailing" secondItem="g1z-DZ-68S" secondAttribute="trailing" constant="40" id="CUO-RH-R0J"/>
                                         <constraint firstItem="FPq-Rn-8Ma" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leadingMargin" constant="10" id="GXn-84-3G7"/>
-                                        <constraint firstAttribute="trailing" secondItem="3PO-aG-lVR" secondAttribute="trailing" constant="40" id="S5g-bf-Wt0"/>
-                                        <constraint firstItem="lQL-Rt-OdE" firstAttribute="top" secondItem="3PO-aG-lVR" secondAttribute="bottom" constant="14" id="dMg-2q-L1s"/>
                                         <constraint firstItem="lQL-Rt-OdE" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leading" constant="40" id="eWQ-4i-tpx"/>
-                                        <constraint firstItem="3PO-aG-lVR" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leading" constant="40" id="jpG-2N-0be"/>
                                         <constraint firstItem="FPq-Rn-8Ma" firstAttribute="top" secondItem="n2a-hJ-wYO" secondAttribute="topMargin" constant="10" id="kUU-wU-xLu"/>
-                                        <constraint firstItem="qIF-85-lZz" firstAttribute="leading" secondItem="n2a-hJ-wYO" secondAttribute="leading" constant="40" id="p2h-Zx-iMN"/>
-                                        <constraint firstItem="3PO-aG-lVR" firstAttribute="top" secondItem="g1z-DZ-68S" secondAttribute="bottom" constant="3" id="svc-dJ-hVf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="errorLabel" destination="3PO-aG-lVR" id="DQP-Vs-xsN"/>
-                                    <outlet property="errorLabelHeightConstraint" destination="QtN-3V-QLz" id="qUj-i6-dkS"/>
                                     <outlet property="joinButton" destination="lQL-Rt-OdE" id="Cph-49-v1p"/>
-                                    <outlet property="textField" destination="qIF-85-lZz" id="O0U-t1-t57"/>
                                     <outlet property="textFieldBorderView" destination="g1z-DZ-68S" id="q52-HW-UmR"/>
                                 </connections>
                             </tableViewCell>
@@ -294,7 +264,7 @@
                             <outlet property="delegate" destination="Gy1-Ex-pi8" id="r1b-By-36U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="AppRTC" id="gci-VV-su8"/>
+                    <navigationItem key="navigationItem" title="呼叫專員" id="gci-VV-su8"/>
                     <connections>
                         <segue destination="xdS-jh-JJq" kind="show" identifier="RTCVideoChatViewController" id="Phm-I1-reH">
                             <nil key="action"/>
@@ -442,7 +412,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WhO-9c-taT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="辨識" image="photo-camera" id="6jT-aF-PLO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="30Y-uO-EIU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="30Y-uO-EIU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -480,7 +450,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fKn-HG-uwt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="個人資料" image="cogwheel" id="frr-8u-ixa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xlL-Tz-1WA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xlL-Tz-1WA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

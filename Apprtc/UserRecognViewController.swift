@@ -37,7 +37,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         }
         
         contentTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height:200))
-        contentTextLabel.text = " user recogn "
+        contentTextLabel.text = "歡迎來到拍照辨識，請拍攝想要辨識的物品"
         contentTextLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         contentTextLabel.numberOfLines = 0
         contentTextLabel.font = contentTextLabel.font.fontWithSize(25)
@@ -54,7 +54,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         CameraButton.frame = CGRect(x: 0, y: 0, width: 200,height: 50)
         CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.83)
         
-        CameraButton.setTitle("Camera", forState: .Normal)
+        CameraButton.setTitle("拍攝照片", forState: .Normal)
         CameraButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
         CameraButton.backgroundColor = UIColor.darkGrayColor()
         CameraButton.addTarget(self, action: #selector(CameraAction), forControlEvents: .TouchUpInside)
