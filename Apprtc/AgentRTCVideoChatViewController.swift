@@ -144,27 +144,59 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     }
     
     @IBAction func hangupButtonPressed(sender:UIButton){
-        leavecomment()
+        leaveRating()
         self.changeState(4, userid: agentid)
     }
     
     //=============================
-    func leavecomment(){
+    func leaveRoom(){
+        self.disconnect()
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    
+    func leavecomment(score:String){
+        let re1 = "該用戶違反使用者條款"
+        let re2 = "此次服務為不當使用，畫面中出現不雅畫面"
         var comment = ""
-        let alertController = UIAlertController(title: "評論",message: "請輸入對此次服務的評論",preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "評論",message: "請輸入對本次服務不滿意的原因，其他原因請在文字框內輸入後再按送出鍵",preferredStyle: .Alert)
         alertController.addTextFieldWithConfigurationHandler{(textField:UITextField!) -> Void in
         textField.placeholder = "comment"}
-        let confirmAction  = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default){
+        let reason1 = UIAlertAction(title: re1,style: UIAlertActionStyle.Default, handler: {action in
+            comment = score + " " + re1;
+            self.sendFeedback(comment);self.leaveRoom()})
+        let reason2 = UIAlertAction(title: re2,style: UIAlertActionStyle.Default, handler: {action in
+            comment = score + " " + re2;
+            self.sendFeedback(comment);self.leaveRoom()})
+        alertController.addAction(reason1)
+        alertController.addAction(reason2)
+        let confirmAction  = UIAlertAction(title: "確認送出其他理由",style: UIAlertActionStyle.Default){
             (ACTION: UIAlertAction!) -> Void in
             let message = (alertController.textFields?.first)! as UITextField
             comment = message.text!
+            comment =  score + " " + comment
             self.sendFeedback(comment)
-            self.disconnect()
-            self.navigationController?.popToRootViewControllerAnimated(true)
-        }
+            self.leaveRoom()
+                    }
         alertController.addAction(confirmAction)
         //display the hint
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func leaveRating(){
+        let alertView = UIAlertController(title: "請給予評分", message: "這次的服務品質您給幾分?",preferredStyle: .Alert)
+        let star1 = UIAlertAction(title: "一顆星",style: UIAlertActionStyle.Default, handler: {action in self.leavecomment("1")})
+        let star2 = UIAlertAction(title: "兩顆星",style: UIAlertActionStyle.Default, handler: {action in self.leavecomment("2")})
+        let star3 = UIAlertAction(title: "三顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendFeedback("3");self.leaveRoom()})
+        let star4 = UIAlertAction(title: "四顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendFeedback("4");self.leaveRoom()})
+        let star5 = UIAlertAction(title: "五顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendFeedback("5");self.leaveRoom()})
+        alertView.addAction(star5)
+        alertView.addAction(star4)
+        alertView.addAction(star3)
+        alertView.addAction(star2)
+        alertView.addAction(star1)
+        presentViewController(alertView, animated: true, completion: nil)
+        
     }
     
     func  sendFeedback(feedback:String) {

@@ -157,11 +157,11 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     //==================================================
     func leaveRating(){
         let alertView = UIAlertController(title: "請給予評分", message: "這次的服務品質您給幾分?",preferredStyle: .Alert)
-        let star1 = UIAlertAction(title: "★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(1);self.leaveRoom()})
-        let star2 = UIAlertAction(title: "★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(2);self.leaveRoom()})
-        let star3 = UIAlertAction(title: "★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(3);self.leaveRoom()})
-        let star4 = UIAlertAction(title: "★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(4);self.leaveRoom()})
-        let star5 = UIAlertAction(title: "★★★★★",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(5);self.leaveRoom()})
+        let star1 = UIAlertAction(title: "一顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(1);self.leaveRoom()})
+        let star2 = UIAlertAction(title: "兩顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(2);self.leaveRoom()})
+        let star3 = UIAlertAction(title: "三顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(3);self.leaveRoom()})
+        let star4 = UIAlertAction(title: "四顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(4);self.leaveRoom()})
+        let star5 = UIAlertAction(title: "五顆星",style: UIAlertActionStyle.Default, handler: {action in self.sendRating(5);self.leaveRoom()})
         alertView.addAction(star5)
         alertView.addAction(star4)
         alertView.addAction(star3)
