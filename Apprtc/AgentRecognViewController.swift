@@ -201,6 +201,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         comment = String(colorTextField.text) + String(nameTextField.text)
+        
         return false
     }
     
@@ -209,6 +210,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         //現階段為返回前頁 待修改
         if myRow==0{
             comment = String(colorTextField.text!) + "  " + String(nameTextField.text!)
+            
         }
         else{
             comment = whatResponse
@@ -219,6 +221,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(comment, forKey: "comment")
+        params.setValue("http://140.113.72.29:8100/api/agent/" + account + "/", forKey: "agent")
         params.setValue(3, forKey: "state")
         params.setValue(photouser[0], forKey: "account")
         print(" Result json content")
@@ -232,11 +235,19 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
             }.resume()
-        
+        colorTextField.text = ""
+        nameTextField.text = ""
         
         self.dismissViewControllerAnimated(true, completion: nil)
         print("送出結果")
-        searchObject()
+        sendMessage()
+    }
+    
+    func sendMessage(){
+        let alertView = UIAlertController(title: "系統訊息", message: "成功送出",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: {action in self.searchObject()})
+        alertView.addAction(action)
+        self.presentViewController(alertView, animated: true, completion: nil)
     }
     
     @IBAction func logout(_sender: AnyObject) {
