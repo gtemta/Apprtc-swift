@@ -26,6 +26,7 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     var delegate:AgentRTCRoomTextInputViewCellDelegate?
     var id = ""
     var targetroom = ""
+    let ipadress = "http://140.113.72.29:8100/"
     
     override func awakeFromNib() {
         self.errorLabelHeightConstraint?.constant=0.0
@@ -44,7 +45,7 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         
 
         //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/uca/")!)
         let params = NSMutableDictionary()
         params.setValue(self.id, forKey: "agent_id")
         print(" Result json content")

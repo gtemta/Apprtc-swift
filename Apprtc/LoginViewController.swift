@@ -15,6 +15,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     weak var accountTextField:UITextField!
     weak var passwordTextField:UITextField!
     var checker: Bool = false
+    let ipadress = "http://140.113.72.29:8100/"
     
     
     override func viewDidLoad() {
@@ -90,7 +91,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
     }
     func login(){
-        //現階段為跳轉頁面 待修改
         //self.presentViewController(,animated: true, completion: nil)
         
         if userlogin{
@@ -113,7 +113,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
             
         else {
-            print("userlogin")
+            print("agentlogin")
             print(userlogin)
             
             if checker{
@@ -178,7 +178,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         print("And my password: \(password)")
         //開始執行web request
         //
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/account/?name="+account+"&pw="+password+"&format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress+"api/account/?name="+account+"&pw="+password+"&format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
@@ -220,9 +220,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         return false
     }
-    
+    //agent trylogin
     func trylogin(agentid:String ,_ agentpw: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/agent/login/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress+"agent/login/")! as NSURL)
         request.HTTPMethod = "POST"
         let body = "username=\(agentid)&password=\(agentpw)&type=api"
         request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)

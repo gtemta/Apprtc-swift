@@ -19,7 +19,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     //the value from LoginView
     var account = String()
     var agentid = String()
-    
+    let ipadress = "http://140.113.72.29:8100/"
     
     // 必須實作的方法：每個 cell 要顯示的內容
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -101,7 +101,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         myTableView.allowsMultipleSelection = false
         
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/agent/" + agentid + "/?format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress+"api/agent/" + agentid + "/?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
@@ -111,12 +111,21 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
                 print("my data is \(profileData!)")
                 let realname = profileData!["realname"]! as! String
                 let education = profileData!["education"]! as! Int
-                let language = profileData!["language"]! as! Int
+                let language1 = profileData!["language1"]! as! Int
+                let language2 = profileData!["language2"]! as! Int
+                let language3 = profileData!["language3"]! as! Int
+                let language4 = profileData!["language4"]! as! Int
                 let gender = profileData!["gender"]! as! Int
                 let id = profileData!["id"]! as! Int
+                let language = self.language_format(
+                    self.language_decode(language1),
+                    b: self.language_decode(language2),
+                    c: self.language_decode(language3),
+                    d: self.language_decode(language4)
+                )
                 self.profile.append("用戶名稱: \(realname)")
                 self.profile.append("用戶性別: \(self.gender_decode(gender))")
-                self.profile.append("使用語言: \(self.language_decode(language))")
+                self.profile.append("使用語言: \(language))")
                 self.profile.append("教育程度: \(self.education_decode(education))")
                 print("this is my STR \(self.profile)")
                 self.myTableView.reloadData()
@@ -137,7 +146,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     
     //change user state
     func changeState(userstate:Int ,userid: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/agent/" + userid + "/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "api/agent/" + userid + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(userstate, forKey: "state")
@@ -237,36 +246,22 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     
     func language_decode(l: Int) -> String{
         switch l {
+        case 0:
+            return ""
         case 1:
             return "中文"
         case 2:
             return "英文"
         case 3:
-            return "中文、英文"
+            return "閩南語"
         case 4:
             return "客家語"
         case 5:
-            return "中文、客家語"
+            return "越南語"
         case 6:
-            return "英文、客家語"
+            return "印尼語"
         case 7:
-            return "中文、英文、客家語"
-        case 8:
-            return "閩南語"
-        case 9:
-            return "中文、閩南語"
-        case 10:
-            return "英文、閩南語"
-        case 11:
-            return "中文、英文、閩南語"
-        case 12:
-            return "客家語、閩南語"
-        case 13:
-            return "中文、客家語、閩南語"
-        case 14:
-            return "英文、客家語、閩南語"
-        case 15:
-            return "中文、英文、客家語、閩南語"
+            return "泰語"
         default:
             return "SOME THING WENT WRONG"
         }
@@ -293,6 +288,25 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
             return "SOME THING WENT WRONG"
         }
     }
+    
+    func language_format(a:String, b:String, c:String, d:String)->String{
+        var result = ""
+        result += a;
+        if b != ""{
+            result+="、"
+            result+=b
+        }
+        if c != ""{
+            result+="、"
+            result+=c
+        }
+        if d != ""{
+            result+="、"
+            result+=d
+        }
+        return result
+    }
+    
     
     
     /*

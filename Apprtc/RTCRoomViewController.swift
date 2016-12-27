@@ -13,6 +13,7 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     
     //the value from LoginView
     var id = String()
+    let ipadress = "http://140.113.72.29:8100/"
     
     
     var targetroom = ""
@@ -72,7 +73,7 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     // refresh the roomname
     func regetroommname(){
         //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/uca/?account_id=" + self.id + "&format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in

@@ -12,6 +12,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
     //--- picker
     let response = ["辨識完成且成功","相片過於模糊，無法辨識","環境光線不足，無法辨識","照片中無明確物體可供辨識","物體資訊不足無法辨識"]
     var whatResponse = "環境光線不足，無法辨識"
+    let ipadress = "http://140.113.72.29:8100/"
     
     //UIpickerDataSource必須實作的方法
     //UIpicker各列有多少行資料
@@ -138,7 +139,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
     func searchObject(){
         let filter  = NSArray()
         //get recogn photo
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?state=1&format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/photo/?state=1&format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
@@ -217,7 +218,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         }
         
         //put result to photo
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/photo/" + photoid + "/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "photo/" + photoid + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(comment, forKey: "comment")

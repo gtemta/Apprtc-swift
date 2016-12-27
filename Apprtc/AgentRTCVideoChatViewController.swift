@@ -52,6 +52,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     var userAcctURL:String = ""
     var agentAcctURL:String = ""
     var serviceID:String = ""
+    let ipadress = "http://140.113.72.29:8100/"
     //====
 
     
@@ -205,7 +206,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         let acctURL = userAcctURL
         let agentURL = agentAcctURL
         
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/service/" + serviceID + "/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "api/service/" + serviceID + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(acctURL, forKey: "account")
@@ -225,7 +226,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     }
     
     func getMyService(_theID:String){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/service/?agent=" + _theID + "&format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/service/?agent=" + _theID + "&format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
@@ -256,7 +257,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     }
     //change user state
     func changeState(userstate:Int ,userid: String){
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/agent/" + userid + "/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "api/agent/" + userid + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(userstate, forKey: "state")

@@ -19,6 +19,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     var pickerView = UIPickerView()
 
     let items = [1,2,3,4,5]
+    let ipadress = "http://140.113.72.29:8100/"
     
     
     //the value from LoginView
@@ -110,7 +111,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/account/?name=" + account + "&?format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/account/?name=" + account + "&?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
@@ -122,13 +123,22 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         print(profile_data)
                         let realname = profile_data["realname"]! as! String
                         let education = profile_data["education"]! as! Int
-                        let language = profile_data["language"]! as! Int
+                        let language1 = profile_data["language1"]! as! Int
+                        let language2 = profile_data["language2"]! as! Int
+                        let language3 = profile_data["language3"]! as! Int
+                        let language4 = profile_data["language4"]! as! Int
                         let gender = profile_data["gender"]! as! Int
                         let id = profile_data["id"]! as! Int
                         let level = profile_data["level"]! as! Int
+                        let language = self.language_format(
+                            self.language_decode(language1),
+                            b: self.language_decode(language2),
+                            c: self.language_decode(language3),
+                            d: self.language_decode(language4)
+                        )
                         self.profile.append("用戶名稱: \(realname)")
                         self.profile.append("用戶性別: \(self.gender_decode(gender))")
-                        self.profile.append("使用語言: \(self.language_decode(language))")
+                        self.profile.append("使用語言: \(language)")
                         self.profile.append("教育程度: \(self.education_decode(education))")
                         self.profile.append("視障等級: \(self.level_decode(level))")
                         self.myTableView.reloadData()
@@ -154,7 +164,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     //change user state
     func changeState(userstate:Int ,userid: String){
         
-        let request = NSMutableURLRequest(URL:  NSURL(string: "http://140.113.72.29:8100/api/account/" + userid + "/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "api/account/" + userid + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(userstate, forKey: "state")
@@ -246,36 +256,22 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     
     func language_decode(l: Int) -> String{
         switch l {
+        case 0:
+            return ""
         case 1:
             return "中文"
         case 2:
             return "英文"
         case 3:
-            return "中文、英文"
+            return "閩南語"
         case 4:
             return "客家語"
         case 5:
-            return "中文、客家語"
+            return "越南語"
         case 6:
-            return "英文、客家語"
+            return "印尼語"
         case 7:
-            return "中文、英文、客家語"
-        case 8:
-            return "閩南語"
-        case 9:
-            return "中文、閩南語"
-        case 10:
-            return "英文、閩南語"
-        case 11:
-            return "中文、英文、閩南語"
-        case 12:
-            return "客家語、閩南語"
-        case 13:
-            return "中文、客家語、閩南語"
-        case 14:
-            return "英文、客家語、閩南語"
-        case 15:
-            return "中文、英文、客家語、閩南語"
+            return "泰語"
         default:
             return "SOME THING WENT WRONG"
         }
@@ -303,7 +299,23 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         }
     }
     
-    
+    func language_format(a:String, b:String, c:String, d:String)->String{
+        var result = ""
+        result += a;
+        if b != ""{
+            result+="、"
+            result+=b
+        }
+        if c != ""{
+            result+="、"
+            result+=c
+        }
+        if d != ""{
+            result+="、"
+            result+=d
+        }
+        return result
+    }
     
     
     override func didReceiveMemoryWarning() {

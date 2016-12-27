@@ -25,6 +25,7 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     var delegate:RTCRoomTextInputViewCellDelegate?
     var id = ""
     var targetroom = ""
+    let ipadress = "http://140.113.72.29:8100/"
     
     override func awakeFromNib() {
         self.errorLabelHeightConstraint?.constant=0.0
@@ -43,7 +44,7 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         //===========Change account into id
         
         //get the fit roomname
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/uca/?account_id=" + self.id + "&format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/uca/?account_id=" + self.id + "&format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in

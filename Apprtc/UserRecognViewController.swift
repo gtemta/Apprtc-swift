@@ -16,6 +16,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     var picture = UIImageView()
     var contentTextLabel = UILabel()
     var CameraButton = UIButton()
+    let ipadress = "http://140.113.72.29:8100/"
     
     var photourl = ""
     var photocomment = ""
@@ -76,7 +77,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         print("in checkstatus")
         
         let filter = NSArray()
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/?account="+ID)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/photo/?account="+ID)!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         //jump out
@@ -217,12 +218,12 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             //get image Data from ImageView
             let imageData:NSData = UIImageJPEGRepresentation(image, 0)!
             let boundary = generateBoundaryString()
-            let request = NSMutableURLRequest(URL: NSURL(string: "http://140.113.72.29:8100/api/photo/")!)
+            let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/photo/")!)
             //define multipart request type
             request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             let session = NSURLSession.sharedSession()
             let body = NSMutableData()
-            let accountname = "http://140.113.72.29:8100/api/account/" + self.ID + "/"
+            let accountname = ipadress + "api/account/" + self.ID + "/"
             
             //date
             let date = NSDate()
