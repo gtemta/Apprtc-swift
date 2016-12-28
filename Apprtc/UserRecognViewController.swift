@@ -232,8 +232,8 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             let date2 = formatter.stringFromDate(date) as String
             print(date2)
             //
-            let fname = date2 + ".png"
-            let mimetype = "image/png"
+            let fname = date2 + ".jpg"
+            let mimetype = "image/jpg"
             
             //define the data post parameter
             //multi part header
