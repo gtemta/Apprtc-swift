@@ -123,10 +123,10 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
                         print(profile_data)
                         let realname = profile_data["realname"]! as! String
                         let education = profile_data["education"]! as! Int
-                        let language1 = profile_data["language1"]! as! Int
-                        let language2 = profile_data["language2"]! as! Int
-                        let language3 = profile_data["language3"]! as! Int
-                        let language4 = profile_data["language4"]! as! Int
+                        let language1 = self.checklanguage(profile_data, field: "language1")
+                        let language2 = self.checklanguage(profile_data, field: "language2")
+                        let language3 = self.checklanguage(profile_data, field: "language3")
+                        let language4 = self.checklanguage(profile_data, field: "language4")
                         let gender = profile_data["gender"]! as! Int
                         let id = profile_data["id"]! as! Int
                         let level = profile_data["level"]! as! Int
@@ -231,6 +231,14 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     //        return title
     //    }
     //
+    func checklanguage(dict: NSDictionary,field: String)->Int{
+        if let result = dict[field] as? Int{
+            return result
+        }
+        else{
+            return 0
+        }
+    }
     func education_decode(e: Int) -> String{
         switch e {
         case 0:

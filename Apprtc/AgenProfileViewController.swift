@@ -100,42 +100,50 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
         
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: ipadress+"api/agent/" + agentid + "/?format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/account/?name=" + account + "&?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
         NSURLSession.sharedSession().dataTaskWithRequest(request) {data, response, err in
             do{
-                let profileData = try  NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
-                print("my data is \(profileData!)")
-                let realname = profileData!["realname"]! as! String
-                let education = profileData!["education"]! as! Int
-                let language1 = profileData!["language1"]! as! Int
-                let language2 = profileData!["language2"]! as! Int
-                let language3 = profileData!["language3"]! as! Int
-                let language4 = profileData!["language4"]! as! Int
-                let gender = profileData!["gender"]! as! Int
-                let id = profileData!["id"]! as! Int
-                let language = self.language_format(
-                    self.language_decode(language1),
-                    b: self.language_decode(language2),
-                    c: self.language_decode(language3),
-                    d: self.language_decode(language4)
-                )
-                self.profile.append("用戶名稱: \(realname)")
-                self.profile.append("用戶性別: \(self.gender_decode(gender))")
-                self.profile.append("使用語言: \(language))")
-                self.profile.append("教育程度: \(self.education_decode(education))")
-                print("this is my STR \(self.profile)")
-                self.myTableView.reloadData()
-                self.changeState(1, userid: String(id) )
+                let json = try  NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                if let section = json as? NSArray{
+                    if let profile_data = section[0] as? NSDictionary{
+                        print(profile_data)
+                        let realname = profile_data["realname"]! as! String
+                        let education = profile_data["education"]! as! Int
+                        let language1 = self.checklanguage(profile_data, field: "language1")
+                        let language2 = self.checklanguage(profile_data, field: "language2")
+                        let language3 = self.checklanguage(profile_data, field: "language3")
+                        let language4 = self.checklanguage(profile_data, field: "language4")
+                        let gender = profile_data["gender"]! as! Int
+                        let id = profile_data["id"]! as! Int
+                        let level = profile_data["level"]! as! Int
+                        let language = self.language_format(
+                            self.language_decode(language1),
+                            b: self.language_decode(language2),
+                            c: self.language_decode(language3),
+                            d: self.language_decode(language4)
+                        )
+                        self.profile.append("用戶名稱: \(realname)")
+                        self.profile.append("用戶性別: \(self.gender_decode(gender))")
+                        self.profile.append("使用語言: \(language)")
+                        self.profile.append("教育程度: \(self.education_decode(education))")
+                        self.profile.append("視障等級: \(self.level_decode(level))")
+                        self.myTableView.reloadData()
+                        print(id)
+                        self.agentid = String(id)
+                        CustomTabController.sharedInstance.myID = String(id)
+                        print("this is my STR \(self.profile)")
+                        self.changeState(1, userid: String(id))
+                        //self.getMyService(String(id))
+                    }
+                }
             }catch{
                 print("Couldn't Serialize")
             }
             }.resume()
-        
-        
+
         
         
         // 加入到畫面中
@@ -219,6 +227,14 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         appDelegate.window?.rootViewController = signInView
         self.dismissViewControllerAnimated(true, completion: nil)
         changeState(0, userid: agentid)
+    }
+    func checklanguage(dict: NSDictionary,field: String)->Int{
+        if let result = dict[field] as? Int{
+            return result
+        }
+        else{
+            return 0
+        }
     }
     
     func education_decode(e: Int) -> String{
