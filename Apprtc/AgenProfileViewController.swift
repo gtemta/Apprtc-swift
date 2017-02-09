@@ -19,7 +19,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
     //the value from LoginView
     var account = String()
     var agentid = String()
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     
     // 必須實作的方法：每個 cell 要顯示的內容
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -129,7 +129,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
                         self.profile.append("用戶性別: \(self.gender_decode(gender))")
                         self.profile.append("使用語言: \(language)")
                         self.profile.append("教育程度: \(self.education_decode(education))")
-                        self.profile.append("視障等級: \(self.level_decode(level))")
+                        self.profile.append("評分等級: \(String(level))")
                         self.myTableView.reloadData()
                         print(id)
                         self.agentid = String(id)

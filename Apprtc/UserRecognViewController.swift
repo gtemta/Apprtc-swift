@@ -16,7 +16,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     var picture = UIImageView()
     var contentTextLabel = UILabel()
     var CameraButton = UIButton()
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     
     var photourl = ""
     var photocomment = ""

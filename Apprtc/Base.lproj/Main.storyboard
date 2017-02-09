@@ -483,8 +483,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a room name." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-dG-tiL">
-                                            <rect key="frame" x="18" y="18" width="227" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="歡迎使用專員辨識 請按下進入房間按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-dG-tiL">
+                                            <rect key="frame" x="18" y="18" width="349" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Gwp-f3-NfB"/>
                                                 <constraint firstAttribute="width" constant="227" id="xHs-Dn-VHZ"/>
@@ -527,7 +527,7 @@
                                                 <constraint firstAttribute="width" constant="100" id="ns6-vx-r3n"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                            <state key="normal" title="JOIN">
+                                            <state key="normal" title="進入房間">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="disabled">
@@ -594,7 +594,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKd-hg-wLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-492" y="-8"/>
+            <point key="canvasLocation" x="-492" y="-8.5457271364317844"/>
         </scene>
         <!--AgentRTC Video Chat View Controller-->
         <scene sceneID="KBT-c6-Gi8">

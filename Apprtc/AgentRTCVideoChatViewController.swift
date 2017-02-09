@@ -52,7 +52,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
     var userAcctURL:String = ""
     var agentAcctURL:String = ""
     var serviceID:String = ""
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     //====
 
     

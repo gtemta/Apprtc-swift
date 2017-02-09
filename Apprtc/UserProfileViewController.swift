@@ -19,7 +19,7 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
     var pickerView = UIPickerView()
 
     let items = [1,2,3,4,5]
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     
     
     //the value from LoginView

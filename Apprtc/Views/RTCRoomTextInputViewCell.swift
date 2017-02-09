@@ -25,7 +25,7 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     var delegate:RTCRoomTextInputViewCellDelegate?
     var id = ""
     var targetroom = ""
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     
     override func awakeFromNib() {
         self.errorLabelHeightConstraint?.constant=0.0

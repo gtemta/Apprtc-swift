@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CB562C71E39CD4900EBAC81 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CB562C61E39CD4900EBAC81 /* Default-568h@2x.png */; };
+		1CB562C91E39CF1D00EBAC81 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CB562C81E39CF1D00EBAC81 /* Launch Screen.storyboard */; };
 		975A57EB1BCFCAC1008F6AB9 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */; };
 		9D0A2B4E1D9BAC7600903277 /* UserRecognViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */; };
 		9D0A2B501D9BAE5B00903277 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */; };
@@ -60,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1CB562C61E39CD4900EBAC81 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1CB562C81E39CF1D00EBAC81 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		975A57EA1BCFCAC1008F6AB9 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = ../SRWebSocket.m; sourceTree = "<group>"; };
 		976E3D501BCE64DF002486D5 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRecognViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		D878BE441B9B6110001AE9CD = {
 			isa = PBXGroup;
 			children = (
+				1CB562C61E39CD4900EBAC81 /* Default-568h@2x.png */,
 				D863B1121C932B0000DE1C4C /* VideoToolbox.framework */,
 				976E3D501BCE64DF002486D5 /* BridgingHeader.h */,
 				D875EEA21B9C051C008B1DF3 /* libc++.dylib */,
@@ -281,6 +286,7 @@
 				D878BE521B9B6110001AE9CD /* AppDelegate.swift */,
 				D878BE541B9B6110001AE9CD /* RTCRoomViewController.swift */,
 				D878BE561B9B6110001AE9CD /* Main.storyboard */,
+				1CB562C81E39CF1D00EBAC81 /* Launch Screen.storyboard */,
 				9D0A2B4D1D9BAC7600903277 /* UserRecognViewController.swift */,
 				9D0A2B4F1D9BAE5B00903277 /* UserProfileViewController.swift */,
 				9D4239161D9D25D200566B19 /* AgentRTCRoomViewController.swift */,
@@ -377,8 +383,9 @@
 				TargetAttributes = {
 					D878BE4C1B9B6110001AE9CD = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = L46VAUBR64;
+						DevelopmentTeam = ES9333BX3M;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					D878BE611B9B6110001AE9CD = {
 						CreatedOnToolsVersion = 6.3;
@@ -412,7 +419,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D878BE581B9B6110001AE9CD /* Main.storyboard in Resources */,
+				1CB562C71E39CD4900EBAC81 /* Default-568h@2x.png in Resources */,
 				D878BE5A1B9B6110001AE9CD /* Images.xcassets in Resources */,
+				1CB562C91E39CF1D00EBAC81 /* Launch Screen.storyboard in Resources */,
 				9D275D2B1DAD3DFA00C38B08 /* pikachu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,8 +591,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = L46VAUBR64;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = ES9333BX3M;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Apprtc/Info.plist;
@@ -593,9 +602,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.org.iii.iaimApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6f6104e2-76b3-4e22-9f49-0def1e062534";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: tw.org.iii.iaimApp";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -607,8 +617,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = L46VAUBR64;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = ES9333BX3M;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Apprtc/Info.plist;
@@ -618,9 +628,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hahaha.iaimApp;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.org.iii.iaimApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6f6104e2-76b3-4e22-9f49-0def1e062534";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: tw.org.iii.iaimApp";
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";

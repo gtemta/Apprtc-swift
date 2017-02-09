@@ -13,7 +13,7 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
     
     //the value from LoginView
     var id = String()
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     
     
     var targetroom = ""

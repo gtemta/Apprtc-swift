@@ -15,7 +15,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     weak var accountTextField:UITextField!
     weak var passwordTextField:UITextField!
     var checker: Bool = false
-    let ipadress = "http://140.113.72.29:8100/"
+    let ipadress = "http://175.98.115.42/"
     
     
     override func viewDidLoad() {
