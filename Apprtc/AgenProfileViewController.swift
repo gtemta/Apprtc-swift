@@ -100,7 +100,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
         
-        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/account/?name=" + account + "&?format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/agent/?name=" + account + "&?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
