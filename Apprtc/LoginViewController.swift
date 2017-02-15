@@ -16,6 +16,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     weak var passwordTextField:UITextField!
     var checker: Bool = false
     let ipadress = "http://175.98.115.42/"
+    @IBOutlet var switchTextLabel : UILabel?
     
     
     override func viewDidLoad() {
@@ -33,6 +34,24 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         targetphotoview.center = CGPoint(x: fullScreenSize.width*0.5, y: fullScreenSize.height*0.2)
         self.view.addSubview(targetphotoview)
+        
+        //agent or user text
+        switchTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
+        switchTextLabel!.text = "以用戶身份登入"
+        switchTextLabel!.textColor = UIColor.purpleColor()
+        switchTextLabel!.textAlignment = .Center
+        switchTextLabel!.center = CGPoint(x: fullScreenSize.width * 0.35  , y: fullScreenSize.height *  0.3)
+        self.view.addSubview(switchTextLabel!)
+        
+        
+        //agent or user switch
+        let AUSwitch = UISwitch()
+        AUSwitch.center = CGPoint(x: fullScreenSize.width * 0.75 , y: fullScreenSize.height *  0.3)
+        AUSwitch.thumbTintColor = UIColor.orangeColor()
+        AUSwitch.tintColor = UIColor.blueColor()
+        AUSwitch.addTarget(self,action: #selector(LoginViewController.SwitchOnChange),forControlEvents: .ValueChanged)
+        self.view.addSubview(AUSwitch)
+        
         
         //填入帳號資料
         accountTextField = UITextField(frame: CGRect(x:0,y:0,width: fullScreenSize.width*0.8,height: 50))
@@ -65,26 +84,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         loginButton.enabled = true
         loginButton.backgroundColor = UIColor.darkGrayColor()
         loginButton.addTarget(self, action: #selector(LoginViewController.login), forControlEvents: .TouchUpInside)
-        loginButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.9 )
+        loginButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.8 )
         self.view.addSubview(loginButton)
         
-        //agent or user text
-        let switchTextLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: 50))
-        switchTextLabel.text = "以用戶／專員身份登入"
-        switchTextLabel.textColor = UIColor.purpleColor()
-        switchTextLabel.textAlignment = .Center
-        
-        switchTextLabel.center = CGPoint(x: fullScreenSize.width * 0.4  , y: fullScreenSize.height *  0.7)
-        self.view.addSubview(switchTextLabel)
-        
-        //agent or user switch
-        let AUSwitch = UISwitch()
-        AUSwitch.center = CGPoint(x: fullScreenSize.width * 0.8 , y: fullScreenSize.height *  0.7)
-        AUSwitch.thumbTintColor = UIColor.orangeColor()
-        AUSwitch.tintColor = UIColor.blueColor()
-        AUSwitch.addTarget(self,action: #selector(LoginViewController.onChange),forControlEvents: .ValueChanged)
-        self.view.addSubview(AUSwitch)
-        
+
         
         self.passwordTextField?.delegate = self
         self.accountTextField?.delegate = self
@@ -136,18 +139,18 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
-    
-    func onChange(sender: AnyObject){
-        //get UISwitch Object
-        let tempswitch = sender as! UISwitch
-        if tempswitch.on{
+    //change state for UIswitch
+    func SwitchOnChange(sender: UISwitch!){
+        if sender.on{
             userlogin = false
             self.view.backgroundColor = UIColor.whiteColor()
+            switchTextLabel?.text = "以專員身份登入"
             print(userlogin)
         }
         else{
             userlogin = true
             self.view.backgroundColor = UIColor.blackColor()
+            switchTextLabel?.text = "以用戶身份登入"
             print(userlogin)
         }
     }
