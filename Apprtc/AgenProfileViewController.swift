@@ -100,7 +100,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
         
-        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/agent/?name=" + account + "&?format=json")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/agent/?id=" + agentid + "&?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         
@@ -118,7 +118,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
                         let language4 = self.checklanguage(profile_data, field: "language4")
                         let gender = profile_data["gender"]! as! Int
                         let id = profile_data["id"]! as! Int
-                        let level = profile_data["level"]! as! Int
+                        let level = self.checklevel(profile_data, field: "level")
                         let language = self.language_format(
                             self.language_decode(language1),
                             b: self.language_decode(language2),
@@ -129,7 +129,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
                         self.profile.append("用戶性別: \(self.gender_decode(gender))")
                         self.profile.append("使用語言: \(language)")
                         self.profile.append("教育程度: \(self.education_decode(education))")
-                        self.profile.append("評分等級: \(String(level))")
+                        self.profile.append("評分等級: \(self.level_decode(level))")
                         self.myTableView.reloadData()
                         print(id)
                         self.agentid = String(id)
@@ -236,6 +236,14 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
             return 0
         }
     }
+    func checklevel(dict: NSDictionary,field: String)->Int{
+        if let result = dict[field] as? Int{
+            return result
+        }
+        else{
+            return 0
+        }
+    }
     
     func education_decode(e: Int) -> String{
         switch e {
@@ -283,6 +291,24 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         }
     }
     
+    func level_decode(l: Int) -> String{
+        switch l {
+        case 0:
+            return "未評等"
+        case 1:
+            return "待加強"
+        case 2:
+            return "尚可"
+        case 3:
+            return "普通"
+        case 4:
+            return "良好"
+        case 5:
+            return "優良"
+        default:
+            return "SOME THING WENT WRONG"
+        }
+    }
     func gender_decode(g: Int) -> String{
         if g==0{
             return "男"
@@ -291,19 +317,7 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
             return "女"
         }
     }
-    
-    func level_decode(l: Int) -> String{
-        switch l {
-        case 1:
-            return "輕度視障"
-        case 2:
-            return "中度視障"
-        case 3:
-            return "高度視障"
-        default:
-            return "SOME THING WENT WRONG"
-        }
-    }
+
     
     func language_format(a:String, b:String, c:String, d:String)->String{
         var result = ""
