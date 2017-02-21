@@ -87,11 +87,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         loginButton.center = CGPoint( x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.8 )
         self.view.addSubview(loginButton)
         
-
-        
         self.passwordTextField?.delegate = self
         self.accountTextField?.delegate = self
-        
     }
     func login(){
         //self.presentViewController(,animated: true, completion: nil)
@@ -107,7 +104,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 appDelegate.window?.rootViewController = userTabBar
                 self.dismissViewControllerAnimated(true, completion: nil)
                 print("登入系統")
-                
             }
             else{
                 Failsignin()
@@ -158,8 +154,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     func Failsignin(){
         print("login fail")
         let alertVC = UIAlertController(
-            title: "Sign in Failed",
-            message: "Sorry, Please Try again",
+            title: "登入失敗",
+            message: "您輸入的帳號密碼錯誤",
             preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK",style: .Default,handler: nil)
         alertVC.addAction(okAction)
@@ -211,7 +207,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         print("And my password: \(password)")
         trylogin(account, password)
     }
-
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         if userlogin{
@@ -220,8 +216,26 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         else{
             agentloginpress()
         }
-        
         return false
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.view.endEditing(true)
+        if userlogin{
+            userloginpressed()
+        }
+        else{
+            agentloginpress()
+        }
+    }
+    override
+    func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+        if userlogin{
+            userloginpressed()
+        }
+        else{
+            agentloginpress()
+        }
     }
     //agent trylogin
     func trylogin(agentid:String ,_ agentpw: String){
@@ -232,7 +246,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
-            
             do {
                 let result = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
                 print("my result is\(result)")

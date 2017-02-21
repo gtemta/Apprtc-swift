@@ -34,9 +34,6 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         // 取得 tableView 目前使用的 cell
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell
         cell.textLabel?.text = profile[indexPath.row]
-        
-        
-        
                 // 設置 Accessory 按鈕樣式
                 if (indexPath as NSIndexPath).section == 0 {
                     if (indexPath as NSIndexPath).row == 0 {
@@ -104,13 +101,13 @@ class UserProfileViewController: UIViewController,UITableViewDelegate, UITableVi
         // 分隔線的間距 四個數值分別代表 上、左、下、右 的間距
         myTableView.separatorInset =
             UIEdgeInsetsMake(0, 20, 0, 20)
-        
+        /*
         // 是否可以點選 cell
         myTableView.allowsSelection = true
         
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
-        
+        */
         let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/account/?name=" + account + "&?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")

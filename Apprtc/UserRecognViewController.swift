@@ -27,8 +27,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.blackColor()
-        
-        
         // get account from loginview
         if let tbc = CustomTabController.sharedInstance.myID{
             ID =  tbc
@@ -51,10 +49,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         picture.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.20)
         picture.image = UIImage(named: "pikachu.png")
         self.view.addSubview(picture)
+        
         //button
         CameraButton.frame = CGRect(x: 0, y: 0, width: 200,height: 50)
         CameraButton.center = CGPoint(x: fullScreenSize.width * 0.5,y: fullScreenSize.height * 0.83)
-        
         CameraButton.setTitle("拍攝照片", forState: .Normal)
         CameraButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
         CameraButton.backgroundColor = UIColor.darkGrayColor()
@@ -64,13 +62,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         //Refresh button
         let refresh_Button = UIBarButtonItem(barButtonSystemItem: .Refresh,target: self,action: #selector(checkstatus))
         self.navigationItem.rightBarButtonItem = refresh_Button
-
         checkstatus()
-        
-    }
-    
-    func refresh(){
-        
     }
     
     func checkstatus(){
@@ -92,7 +84,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                         })
                     }
                     else{
-                        
                         if let photo_data = section.lastObject as? NSDictionary{
                             print(photo_data)
                             let state = photo_data["state"]! as! Int
@@ -129,11 +120,9 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             contentTextLabel.text = "請拍下欲辨識的物體"
             contentTextLabel.enabled = true
            
-            
             //imageview
             picture.image = UIImage(named: "pikachu.png")
            
-            
             //Button
             CameraButton.enabled = true
             CameraButton.hidden = false
@@ -200,9 +189,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
         print("set photo from camera")
         self.uploadRequest(selectedImage, Orientation: myOrientation)
         self.dismissViewControllerAnimated(true, completion: nil)
-        
         //Dismiss  the picker
-        
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         //Dismiss  the picker if the user canceled
@@ -232,8 +219,8 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             let date2 = formatter.stringFromDate(date) as String
             print(date2)
             //
-            let fname = date2 + ".jpg"
-            let mimetype = "image/jpg"
+            let fname = date2 + ".jpeg"
+            let mimetype = "image/jpeg"
             
             //define the data post parameter
             //multi part header
@@ -283,8 +270,8 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     
     func noCamera(){
         let alertVC = UIAlertController(
-            title: "No Camera",
-            message: "Sorry, this device has no camera",
+            title: "沒有相機",
+            message: "抱歉本裝置並沒有相機裝置",
             preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK",style: .Default,handler: nil)
         alertVC.addAction(okAction)

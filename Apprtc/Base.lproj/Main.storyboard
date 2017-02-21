@@ -192,17 +192,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g1z-DZ-68S">
-                                            <rect key="frame" x="40" y="88" width="520" height="2"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </view>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQL-Rt-OdE">
                                             <rect key="frame" x="40" y="133" width="268" height="59"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                            <state key="normal" title="呼叫專員">
+                                            <state key="normal" title="等候專員">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <state key="disabled">
@@ -218,7 +213,7 @@
                                                 <action selector="touchButtonPressed:" destination="DEP-aM-p38" eventType="touchUpInside" id="Y3M-Uh-byx"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="請按下呼叫專員按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPq-Rn-8Ma">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="請按下等候專員按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPq-Rn-8Ma">
                                             <rect key="frame" x="111" y="8" width="153" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -231,7 +226,6 @@
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="joinButton" destination="lQL-Rt-OdE" id="Cph-49-v1p"/>
-                                    <outlet property="textFieldBorderView" destination="g1z-DZ-68S" id="q52-HW-UmR"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MahabaliCell" rowHeight="124" id="lDT-vj-cpJ">
@@ -283,7 +277,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ExN-Rm-yTG" userLabel="Footer View">
                                 <rect key="frame" x="0.0" y="520" width="600" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Waiting for someone to join this room: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRM-qp-XCg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="等待專員進入房間後開始服務" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRM-qp-XCg">
                                         <rect key="frame" x="10" y="10" width="580" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Mks-7Z-Nrq"/>
@@ -484,7 +478,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="歡迎使用專員辨識 請按下進入房間按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-dG-tiL">
-                                            <rect key="frame" x="18" y="18" width="349" height="21"/>
+                                            <rect key="frame" x="18" y="18" width="349" height="84"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Gwp-f3-NfB"/>
                                                 <constraint firstAttribute="width" constant="227" id="xHs-Dn-VHZ"/>
@@ -493,33 +487,7 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xPj-Vc-CwL">
-                                            <rect key="frame" x="40" y="48" width="520" height="40"/>
-                                            <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="I9Q-0u-mmX"/>
-                                            </constraints>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="alert"/>
-                                        </textField>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeU-J6-ZtT">
-                                            <rect key="frame" x="40" y="88" width="520" height="2"/>
-                                            <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="2" id="o54-ZI-TmQ"/>
-                                            </constraints>
-                                        </view>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Room name must be 5 or more characters and include only letters and numbers." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kad-BL-Ygh">
-                                            <rect key="frame" x="40" y="93" width="520" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="rSp-dD-a4z"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                            <color key="textColor" red="0.93341982359999998" green="0.16678811609999999" blue="0.1634537429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-oH-RX1">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-oH-RX1">
                                             <rect key="frame" x="65" y="141" width="268" height="59"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -547,27 +515,13 @@
                                     <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="jQ1-dG-tiL" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leadingMargin" constant="10" id="7BS-ba-4pL"/>
-                                        <constraint firstItem="xPj-Vc-CwL" firstAttribute="top" secondItem="jQ1-dG-tiL" secondAttribute="bottom" constant="9" id="IHS-K4-Qje"/>
-                                        <constraint firstAttribute="trailing" secondItem="xPj-Vc-CwL" secondAttribute="trailing" constant="40" id="NFW-D0-2e3"/>
-                                        <constraint firstAttribute="trailing" secondItem="xeU-J6-ZtT" secondAttribute="trailing" constant="40" id="OyA-mo-WRA"/>
                                         <constraint firstItem="jQ1-dG-tiL" firstAttribute="top" secondItem="jYW-Fd-rrX" secondAttribute="topMargin" constant="10" id="SJh-lV-xlW"/>
-                                        <constraint firstItem="xeU-J6-ZtT" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leading" constant="40" id="TK8-Xf-1VJ"/>
-                                        <constraint firstItem="0kT-oH-RX1" firstAttribute="top" secondItem="kad-BL-Ygh" secondAttribute="bottom" constant="14" id="Tu2-fU-Qj5"/>
-                                        <constraint firstAttribute="trailing" secondItem="kad-BL-Ygh" secondAttribute="trailing" constant="40" id="UHf-Et-e0R"/>
-                                        <constraint firstItem="xeU-J6-ZtT" firstAttribute="top" secondItem="xPj-Vc-CwL" secondAttribute="bottom" id="ZMA-o4-TeI"/>
-                                        <constraint firstItem="kad-BL-Ygh" firstAttribute="top" secondItem="xeU-J6-ZtT" secondAttribute="bottom" constant="3" id="bAM-vZ-2H7"/>
-                                        <constraint firstItem="xPj-Vc-CwL" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leading" constant="40" id="eYB-Ba-rD9"/>
-                                        <constraint firstItem="kad-BL-Ygh" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leading" constant="40" id="rco-sz-V1k"/>
                                         <constraint firstItem="0kT-oH-RX1" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leading" constant="40" id="sgN-1l-Ui2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="errorLabel" destination="kad-BL-Ygh" id="tE7-a1-A5k"/>
-                                    <outlet property="errorLabelHeightConstraint" destination="rSp-dD-a4z" id="muA-6x-xyh"/>
                                     <outlet property="joinButton" destination="0kT-oH-RX1" id="FSg-Uq-kVC"/>
-                                    <outlet property="textField" destination="xPj-Vc-CwL" id="vOP-Be-gJf"/>
-                                    <outlet property="textFieldBorderView" destination="xeU-J6-ZtT" id="kGa-gv-BTQ"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MahabaliCell" rowHeight="124" id="URp-Tl-ZHe">
@@ -624,7 +578,7 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUH-kc-qjn" userLabel="Footer View">
                                 <rect key="frame" x="0.0" y="520" width="600" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Waiting for someone to join this room: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngW-Gh-QVs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="等待用戶進入房間後開始服務" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngW-Gh-QVs">
                                         <rect key="frame" x="10" y="10" width="580" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="bi5-to-BSC"/>
