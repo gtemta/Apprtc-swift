@@ -93,13 +93,13 @@ class AgentProfileViewController: UIViewController,UITableViewDelegate, UITableV
         // 分隔線的間距 四個數值分別代表 上、左、下、右 的間距
         myTableView.separatorInset =
             UIEdgeInsetsMake(0, 20, 0, 20)
-        
+        /*
         // 是否可以點選 cell
         myTableView.allowsSelection = true
         
         // 是否可以多選 cell
         myTableView.allowsMultipleSelection = false
-        
+        */
         let request = NSMutableURLRequest(URL: NSURL(string: ipadress + "api/agent/?id=" + agentid + "&?format=json")!)
         request.HTTPMethod = "GET"
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
