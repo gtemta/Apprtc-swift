@@ -97,9 +97,9 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         self.client=ARDAppClient(delegate: self)
         self.client?.serverHostUrl="https://appr.tc/"
         self.client!.connectToRoomWithId(self.roomName! as String, options: nil)
-        self.urlLabel?.text="用戶已進入房間 開始服務"
+        self.urlLabel?.text = ""
     }
-    
+    //若另一方進入房間後則會在此把下方狀態列隱藏
     override func  viewWillDisappear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         NSNotificationCenter.defaultCenter().removeObserver(self)

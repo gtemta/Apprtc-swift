@@ -89,7 +89,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
     self.client=ARDAppClient(delegate: self)
     self.client?.serverHostUrl="https://appr.tc/"
     self.client!.connectToRoomWithId(self.roomName! as String, options: nil)
-    self.urlLabel?.text = "專員已進入房間 開始服務"
+    self.urlLabel?.text = "請稍待 等候專員進入房間 專員進入後本行文字將消失"
   }
   
   override func  viewWillDisappear(animated: Bool) {
