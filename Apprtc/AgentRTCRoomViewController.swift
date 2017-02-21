@@ -69,7 +69,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     //重新整理
     func refreshAlert(){
         let alertView = UIAlertController(title: "系統訊息", message: "確定真的要重新刷新專員服務？若是請按下確認",preferredStyle: .Alert)
-        let confirmAction = UIAlertAction(title: "確認", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) in })
+        let confirmAction = UIAlertAction(title: "確認", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) in self.recheck()})
         alertView.addAction(confirmAction)
         let cancellAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(cancellAction)
@@ -105,8 +105,9 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
                         }
                         else{
                             self.targetroom = roomname!
+                            CustomTabController.sharedInstance.targetRoom = self.targetroom
                         }
-                        print ("target Room : ")
+                        print ("^^target Room : ^^")
                         print(self.targetroom)
                     }
                 }
