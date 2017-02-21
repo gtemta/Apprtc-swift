@@ -97,7 +97,7 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         self.client=ARDAppClient(delegate: self)
         self.client?.serverHostUrl="https://appr.tc/"
         self.client!.connectToRoomWithId(self.roomName! as String, options: nil)
-        self.urlLabel?.text=self.roomName! as String
+        self.urlLabel?.text="用戶已進入房間 開始服務"
     }
     
     override func  viewWillDisappear(animated: Bool) {

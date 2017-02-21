@@ -96,7 +96,8 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                             self.photocomment = comment!
                             print("statecode: \(state)")
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.setview(state)
+                                if section.count == 1 {self.setview(0)}
+                                else{self.setview(state)}
                             })
                         }
                     }

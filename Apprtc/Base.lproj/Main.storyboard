@@ -185,11 +185,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoomInputCell" rowHeight="200" id="DEP-aM-p38" customClass="RTCRoomTextInputViewCell" customModule="Apprtc" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="375" height="200"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoomInputCell" rowHeight="410" id="DEP-aM-p38" customClass="RTCRoomTextInputViewCell" customModule="Apprtc" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="22" width="375" height="410"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DEP-aM-p38" id="n2a-hJ-wYO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="410"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQL-Rt-OdE">
@@ -229,7 +229,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MahabaliCell" rowHeight="124" id="lDT-vj-cpJ">
-                                <rect key="frame" x="0.0" y="222" width="375" height="124"/>
+                                <rect key="frame" x="0.0" y="432" width="375" height="124"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lDT-vj-cpJ" id="BYK-Z6-CKw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
@@ -470,28 +470,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoomInputCell" rowHeight="200" id="5Cz-y3-06V" customClass="AgentRTCRoomTextInputViewCell" customModule="Apprtc" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="375" height="200"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoomInputCell" rowHeight="497" id="5Cz-y3-06V" customClass="AgentRTCRoomTextInputViewCell" customModule="Apprtc" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="22" width="375" height="497"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Cz-y3-06V" id="jYW-Fd-rrX">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="497"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="歡迎使用專員辨識 請按下進入房間按鈕" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-dG-tiL">
-                                            <rect key="frame" x="18" y="18" width="349" height="84"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="歡迎使用專員辨識 請按下進入房間按鈕" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQ1-dG-tiL">
+                                            <rect key="frame" x="46" y="8" width="305" height="84"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="Gwp-f3-NfB"/>
+                                                <constraint firstAttribute="height" constant="65" id="Gwp-f3-NfB"/>
                                                 <constraint firstAttribute="width" constant="227" id="xHs-Dn-VHZ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-oH-RX1">
-                                            <rect key="frame" x="65" y="141" width="268" height="59"/>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kT-oH-RX1">
+                                            <rect key="frame" x="53" y="221" width="268" height="59"/>
                                             <color key="backgroundColor" red="0.2047472894" green="0.42595943809999998" blue="0.94441002610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="6E9-Yg-eAz"/>
+                                                <constraint firstAttribute="height" constant="55" id="6E9-Yg-eAz"/>
                                                 <constraint firstAttribute="width" constant="100" id="ns6-vx-r3n"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
@@ -515,8 +515,9 @@
                                     <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="jQ1-dG-tiL" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leadingMargin" constant="10" id="7BS-ba-4pL"/>
+                                        <constraint firstItem="0kT-oH-RX1" firstAttribute="bottom" secondItem="jYW-Fd-rrX" secondAttribute="bottomMargin" id="8Iy-gs-nBf"/>
                                         <constraint firstItem="jQ1-dG-tiL" firstAttribute="top" secondItem="jYW-Fd-rrX" secondAttribute="topMargin" constant="10" id="SJh-lV-xlW"/>
-                                        <constraint firstItem="0kT-oH-RX1" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leading" constant="40" id="sgN-1l-Ui2"/>
+                                        <constraint firstItem="0kT-oH-RX1" firstAttribute="leading" secondItem="jYW-Fd-rrX" secondAttribute="leading" constant="53" id="WjA-fc-TSD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -524,11 +525,11 @@
                                     <outlet property="joinButton" destination="0kT-oH-RX1" id="FSg-Uq-kVC"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MahabaliCell" rowHeight="124" id="URp-Tl-ZHe">
-                                <rect key="frame" x="0.0" y="222" width="375" height="124"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MahabaliCell" rowHeight="36" id="URp-Tl-ZHe">
+                                <rect key="frame" x="0.0" y="519" width="375" height="36"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="URp-Tl-ZHe" id="S8D-if-kM6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
