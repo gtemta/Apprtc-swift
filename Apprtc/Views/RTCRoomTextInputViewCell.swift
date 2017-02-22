@@ -86,10 +86,11 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
     
     ///************change this place to target room********
     @IBAction func touchButtonPressed (sender:UIButton){
+        targetroom = CustomTabController.sharedInstance.targetRoom!
         if targetroom == "" {
             alertnull()
         }
-        targetroom = CustomTabController.sharedInstance.targetRoom!
+        
         if self.delegate?.shouldJoinRoom(targetroom, textInputCell: self) != nil{
             NSLog("Delegate was implemented");
         }

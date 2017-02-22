@@ -579,15 +579,6 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUH-kc-qjn" userLabel="Footer View">
                                 <rect key="frame" x="0.0" y="520" width="600" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="等待用戶進入房間後開始服務" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngW-Gh-QVs">
-                                        <rect key="frame" x="10" y="10" width="580" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="bi5-to-BSC"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="https://apprtc.appspot.com/r/room" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzW-sG-fgq">
                                         <rect key="frame" x="10" y="32" width="580" height="21"/>
                                         <constraints>
@@ -600,12 +591,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ngW-Gh-QVs" secondAttribute="trailing" constant="10" id="BBA-bp-HI8"/>
-                                    <constraint firstItem="ngW-Gh-QVs" firstAttribute="top" secondItem="UUH-kc-qjn" secondAttribute="top" constant="10" id="Eux-pq-580"/>
                                     <constraint firstAttribute="trailing" secondItem="CzW-sG-fgq" secondAttribute="trailing" constant="10" id="OWD-wZ-4mf"/>
-                                    <constraint firstItem="ngW-Gh-QVs" firstAttribute="leading" secondItem="UUH-kc-qjn" secondAttribute="leading" constant="10" id="Tma-GW-mFQ"/>
-                                    <constraint firstItem="CzW-sG-fgq" firstAttribute="top" secondItem="ngW-Gh-QVs" secondAttribute="bottom" constant="1" id="XNi-bQ-qUa"/>
                                     <constraint firstItem="CzW-sG-fgq" firstAttribute="leading" secondItem="UUH-kc-qjn" secondAttribute="leading" constant="10" id="iVI-4S-ICd"/>
+                                    <constraint firstItem="CzW-sG-fgq" firstAttribute="top" secondItem="UUH-kc-qjn" secondAttribute="top" constant="32" id="j2x-4r-xoh"/>
                                     <constraint firstAttribute="height" constant="80" id="sei-ws-7KS"/>
                                 </constraints>
                             </view>

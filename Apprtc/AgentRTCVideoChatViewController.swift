@@ -6,14 +6,6 @@
 //  Copyright © 2016年 Dhilip. All rights reserved.
 //
 
-//
-//  RTCVideoChatViewController.swift
-//  Apprtc
-//
-//  Created by Mahabali on 9/6/15.
-//  Copyright (c) 2015 Mahabali. All rights reserved.
-//
-
 import UIKit
 import AVFoundation
 class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDAppClientDelegate {
@@ -97,12 +89,18 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         self.client=ARDAppClient(delegate: self)
         self.client?.serverHostUrl="https://appr.tc/"
         self.client!.connectToRoomWithId(self.roomName! as String, options: nil)
-        self.urlLabel?.text = ""
+        self.urlLabel?.text = "等待用戶進入房間後開始服務"
     }
     //若另一方進入房間後則會在此把下方狀態列隱藏
     override func  viewWillDisappear(animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.localViewBottomConstraint?.constant=0.0
+        self.localViewRightConstraint?.constant=0.0
+        self.localViewHeightConstraint?.constant=self.view.frame.size.height
+        self.localViewWidthConstraint?.constant=self.view.frame.size.width
+        self.footerViewBottomConstraint?.constant=0.0
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.urlLabel?.text = "用戶已進入房間 請開始服務"
         self.disconnect()
     }
     

@@ -25,7 +25,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
         super.viewDidLoad()
         if let tbc = CustomTabController.sharedInstance.myID{
             id =  tbc
-            print ("======agent==RTC login id =======")
+            print ("===firsttime=agent=RTC login id =======")
             print(id)
             print ("================================")
         }
@@ -66,6 +66,23 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     func shouldJoinRoom(room: NSString, textInputCell: AgentRTCRoomTextInputViewCell) {
         self.performSegueWithIdentifier("AgentRTCVideoChatViewController", sender: room)
     }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(" to string \(segue.destinationViewController.dynamicType)")
+        let viewController:AgentRTCVideoChatViewController=segue.destinationViewController as! AgentRTCVideoChatViewController
+        //pass the roomname
+        targetroom = CustomTabController.sharedInstance.targetRoom!
+        print("THIS ROOM NAME :")
+        print(targetroom)
+        if targetroom == ""{alertnull()}
+        else{
+            print("GO ROOOOOOOOOM")
+            viewController.roomName = targetroom
+            print("Segue use roomname")
+            print(viewController.roomName)
+            viewController.roomName!=sender as! String
+        }
+    }
+    
     //重新整理
     func refreshAlert(){
         let alertView = UIAlertController(title: "系統訊息", message: "確定真的要重新刷新專員服務？若是請按下確認",preferredStyle: .Alert)
@@ -102,6 +119,8 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
                         let roomname = section["msg"] as? String
                         if roomname == nil{
                             print("room is nil")
+                            self.targetroom = String()
+                            CustomTabController.sharedInstance.targetRoom = self.targetroom
                         }
                         else{
                             self.targetroom = roomname!
@@ -109,31 +128,19 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
                         }
                         print ("^^target Room : ^^")
                         print(self.targetroom)
+                        print(CustomTabController.sharedInstance.targetRoom)
                     }
                 }
             }catch{
                 print("Couldn't Serialize")
+                
+            
+            
             }
             }.resume()
 }
 
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(" to string \(segue.destinationViewController.dynamicType)")
-        let viewController:AgentRTCVideoChatViewController=segue.destinationViewController as! AgentRTCVideoChatViewController
-            //pass the roomname
-        self.targetroom = CustomTabController.sharedInstance.targetRoom!
-        print("THIS ROOM NAME :")
-        print(targetroom)
-        if targetroom == ""{alertnull()}
-        else{
-            print("GO ROOOOOOOOOM")
-            viewController.roomName = targetroom
-            print("Segue use roomname")
-            print(viewController.roomName)
-            viewController.roomName!=sender as! String
-        }
-    }
     
     override func  shouldAutorotate() -> Bool {
         return false

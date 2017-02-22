@@ -105,14 +105,6 @@ class RTCRoomViewController: UITableViewController,RTCRoomTextInputViewCellDeleg
             }.resume()
         
     }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        
-        return false
-    }
-    
-    
     func shouldJoinRoom(room: NSString, textInputCell: RTCRoomTextInputViewCell) {
         self.performSegueWithIdentifier("RTCVideoChatViewController", sender: room)
     }
