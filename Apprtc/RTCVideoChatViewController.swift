@@ -133,7 +133,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
   }
   @IBAction func videoButtonPressed(sender:UIButton){
     sender.selected = !sender.selected
-    self.client?.toggleVideoMute()
+    //self.client?.toggleVideoMute()
   }
   //=============
   @IBAction func hangupButtonPressed(sender:UIButton){

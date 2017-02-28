@@ -89,20 +89,17 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         let alertView = UIAlertController(title: "系統訊息", message: "系統中無用戶需要服務，請稍後再試",preferredStyle: .Alert)
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
-        alertView.actions
     }
-    
-    
-    
     @IBAction func touchButtonPressed (sender:UIButton){
         targetroom = CustomTabController.sharedInstance.targetRoom!
         if targetroom == "" {
             alertnull()
         }
+        
         if self.delegate?.shouldJoinRoom(targetroom, textInputCell: self) != nil{
             NSLog("Delegate was implemented");
         }
-    }
+       }
     //Mark - UITextFieldDelegate Methods
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

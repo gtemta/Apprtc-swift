@@ -90,7 +90,6 @@ class RTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
         if targetroom == "" {
             alertnull()
         }
-        
         if self.delegate?.shouldJoinRoom(targetroom, textInputCell: self) != nil{
             NSLog("Delegate was implemented");
         }
