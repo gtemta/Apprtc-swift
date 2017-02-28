@@ -571,11 +571,6 @@
                                     <constraint firstAttribute="height" constant="120" id="spB-Jk-9EG"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Giq-V9-bFh" userLabel="Remote View" customClass="RTCEAGLVideoView">
-                                <rect key="frame" x="-113" y="33" width="600" height="600"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.32584697010000002" green="0.32583719490000002" blue="0.32584273819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUH-kc-qjn" userLabel="Footer View">
                                 <rect key="frame" x="0.0" y="520" width="600" height="80"/>
                                 <subviews>
@@ -641,6 +636,11 @@
                                     <constraint firstAttribute="height" constant="160" id="LsL-WG-ieH"/>
                                     <constraint firstAttribute="width" constant="40" id="PIw-Am-qP8"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Giq-V9-bFh" userLabel="Remote View" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="-105" y="-28" width="600" height="600"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.32584697010000002" green="0.32583719490000002" blue="0.32584273819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
