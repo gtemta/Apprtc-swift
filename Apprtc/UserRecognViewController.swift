@@ -265,7 +265,7 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
 
         }
         mynewUpLoad(image, Orientation: Orientation)
-        //        checkstatus()
+        checkstatus()
     }
     
     

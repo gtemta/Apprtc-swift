@@ -53,6 +53,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
     let fullScreenSize = UIScreen.mainScreen().bounds.size
     let colorTextField = UITextField()
     let nameTextField = UITextField()
+    var sendButton = UIButton();
     var targetphotoview = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +109,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         self.view.addSubview(fastPickerView)
         
         //送出結果按鍵
-        let sendButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200 ,height: 40))
+        sendButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200 ,height: 40))
         sendButton.setTitle("送出結果", forState: UIControlState())
         sendButton.setTitleColor(UIColor.greenColor(), forState:  UIControlState())
         sendButton.enabled = true
@@ -162,19 +163,22 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
                         self.photoid = String(id)
                         self.photourl = url
                         self.photouser = useraccount.componentsSeparatedByString("?format=json")
+                        
                         print(self.photoid)
                         print(self.photourl)
                         dispatch_async(dispatch_get_main_queue(), {
                             self.load_image(self.photourl)
                         })
-                        
+                        self.sendButton.enabled = true;
                     }
+                        
             }
                 }
             }catch{
                 print("Couldn't Serialize")
             }
             }.resume()
+        
     }
 
     func alertnull(){
@@ -205,7 +209,12 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         
         return false
     }
-    
+    override
+    func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+        comment = String(colorTextField.text) + String(nameTextField.text)
+    }
+
     
     func  sendResult() {
         //現階段為返回前頁 待修改
@@ -218,7 +227,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         }
         
         //put result to photo
-        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "photo/" + photoid + "/")! as NSURL)
+        let request = NSMutableURLRequest(URL:  NSURL(string: ipadress + "api/photo/" + photoid + "/")! as NSURL)
         request.HTTPMethod = "PUT"
         let params = NSMutableDictionary()
         params.setValue(comment, forKey: "comment")
@@ -232,6 +241,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         request.addValue("Accept", forHTTPHeaderField: "Vary")
         //=====================
         request.addValue("Basic YWRtaW46aWFpbTEyMzQ=", forHTTPHeaderField: "Authorization")
+        
         //^^^^^^^^^^^^^^^^^^^^^
         NSURLSession.sharedSession().dataTaskWithRequest(request){data, response, err in
             print("response:\(response)")
@@ -242,6 +252,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         self.dismissViewControllerAnimated(true, completion: nil)
         print("送出結果")
         sendMessage()
+        self.sendButton.enabled = false;
     }
     
     func sendMessage(){
