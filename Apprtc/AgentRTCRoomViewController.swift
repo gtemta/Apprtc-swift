@@ -17,6 +17,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     var id = ""
     var targetroom = CustomTabController.sharedInstance.targetRoom!
     let ipadress = "http://175.98.115.42/"
+    var firstin = Bool()
     // get account from loginview
    
 
@@ -29,13 +30,21 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
             print(id)
             print ("================================")
         }
+        firstin = true
         //Refresh button
         let refresh_Button = UIBarButtonItem(title:"重新整理服務",style: .Plain ,target: self,action: #selector(refreshAlert))
         self.navigationItem.rightBarButtonItem = refresh_Button
-        
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        print("viewDidAPPEAR")
+        noticecheck()
+        
+    }
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -63,8 +72,18 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
         return cell
     }
     
+    func checkservice(){
+        print("check")
+        if (self.targetroom ==  "")
+        {self.alertnull()
+        }
+        else {self.noticeservice()}
+    }
+    
     func shouldJoinRoom(room: NSString, textInputCell: AgentRTCRoomTextInputViewCell) {
         self.performSegueWithIdentifier("AgentRTCVideoChatViewController", sender: room)
+        firstin = false
+        print("@@@@set false@@@")
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(" to string \(segue.destinationViewController.dynamicType)")
@@ -80,6 +99,7 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
             print("Segue use roomname")
             print(viewController.roomName)
             viewController.roomName!=sender as! String
+            
         }
     }
     
@@ -133,14 +153,9 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
                 }
             }catch{
                 print("Couldn't Serialize")
-                
-            
-            
             }
             }.resume()
 }
-
-    
     
     override func  shouldAutorotate() -> Bool {
         return false
@@ -149,13 +164,33 @@ class AgentRTCRoomViewController: UITableViewController,AgentRTCRoomTextInputVie
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.Portrait
     }
+    func noticecheck(){
+        if (firstin){
+        if targetroom == ""{recheck()}
+        let alertView = UIAlertController(title: "系統訊息", message: "將為您確認目前是否有服務等待進行,按下確認鍵繼續",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) in self.checkservice()})
+        alertView.addAction(action)
+        presentViewController(alertView, animated: true, completion: nil)
+        }
+    }
     
     func alertnull(){
-        let alertView = UIAlertController(title: "系統訊息", message: "目前無用戶需要服務，請稍後再試",preferredStyle: .Alert)
+        let alertView = UIAlertController(title: "系統訊息", message: "目前無用戶需要服務，請稍後再試，按下重新整理鍵可以刷新服務狀態",preferredStyle: .Alert)
+        alertView.view.backgroundColor = UIColor.grayColor()
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
         presentViewController(alertView, animated: true, completion: nil)
         
     }
+    func noticeservice(){
+        let alertView = UIAlertController(title: "系統訊息", message: "有用戶需要服務，請盡快進入房間為用戶服務",preferredStyle: .Alert)
+        alertView.view.backgroundColor = UIColor.blueColor()
+        alertView.view.tintColor = UIColor.redColor()
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        
+        alertView.addAction(action)
+        presentViewController(alertView, animated: true, completion: nil)
+    }
+    
 }
 

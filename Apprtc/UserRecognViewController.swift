@@ -102,7 +102,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                         }
                     }
                 }
-                
             }catch{
                 print("Couldn't Serialize")
             }
@@ -113,7 +112,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     }
     
     func setview(situation :Int){
-        
         print("in setview")
         print("sitution: \(situation)")
         if situation==0 {

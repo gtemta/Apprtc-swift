@@ -77,7 +77,6 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
                         }
                         print ("target Room : ")
                         print(self.targetroom)
-                        
                     }
                 }
             }catch{
@@ -85,8 +84,16 @@ class AgentRTCRoomTextInputViewCell: UITableViewCell,UITextFieldDelegate {
             }
             }.resume()
     }
+    
+    
     func alertnull(){
         let alertView = UIAlertController(title: "系統訊息", message: "系統中無用戶需要服務，請稍後再試",preferredStyle: .Alert)
+        let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+
+    }
+    func noticeservice(){
+        let alertView = UIAlertController(title: "系統訊息", message: "目前有用戶需要服務，請盡快進入房間為用戶服務",preferredStyle: .Alert)
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
     }
