@@ -96,8 +96,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                             self.photocomment = comment!
                             print("statecode: \(state)")
                             dispatch_async(dispatch_get_main_queue(), {
-                                if section.count == 1 {self.setview(0)}
-                                else{self.setview(state)}
+                                if (section.count == 1)
+                                {self.setview(0)}
+                                else
+                                {self.setview(state)}
                             })
                         }
                     }
@@ -263,7 +265,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
 
         }
         mynewUpLoad(image, Orientation: Orientation)
-        checkstatus()
     }
     
     
