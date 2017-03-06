@@ -184,7 +184,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
     //set imageview to camera's content
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
-        print("now here")
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         // Set photoImageView to display the selected image.
         let myOrientation = selectedImage.imageOrientation
