@@ -83,6 +83,10 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                             self.setview(0)
                         })
                     }
+                    if (section.count == 1)
+                    {
+                        self.setview(0)
+                    }
                     else{
                         if let photo_data = section.lastObject as? NSDictionary{
                             print(photo_data)
@@ -95,11 +99,9 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                             }
                             self.photocomment = comment!
                             print("statecode: \(state)")
+                            print("Section Count : \(section.count)")
                             dispatch_async(dispatch_get_main_queue(), {
-                                if (section.count == 1)
-                                {self.setview(0)}
-                                else
-                                {self.setview(state)}
+                                self.setview(state)
                             })
                         }
                     }
@@ -262,7 +264,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             let task = session.dataTaskWithRequest(request,completionHandler: {data,response,error -> Void in
                 print("Response: \(response)")})
             task.resume()
-
         }
         mynewUpLoad(image, Orientation: Orientation)
     }
