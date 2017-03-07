@@ -151,6 +151,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
                     if (section.isEqualToArray(filter as [AnyObject])){
                         dispatch_async(dispatch_get_main_queue(), {
                             self.alertnull()
+                            self.sendButton.enabled = false
                         })
                     }
                     else{

@@ -167,10 +167,14 @@ class AgentRTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate
         let confirmAction  = UIAlertAction(title: "確認送出其他理由",style: UIAlertActionStyle.Default){
             (ACTION: UIAlertAction!) -> Void in
             let message = (alertController.textFields?.first)! as UITextField
+            if message.text == ""{
+            self.leavecomment(score)
+            }
+            else{
             comment = message.text!
             comment =  score + " " + comment
             self.sendFeedback(comment)
-            self.leaveRoom()
+                self.leaveRoom()}
                     }
         alertController.addAction(confirmAction)
         //display the hint

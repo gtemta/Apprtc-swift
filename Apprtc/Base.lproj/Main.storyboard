@@ -368,16 +368,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJr-3C-cXo" userLabel="Remote View" customClass="RTCEAGLVideoView">
+                            <view hidden="YES" contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJr-3C-cXo" userLabel="Remote View" customClass="RTCEAGLVideoView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.32584697010000002" green="0.32583719490000002" blue="0.32584273819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HxB-dN-csL" userLabel="Local View" customClass="RTCEAGLVideoView">
-                                <rect key="frame" x="452" y="452" width="120" height="120"/>
+                            <view contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HxB-dN-csL" userLabel="Local View" customClass="RTCEAGLVideoView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="610"/>
                                 <color key="backgroundColor" red="0.15056313569999999" green="0.15055863559999999" blue="0.15056121350000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="K8f-Tp-kQW"/>
-                                    <constraint firstAttribute="height" constant="120" id="zv3-1c-I8F"/>
+                                    <constraint firstAttribute="width" constant="375" id="K8f-Tp-kQW"/>
+                                    <constraint firstAttribute="height" constant="620" id="zv3-1c-I8F"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4a6-Hu-anV" userLabel="Footer View">
@@ -499,7 +499,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eng-gT-2aw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="B2E-vi-ejJ"/>
             </objects>
-            <point key="canvasLocation" x="-1044" y="-2148"/>
+            <point key="canvasLocation" x="-1044" y="-2148.5757121439283"/>
         </scene>
         <!--User Recogn View Controller-->
         <scene sceneID="ZHG-qz-xpO">
@@ -622,7 +622,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iNw-pF-GAG" userLabel="Remote View" customClass="RTCEAGLVideoView">
+                            <view userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iNw-pF-GAG" userLabel="Remote View" customClass="RTCEAGLVideoView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.32584697010000002" green="0.32583719490000002" blue="0.32584273819999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
