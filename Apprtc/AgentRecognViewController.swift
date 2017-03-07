@@ -187,6 +187,7 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         let action = UIAlertAction(title: "確認",style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
         self.presentViewController(alertView, animated: true, completion: nil)
+        self.sendButton.enabled = false
        }
     
     
