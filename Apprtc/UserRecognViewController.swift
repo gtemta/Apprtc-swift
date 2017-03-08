@@ -110,8 +110,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
                 print("Couldn't Serialize")
             }
             }.resume()
-        
-        
         print("out status check")
     }
     
@@ -265,7 +263,6 @@ class UserRecognViewController: UIViewController ,UIImagePickerControllerDelegat
             task.resume()
         }
         mynewUpLoad(image, Orientation: Orientation)
-        checkstatus()
     }
     
     

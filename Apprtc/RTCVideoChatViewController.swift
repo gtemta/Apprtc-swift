@@ -340,10 +340,7 @@ class RTCVideoChatViewController: UIViewController,RTCEAGLVideoViewDelegate,ARDA
         let aspectRatio: CGSize = CGSizeEqualToSize(size, CGSizeZero) ? defaultAspectRatio : size
         var videoRect: CGRect = self.view.bounds
         if (self.remoteVideoTrack != nil) {
-            videoRect = CGRectMake(0.0, 0.0, self.view.frame.size.width / 4.0, self.view.frame.size.height / 4.0)
-          if orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight {
-            videoRect = CGRectMake(0.0, 0.0, self.view.frame.size.height / 4.0, self.view.frame.size.width / 4.0)
-          }
+            videoRect = CGRectMake(0.0, 0.0, self.view.frame.size.width , self.view.frame.size.height )
         }
         let videoFrame: CGRect = AVMakeRectWithAspectRatioInsideRect(aspectRatio, videoRect)
         self.localViewWidthConstraint!.constant = videoFrame.size.width

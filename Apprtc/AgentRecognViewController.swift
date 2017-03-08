@@ -208,6 +208,15 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true)
         comment = String(colorTextField.text) + String(nameTextField.text)
+        if comment == ""
+        {
+            self.sendButton.enabled = false
+        }
+        else
+        {
+            sendButton.enabled = true
+        }
+        
         
         return false
     }
@@ -269,7 +278,6 @@ class AgentRecognViewController: UIViewController ,UITextFieldDelegate,UIPickerV
         //let signInView = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         //let appDelegate = UIApplication.shared.delegate as! AppDelegate
         //appDelegate.window?.rootViewController = signInView
-        
     }
     
     override func didReceiveMemoryWarning() {
